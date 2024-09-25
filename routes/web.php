@@ -37,9 +37,9 @@ Route::post('/shop/cashForm', [CashController::class, 'store'])->name('shop.cash
 Route::get('/shop/depositDetailList', [CashController::class, 'depositDetailList'])->name('shop.cash.depositDetailList');
 Route::get('/shop/withdrawalDetailList', [CashController::class, 'withdrawalDetailList'])->name('shop.cash.withdrawalDetailList');
 Route::get('/shop/expenseDetailList', [CashController::class, 'expenseDetailList'])->name('shop.cash.expenseDetailList');
-Route::get('/export-deposits', [CashController::class, 'depositExportExcel'])->name('export.deposits');
-Route::get('/export-withdrawals', [CashController::class, 'withdrawalExportExcel'])->name('export.withdrawals');
-Route::get('/export-expenses', [CashController::class, 'expenseExportExcel'])->name('export.expenses');
+Route::get('/export-deposits', [CashController::class, 'depositExportExcel'])->name('export.deposits')->middleware('auth');
+Route::get('/export-withdrawals', [CashController::class, 'withdrawalExportExcel'])->name('export.withdrawals')->middleware('auth');
+Route::get('/export-expenses', [CashController::class, 'expenseExportExcel'])->name('export.expenses')->middleware('auth');
 
 
 // bank page display

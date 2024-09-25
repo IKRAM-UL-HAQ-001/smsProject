@@ -4,6 +4,7 @@ namespace App\Exports;
 
 use App\Models\Cash;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Auth;
 
 class WithdrawalTransactionsExport implements FromCollection
 {
@@ -27,16 +28,16 @@ class WithdrawalTransactionsExport implements FromCollection
     public function headings(): array
     {
         return [
-            'id',
-            'reference_number',
-            'customer_name',
-            'cash_amount',
-            'cash_type',
-            'total_balance',
-            'total_shop_balance',
-            'remarks',
-            'created_at',
-            'updated_at',
+            'ID',
+            'Reference Number',
+            'Customer Name',
+            'Cash Amount',
+            'Cash Type',
+            'Total Balance',
+            'Total Shop Balance',
+            'Remarks',
+            'Created At',
+            'Updated At',
         ];
     }
 }

@@ -4,7 +4,7 @@ namespace App\Exports;
 
 use App\Models\Cash;
 use Maatwebsite\Excel\Concerns\FromCollection;
-
+use Auth;
 class DepositTransactionsExport implements FromCollection
 {
     /**
@@ -17,30 +17,28 @@ class DepositTransactionsExport implements FromCollection
         else{
             $user = Auth::user();
             $shopId =  $user->shop_id;            
-            if ($user && $user->role === 'admin') {
+            if ($user->role === 'admin') {
                 return Cash::where('cash_type', 'deposit')->get();
-            }else{
-                return Cash::where('cash_type', 'deposit')
-                ->where('shop_id', $shopId)
-                ->get();
+            } else {
+                return Cash::where('cash_type', 'deposit')->where('shop_id', $shopId)->get();
             }
         }
     }
 
     public function headings(): array{
         return [
-            'id',
-            'reference_number',
-            'customer_name',
-            'cash_amount',
-            'cash_type',
-            'bonus_amount',
-            'total_balance',
-            'total_shop_balance',
-            'payment_type',
-            'remarks',
-            'created_at',
-            'updated_at',
+            'ID',
+            'Reference Number',
+            'Customer Name',
+            'Cash Amount',
+            'Cash Type',
+            'Bonus Amount',
+            'Total Balance',
+            'Total Shop Balance',
+            'Payment Type',
+            'Remarks',
+            'Created At',
+            'Updated At',
         ];
     }
 }

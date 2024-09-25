@@ -4,6 +4,7 @@ namespace App\Exports;
 
 use App\Models\Cash;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Auth;
 
 class ExpenseTransactionsExport implements FromCollection
 {
@@ -25,14 +26,14 @@ class ExpenseTransactionsExport implements FromCollection
     }
     public function headings(): array{
         return [
-            'id',
-            'cash-amount',
-            'cash_type',
-            'total_balance',
-            'total_shop_balance',
-            'remarks',
-            'created_t',
-            'updated_at',
+            'ID',
+            'Cash Amount',
+            'Cash Type',
+            'Total Balance',
+            'Total Shop Balance',
+            'Remarks',
+            'Created At',
+            'Updated At',
         ];
     }
 }

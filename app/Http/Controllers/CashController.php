@@ -21,7 +21,7 @@ class CashController extends Controller
             return redirect()->route('firstpage');
         }
         else{
-            return Excel::download(new Cash, 'deposit_cash_flow_records.xlsx');
+            return Excel::download(new DepositTransactionsExport, 'deposit_cash_flow_records.xlsx');
         }
     }
     
@@ -31,7 +31,7 @@ class CashController extends Controller
             return redirect()->route('firstpage');
         }
         else{
-            return Excel::download(new Cash, 'expense_cash_flow_records.xlsx');
+            return Excel::download(new ExpenseTransactionsExport, 'expense_cash_flow_records.xlsx');
         }
     }
 
@@ -41,7 +41,7 @@ class CashController extends Controller
             return redirect()->route('firstpage');
         }
         else{
-            return Excel::download(new Cash, 'withdrawal_cash_flow_records.xlsx');
+            return Excel::download(new withdrawalTransactionsExport, 'withdrawal_cash_flow_records.xlsx');
         }
     }
 
