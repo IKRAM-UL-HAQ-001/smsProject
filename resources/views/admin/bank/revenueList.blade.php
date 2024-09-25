@@ -20,7 +20,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Shop Revenue List Detail</h4>
+                    <h4 class="card-title">Exchange Revenue List Detail</h4>
                     <a href="{{ route('export.deposits') }}" class="btn btn-primary">Download Deposit Transactions</a>
                     <a href="{{ route('export.withdrawals') }}" class="btn btn-primary">Download Withdrawal Transactions</a>
                 </div>
@@ -29,7 +29,7 @@
                         <table id="example" class="display" style="min-width: 845px">
                             <thead>
                                 <tr>
-                                    <th>Shop Name</th>
+                                    <th>Exchange Name</th>
                                     <th>User Name</th>
                                     <th>Customer ID</th>
                                     <th>Cash Type</th>
@@ -68,7 +68,7 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>Shop Name</th>
+                                    <th>Exchange Name</th>
                                     <th>User Name</th>
                                     <th>Customer ID</th>
                                     <th>Cash Type</th>

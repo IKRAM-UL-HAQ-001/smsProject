@@ -20,7 +20,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Shop Revenue List Detail</h4>
+                    <h4 class="card-title">Exchange Revenue List Detail</h4>
                     <a href="{{ route('export.expenses') }}" class="btn btn-primary">Download Expense Transactions</a>
                 </div>
                 <div class="card-body">
@@ -28,7 +28,7 @@
                         <table id="example" class="display" style="min-width: 845px">
                             <thead>
                                 <tr>
-                                    <th>Shop Name</th>
+                                    <th>Exchange Name</th>
                                     <th>User Name</th>
                                     <th>Cash Amount</th>
                                     <th>Total Balance</th>
@@ -41,7 +41,7 @@
                                 @foreach($expenseRecords as $expense)
                                     <tr>
                                         <td>{{$expense->shop->shop_name}}</td>
-                                        <td>{{ $userNames[$expense->user_id] ?? 'Unknown' }}</td>
+                                        <td>{{$userNames[$expense->user_id] ?? 'Unknown' }}</td>
                                         <td>{{$expense->cash_amount}}</td>
                                         <td>{{$expense->total_balance}}</td>
                                         <td>{{$expense->remarks}}</td>
@@ -59,7 +59,7 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>Shop Name</th>
+                                    <th>Exchange Name</th>
                                     <th>User Name</th>
                                     <th>Cash Amount</th>
                                     <th>Total Balance</th>
