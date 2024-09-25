@@ -75,8 +75,10 @@ Route::get('/admin/revenueList', [BankController::class, 'adminRevenueList'])->n
 Route::get('/admin/expenseList', [BankController::class, 'adminExpenseList'])->name('admin.bank.expenseList');
 Route::post('/admin/revenue/delete', [BankController::class, 'adminRevenueDestroy'])->name('admin.bank.revenue.destroy');
 Route::post('/admin/expense/delete', [BankController::class, 'adminExpenseDestroy'])->name('admin.bank.expense.destroy');
+
 // report page display
-Route::get('/admin/dailyReport', [ReportController::class, 'adminDailyReport'])->name('admin.report.dailyReport');
+Route::get('/admin/shopListDetail', [ReportController::class, 'shopListDetail'])->name('admin.report.shopListDetail');
+Route::post('/admin/dailyReport', [ReportController::class, 'adminDailyReport'])->name('admin.report.dailyReport');
 Route::get('/admin/monthlyReport', [ReportController::class, 'adminMonthlyReport'])->name('admin.report.monthlyReport');
 
 });

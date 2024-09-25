@@ -92,7 +92,7 @@
                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
                                 class="icon icon-form"></i><span class="nav-text">Reports</span></a>
                         <ul aria-expanded="false">
-                            <li><a href="{{route('admin.report.dailyReport')}}">Daily Report</a></li>
+                            <li><a href="{{route('admin.report.shopListDetail')}}">Daily Report</a></li>
                             <li><a href="{{route('admin.report.monthlyReport')}}">Monthly Report</a></li>
                         </ul>
                     </li>
