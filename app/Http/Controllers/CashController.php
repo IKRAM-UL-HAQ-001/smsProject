@@ -99,7 +99,7 @@ class CashController extends Controller
         }
         else{
             $validatedData = $request->validate([
-                'reference_number' => 'nullable|string|max:255',
+                'reference_number' => 'nullable|string|max:255|unique:caches,reference_number',
                 'customer_name' => 'nullable|string|max:255',
                 'cash_amount' => 'required|numeric',
                 'cash_type' => 'required|in:deposit,withdrawal,expense',

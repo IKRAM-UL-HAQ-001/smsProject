@@ -16,26 +16,26 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row text-light">
             @foreach ([
-                ['Total Balance', $totalBalance, 'ti-money text-success border-success'],
-                ['Total Deposit', $totalDeposit, 'ti-money text-secondary border-secondary'],
-                ['Total Withdrawal', $totalWithdrawal, 'ti-money text-danger border-danger'],
-                ['Total Expense', $totalExpense, 'ti-link text-danger border-danger'],
-                ['Total Bonus', $totalBonus, 'ti-money text-info border-info'],
-                ['Total Shops', $totalShops, 'ti-layout-grid2 text-pink border-pink'],
-                ['Total Users', $totalUsers, 'ti-user text-primary border-primary'],
-                ['Customers', $totalCustomers, 'ti-user text-primary border-primary']
+                ['Total Balance', $totalBalance, 'ti-money text-light border-light'],
+                ['Total Deposit', $totalDeposit, 'ti-money text-light border-light'],
+                ['Total Withdrawal', $totalWithdrawal, 'ti-money text-light border-light'],
+                ['Total Expense', $totalExpense, 'ti-link text-light border-light'],
+                ['Total Bonus', $totalBonus, 'ti-money text-light border-light'],
+                ['Total Exchanges', $totalShops, 'ti-layout-grid2 text-light border-light'],
+                ['Total Users', $totalUsers, 'ti-user text-light border-light'],
+                ['Customers', $totalCustomers, 'ti-user text-light border-light']
             ] as $card)
                 <div class="col-md-3 col-sm-6 mb-4">
-                    <div class="card h-100">
+                    <div class="card h-100" style="background:#343957">
                         <div class="stat-widget-one card-body d-flex align-items-center">
-                            <div class="stat-icon d-inline-block">
-                                <i class="{{ $card[2] }}"></i>
+                            <div class="stat-icon d-inline-block ">
+                                <i class="{{ $card[2] }} "></i>
                             </div>
                             <div class="stat-content d-inline-block ml-3">
-                                <div class="stat-text">{{ $card[0] }}</div>
-                                <div class="stat-digit">{{ $card[1] }}</div>
+                                <div class="stat-text text-light"><h4 class="text-light">{{ $card[0] }}</h4></div>
+                                <div class="stat-digit text-light">{{ $card[1] }}</div>
                             </div>
                         </div>
                     </div>

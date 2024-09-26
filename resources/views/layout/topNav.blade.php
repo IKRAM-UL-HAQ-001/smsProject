@@ -35,8 +35,8 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <a href="{{route('auth.logout')}}" class="dropdown-item">
-                                <i class="icon-key"></i>
-                                <span class="ml-2">Logout </span>
+                                <i class="icon-logout fa-1x"></i>
+                                <span class="ml-2" style="font-size:20px">Logout </span>
                             </a>
                         </div>
                     </li>
