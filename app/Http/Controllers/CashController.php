@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\DepositTransactionsExport;
-use App\Exports\withdrawalTransactionsExport;
+use App\Exports\WithdrawalTransactionsExport;
 use App\Exports\ExpenseTransactionsExport;
 use Auth;
 class CashController extends Controller
@@ -41,7 +41,7 @@ class CashController extends Controller
             return redirect()->route('firstpage');
         }
         else{
-            return Excel::download(new withdrawalTransactionsExport, 'withdrawal_cash_flow_records.xlsx');
+            return Excel::download(new WithdrawalTransactionsExport, 'withdrawal_cash_flow_records.xlsx');
         }
     }
 
