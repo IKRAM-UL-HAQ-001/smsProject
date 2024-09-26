@@ -44,7 +44,7 @@
                     <div class="col-lg-4 col-sm-12">
                         <div class="card equal-height">
                             <div class="card-header">
-                                <h4 class="card-title">Total Exchange Balance</h4>
+                                <h4 class="card-title">Total Exchange Profit</h4>
                                 <span style="color:black">{{$date}}</span>
                             </div>
                             <div class="card-body">
@@ -71,7 +71,7 @@
                     labels: ['Withdrawals', 'Deposits'],
                     datasets: [{
                         data: [{{$withdrawal ?: 0}}, {{$deposit ?: 0}}],
-                        backgroundColor: ['rgb(192, 10, 39)', '#E0E0E0'],
+                        backgroundColor: ['rgb(192, 10, 39)', '#75B432'],
                     }]
                 },
                 options: {

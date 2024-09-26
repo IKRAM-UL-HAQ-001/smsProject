@@ -23,13 +23,13 @@
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon icon-app-store"></i>
-                            <span class="nav-text">Cash Details</span>
+                            <span class="nav-text">Transaction Details</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="{{route('shop.cash.form')}}">Cash Form</a></li>
-                            <li><a href="{{route('shop.cash.depositDetailList')}}">Deposit Cash Detail List</a></li>
-                            <li><a href="{{route('shop.cash.withdrawalDetailList')}}">withdrawal Cash Detail List</a></li>
-                            <li><a href="{{route('shop.cash.expenseDetailList')}}">Expense Cash Detail List</a></li>
+                            <li><a href="{{route('shop.cash.form')}}">Transaction Form</a></li>
+                            <li><a href="{{route('shop.cash.depositDetailList')}}">Deposit Transaction List</a></li>
+                            <li><a href="{{route('shop.cash.withdrawalDetailList')}}">withdrawal Transaction List</a></li>
+                            <li><a href="{{route('shop.cash.expenseDetailList')}}">Expense Transaction List</a></li>
                         </ul>
                     </li>
                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i

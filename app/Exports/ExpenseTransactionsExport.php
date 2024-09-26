@@ -2,41 +2,83 @@
 
 namespace App\Exports;
 
-use App\Models\Cash;
-use Maatwebsite\Excel\Concerns\FromCollection;
 use Auth;
 use Carbon\Carbon;
-class ExpenseTransactionsExport implements FromCollection
+use App\Models\Cash;
+use Maatwebsite\Excel\Concerns\FromQuery;
+use Maatwebsite\Excel\Concerns\Exportable;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithStyles;
+use Maatwebsite\Excel\Concerns\WithColumnWidths;
+use Illuminate\Support\Facades\DB;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use PhpOffice\PhpSpreadsheet\Style\Color;
+use PhpOffice\PhpSpreadsheet\Style\Font;
+
+class ExpenseTransactionsExport implements FromQuery,  WithHeadings, WithStyles, WithColumnWidths
 {
-    public function collection(){
-        if (!auth()->check()) {
-            return redirect()->route('firstpage');
-        }
-        else{
-            $user = Auth::user();
-            $shopId =  $user->shop_id;            
-            if ($user->role === 'admin') {
-                $data = Cash::where('cash_type', 'expense')->get();
-            } else {
-                $today = Carbon::today();
-                $data = Cash::whereDate('created_at', $today)
-                ->where('cash_type', 'expense')
-                ->where('shop_id', $shopId)->get();
-            }
-            Log::info('Fetched data', ['data' => $data->toArray()]);
-            return $data;
-        }
+    use Exportable;
+
+    protected $shopId;
+
+    public function __construct($shopId)
+    {
+        $this->shopId = $shopId;
     }
-    public function headings(): array{
+
+    public function query()
+    {
+        $userId = Auth::User()->id;
+        $today = Carbon::today();
+        return Cash::select(
+            'cashes.id', 
+            'shops.shop_name as shop_name',
+            'cashes.cash_type',
+            'cashes.cash_amount',
+            'cashes.total_shop_balance',
+            'cashes.remarks',
+            'cashes.created_at',
+            'cashes.updated_at'
+        )
+        ->join('shops', 'cashes.shop_id', '=', 'shops.id') 
+        ->join('users', 'cashes.user_id', '=', 'users.id') 
+        ->whereDate('cashes.created_at', $today) 
+        ->where('cashes.cash_type', 'expense')
+        ->where('cashes.shop_id', $this->shopId);
+
+    }
+
+    public function headings(): array
+    {
         return [
             'ID',
-            'Cash Amount',
+            'Exchange Name',
             'Cash Type',
-            'Total Balance',
+            'Cash Amount',
             'Total Shop Balance',
             'Remarks',
             'Created At',
             'Updated At',
+        ];
+    }
+
+    public function styles(Worksheet $sheet)
+    {
+        $sheet->getStyle('A1:H1')->getFont()->setBold(true); // Bold the header row
+        $sheet->getStyle('A1:H1')->getFont()->setSize(12); // Optional: set font size
+    }
+
+    public function columnWidths(): array
+    {
+        return [
+            'A' => 10, // ID
+            'B' => 20, // Shop Name
+            'C' => 15, // Cash Type
+            'D' => 15, // Cash Amount
+            'E' => 20, // Total Shop Balance
+            'F' => 25, // Remarks
+            'G' => 30, // created_at
+            'H' => 30, // updated_At
         ];
     }
 }

@@ -59,7 +59,7 @@
                                             <input type="text" class="form-control" id="reference_number" name="reference_number" placeholder="Enter a Customer Reference Number" value="{{ old('reference_number') }}" >
                                         </div>
                                         @error('reference_number')
-                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            <div class="invalid-feedback" style="color: white">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="form-group row " id="customer_name">
@@ -68,7 +68,7 @@
                                             <input type="text" class="form-control" id="customer_name" name="customer_name" placeholder="Enter a Customer Name" value="{{ old('customer_name') }}">
                                         </div>
                                         @error('customer_name')
-                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            <div class="invalid-feedback" style="color: white">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="form-group row">
@@ -77,7 +77,7 @@
                                             <input type="text" class="form-control" id="cash_amount" name="cash_amount" placeholder="Enter Cash Amount" value="{{ old('cash_amount') }}" required>
                                         </div>
                                         @error('cash_amount')
-                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            <div class="invalid-feedback" style="color: white">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="form-group row" id="bonus-amount-field">
@@ -86,7 +86,7 @@
                                             <input type="text" class="form-control" id="bonus_amount" name="bonus_amount" placeholder="Enter Bonus Amount if any">
                                         </div>
                                         @error('bonus_amount')
-                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            <div class="invalid-feedback" style="color: white">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="form-group" id="payment-type-field">
@@ -125,7 +125,7 @@
                                                 </div>
                                             </div>
                                             @error('payment_type')
-                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            <div class="invalid-feedback" style="color: white">{{ $message }}</div>
                                         @enderror
                                         </div>
                                     </div>
@@ -135,7 +135,7 @@
                                             <input type="text" class="form-control" id="remarks" name="remarks" placeholder="Enter Remarks if any" value="{{ old('remarks') }}">
                                         </div>
                                         @error('remarks')
-                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            <div class="invalid-feedback" style="color: white">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="form-group row">
@@ -172,7 +172,7 @@
                     paymentTypeField.style.display = 'none'; // Hide payment type
                 } else if (cashTypeSelect.value === 'withdrawal') {
                     bonusAmountField.style.display = 'none';
-                    referenceNumberField.style.display = 'flex';
+                    referenceNumberField.style.display = 'none';
                     customerNameField.style.display = 'flex';
                     paymentTypeField.style.display = 'none'; // Hide payment type
                 } else {

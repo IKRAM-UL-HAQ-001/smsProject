@@ -21,7 +21,8 @@ class CashController extends Controller
             return redirect()->route('firstpage');
         }
         else{
-            return Excel::download(new DepositTransactionsExport, 'deposit_cash_flow_records.xlsx');
+            $shopId= Auth::user()->shop_id;
+            return Excel::download(new DepositTransactionsExport($shopId), 'deposit_cash_flow_records.xlsx');
         }
     }
     
@@ -31,7 +32,8 @@ class CashController extends Controller
             return redirect()->route('firstpage');
         }
         else{
-            return Excel::download(new ExpenseTransactionsExport, 'expense_cash_flow_records.xlsx');
+            $shopId= Auth::user()->shop_id;
+            return Excel::download(new ExpenseTransactionsExport($shopId), 'expense_cash_flow_records.xlsx');
         }
     }
 
@@ -41,7 +43,8 @@ class CashController extends Controller
             return redirect()->route('firstpage');
         }
         else{
-            return Excel::download(new WithdrawalTransactionsExport, 'withdrawal_cash_flow_records.xlsx');
+            $shopId= Auth::user()->shop_id;
+            return Excel::download(new WithdrawalTransactionsExport($shopId), 'withdrawal_cash_flow_records.xlsx');
         }
     }
 
@@ -99,7 +102,7 @@ class CashController extends Controller
         }
         else{
             $validatedData = $request->validate([
-                'reference_number' => 'nullable|string|max:255',
+               'reference_number' => 'nullable|string|max:255|unique:cashes,reference_number',
                 'customer_name' => 'nullable|string|max:255',
                 'cash_amount' => 'required|numeric',
                 'cash_type' => 'required|in:deposit,withdrawal,expense',
@@ -141,13 +144,7 @@ class CashController extends Controller
                     $cash->total_balance = $total_balance;
                     $cash->total_shop_balance = $total_shop_balance;
                     $cash->save();
-                    if($cash_type=='expense'){
-                        return redirect()->route('shop.cash.expenseDetailList')->with('success', 'Data saved successfully.');
-                    }else if($cash_type=='deposit'){
-                        return redirect()->route('shop.cash.depositDetailList')->with('success', 'Data saved successfully.');
-                    }else if($cash_type=='withdrawal'){
-                        return redirect()->route('shop.cash.withdrawalDetailList')->with('success', 'Data saved successfully.');
-                    }
+                    return redirect()->route('shop.cash.form')->with('success', 'Data saved successfully.');
                 }
             } catch (\Exception $e) {
             

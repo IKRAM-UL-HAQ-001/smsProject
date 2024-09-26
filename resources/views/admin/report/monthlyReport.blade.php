@@ -71,11 +71,21 @@
                     labels: ['Withdrawals', 'Deposits'],
                     datasets: [{
                         data: [{{$withdrawal ?: 0}}, {{$deposit ?: 0}}],
-                        backgroundColor: ['rgb(192, 10, 39)', '#E0E0E0'],
+                        backgroundColor: ['rgb(192, 10, 39)', '#75B432'],
                     }]
                 },
                 options: {
                     responsive: true,
+                    plugins: {
+                        tooltip: {
+                            bodyFont: {
+                                size: 16, // Increase the font size here
+                            },
+                            titleFont: {
+                                size: 18, // Optional: Increase title font size
+                            },
+                        }
+                    }
                 }
             });
 
@@ -92,6 +102,16 @@
                 },
                 options: {
                     responsive: true,
+                    plugins: {
+                        tooltip: {
+                            bodyFont: {
+                                size: 16, // Increase the font size here
+                            },
+                            titleFont: {
+                                size: 18, // Optional: Increase title font size
+                            },
+                        }
+                    }
                 }
             });
 
@@ -108,6 +128,16 @@
                 },
                 options: {
                     responsive: true,
+                    plugins: {
+                        tooltip: {
+                            bodyFont: {
+                                size: 16, // Increase the font size here
+                            },
+                            titleFont: {
+                                size: 18, // Optional: Increase title font size
+                            },
+                        }
+                    }
                 }
             });
         })(jQuery);
