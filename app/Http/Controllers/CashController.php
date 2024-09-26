@@ -107,6 +107,7 @@ class CashController extends Controller
                 'payment_type' => 'nullable|string',
                 'remarks' => 'required|string|max:255',
             ]);
+
             try {
                 $user = Auth::User();
                 if (!Auth::check()) {
