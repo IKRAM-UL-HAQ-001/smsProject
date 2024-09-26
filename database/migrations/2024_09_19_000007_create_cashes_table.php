@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('cashes', function (Blueprint $table) {
             $table->id();
-            $table->string('reference_number')->nullable()->unique();
+            $table->string('reference_number')->nullable();
             $table->string('customer_name')->nullable();
             $table->integer('cash_amount');
             $table->string('cash_type');
