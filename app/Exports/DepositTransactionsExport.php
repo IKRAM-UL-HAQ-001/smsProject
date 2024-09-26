@@ -5,6 +5,8 @@ namespace App\Exports;
 use App\Models\Cash;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Auth;
+use Carbon\Carbon;
+
 class DepositTransactionsExport implements FromCollection
 {
     /**
@@ -20,7 +22,10 @@ class DepositTransactionsExport implements FromCollection
             if ($user->role === 'admin') {
                 return Cash::where('cash_type', 'deposit')->get();
             } else {
-                return Cash::where('cash_type', 'deposit')->where('shop_id', $shopId)->get();
+                $today = Carbon::today();
+                return Cash::whereDate('created_at', $today)
+                ->where('cash_type', 'deposit')
+                ->where('shop_id', $shopId)->get();
             }
         }
     }

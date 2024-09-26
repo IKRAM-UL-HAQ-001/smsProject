@@ -5,7 +5,7 @@ namespace App\Exports;
 use App\Models\Cash;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Auth;
-
+use Carbon\Carbon;
 class ExpenseTransactionsExport implements FromCollection
 {
     public function collection(){
@@ -18,7 +18,10 @@ class ExpenseTransactionsExport implements FromCollection
             if ($user->role === 'admin') {
                 $data = Cash::where('cash_type', 'expense')->get();
             } else {
-                $data = Cash::where('cash_type', 'expense')->where('shop_id', $shopId)->get();
+                $today = Carbon::today();
+                $data = Cash::whereDate('created_at', $today)
+                ->where('cash_type', 'expense')
+                ->where('shop_id', $shopId)->get();
             }
             Log::info('Fetched data', ['data' => $data->toArray()]);
             return $data;

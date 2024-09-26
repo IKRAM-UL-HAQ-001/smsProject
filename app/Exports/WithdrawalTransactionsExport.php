@@ -5,6 +5,7 @@ namespace App\Exports;
 use App\Models\Cash;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Auth;
+use Carbon\Carbon;
 
 class WithdrawalTransactionsExport implements FromCollection
 {
@@ -18,7 +19,9 @@ class WithdrawalTransactionsExport implements FromCollection
             if ($user && $user->role === 'admin') {
                 return Cash::where('cash_type', 'withdrawal')->get();
             }else{
-                return Cash::where('cash_type', 'withdrawal')
+                $today = Carbon::today();
+                return Cash::whereDate('created_at', $today)
+                ->where('cash_type', 'withdrawal')
                 ->where('shop_id', $shopId)
                 ->get();
             }
