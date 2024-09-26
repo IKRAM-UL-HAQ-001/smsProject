@@ -49,7 +49,7 @@
                         <div class="col-lg-4 col-sm-12">
                             <div class="card equal-height">
                                 <div class="card-header">
-                                    <h4 class="card-title">Total Balance</h4>
+                                    <h4 class="card-title">Total Exchange Profit</h4>
                                 </div>
                                 <div class="card-header" style="color:black">
                                     <span>{{$date}}</span>
@@ -108,7 +108,7 @@
             const bonusChart = new Chart(ctx4, {
                 type: 'pie',
                 data: {
-                    labels: ['Total Shop Balance'],
+                    labels: ['Total Exchange Profit'],
                     datasets: [{
                         data: [{{$latestBalance}}],
                         backgroundColor: ['#FFCE56'],
