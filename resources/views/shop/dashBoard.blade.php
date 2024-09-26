@@ -23,7 +23,7 @@
             ['Total Withdrawal', $totalWithdrawal, 'ti-money text-light border-light'],
             ['Total Expense', $totalExpense, 'ti-money text-light border-light'],
             ['Total Bonus', $totalBonus, 'ti-money text-light border-light'],
-            ['Shop User', $userCount, 'ti-user text-light border-light'],
+            ['Exchange User', $userCount, 'ti-user text-light border-light'],
             ['Total Exchange Customer', $customerCount, 'ti-user text-light border-light']
         ] as $card)
             <div class="col-md-4 col-sm-6 mb-4">

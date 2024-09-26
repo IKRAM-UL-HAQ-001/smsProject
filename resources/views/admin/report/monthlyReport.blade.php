@@ -44,7 +44,7 @@
                     <div class="col-lg-4 col-sm-12">
                         <div class="card equal-height">
                             <div class="card-header">
-                                <h4 class="card-title">Total Shop Balance (Monthly)</h4>
+                                <h4 class="card-title">Total Exchange Balance</h4>
                                 <span style="color:black">{{$dateRange}}</span>
                             </div>
                             <div class="card-body">
@@ -100,7 +100,7 @@
             new Chart(ctx4, {
                 type: 'pie',
                 data: {
-                    labels: ['Total Shop Balance'],
+                    labels: ['Total Exchange Balance'],
                     datasets: [{
                         data: [{{$latestBalance ?: 0}}],
                         backgroundColor: ['#FFCE56'],

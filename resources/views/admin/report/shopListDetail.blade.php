@@ -3,7 +3,7 @@
     <div class="container mt-4">
         <div class="row">
             @if($shopRecords->isEmpty())
-                <p class="text-center" style="color:#343957">No shops available.</p>
+                <p class="text-center" style="color:#343957">No Exchange available.</p>
             @else
                 @foreach($shopRecords as $record)
                     <div class="col-md-4 mb-4" >

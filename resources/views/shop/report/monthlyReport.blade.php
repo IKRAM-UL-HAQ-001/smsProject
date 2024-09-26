@@ -100,7 +100,7 @@
             new Chart(ctx4, {
                 type: 'pie',
                 data: {
-                    labels: ['Total Shop Balance'],
+                    labels: ['Total Exchange Balance'],
                     datasets: [{
                         data: [{{$latestBalance ?: 0}}],
                         backgroundColor: ['#FFCE56'],
