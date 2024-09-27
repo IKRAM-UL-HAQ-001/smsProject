@@ -34,7 +34,7 @@ class WithdrawalTransactionsExport implements FromQuery,  WithHeadings, WithStyl
             'cashes.id', 
             'shops.shop_name as shop_name',
             'users.user_name as user_name',
-            'cashes.reference_number',
+            'cashes.customer_name',
             'cashes.cash_type',
             'cashes.cash_amount',
             'cashes.total_shop_balance',
@@ -55,7 +55,7 @@ class WithdrawalTransactionsExport implements FromQuery,  WithHeadings, WithStyl
         return [
             'ID',
             'Exchange Name',
-            'Reference Number',
+            'User Name',
             'Customer Name',
             'Cash Type',
             'Cash Amount',

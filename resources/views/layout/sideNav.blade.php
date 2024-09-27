@@ -28,7 +28,7 @@
                         <ul aria-expanded="false">
                             <li><a href="{{route('shop.cash.form')}}">Transaction Form</a></li>
                             <li><a href="{{route('shop.cash.depositDetailList')}}">Deposit Transaction List</a></li>
-                            <li><a href="{{route('shop.cash.withdrawalDetailList')}}">withdrawal Transaction List</a></li>
+                            <li><a href="{{route('shop.cash.withdrawalDetailList')}}">Withdrawal Transaction List</a></li>
                             <li><a href="{{route('shop.cash.expenseDetailList')}}">Expense Transaction List</a></li>
                         </ul>
                     </li>

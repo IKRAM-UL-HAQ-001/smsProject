@@ -79,13 +79,13 @@ class DepositTransactionsExport implements FromQuery,  WithHeadings, WithStyles,
     public function columnWidths(): array
     {
         return [
-            'A' => 10, // ID
-            'B' => 20, // Shop Name
-            'C' => 15, // Cash Type
-            'D' => 15, // Cash Amount
-            'E' => 20, // Total Shop Balance
-            'F' => 20, // Remarks
-            'G' => 20, // created_at
+            'A' => 10, 
+            'B' => 20, 
+            'C' => 15, 
+            'D' => 20, 
+            'E' => 20, 
+            'F' => 20, 
+            'G' => 20, 
             'H' => 20,
             'I' => 15,
             'J' => 20,
