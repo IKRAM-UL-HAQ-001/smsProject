@@ -38,7 +38,7 @@
                                     </div>
                                 @endif
 
-                                <form class="form-valide" action="" method="post">
+                                <form class="form-valide" action="{{route('password.update')}}" method="post">
                                     @csrf
                                     <div class="form-group row">
                                         <label class="col-lg-4 col-form-label" for="password">Password <span class="text-danger">*</span></label>
