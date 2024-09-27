@@ -27,28 +27,36 @@ class WithdrawalTransactionsExport implements FromQuery,  WithHeadings, WithStyl
     }
 
     public function query()
-    {
-        $userId = Auth::User()->id;
-        $today = Carbon::today();
-        return Cash::select(
-            'cashes.id', 
-            'shops.shop_name as shop_name',
-            'users.user_name as user_name',
-            'cashes.customer_name',
-            'cashes.cash_type',
-            'cashes.cash_amount',
-            'cashes.total_shop_balance',
-            'cashes.remarks',
-            'cashes.created_at',
-            'cashes.updated_at'
-        )
-        ->join('shops', 'cashes.shop_id', '=', 'shops.id') 
-        ->join('users', 'cashes.user_id', '=', 'users.id') 
-        ->whereDate('cashes.created_at', $today) 
-        ->where('cashes.cash_type', 'withdrawal')
-        ->where('cashes.shop_id', $this->shopId);
+{
+    $today = Carbon::today();
 
+    $query = Cash::select(
+        'cashes.id', 
+        'shops.shop_name as shop_name',
+        'users.user_name as user_name',
+        'cashes.customer_name',
+        'cashes.cash_type',
+        'cashes.cash_amount',
+        'cashes.total_shop_balance',
+        'cashes.remarks',
+        'cashes.created_at',
+        'cashes.updated_at'
+    )
+    ->join('shops', 'cashes.shop_id', '=', 'shops.id') 
+    ->join('users', 'cashes.user_id', '=', 'users.id') 
+    ->whereDate('cashes.created_at', $today) 
+    ->where('cashes.cash_type', 'withdrawal');
+    \Log::info($query->toSql(), $query->getBindings());
+    if (Auth::user()->role == "shop") {
+        return $query->where('cashes.shop_id', $this->shopId); // No ->get() here, return the query builder
+    } elseif (Auth::user()->role == "admin") {
+        return $query;
     }
+
+    // If the role does not match, return an empty collection or handle it accordingly
+    return collect(); // Or handle as needed
+}
+
 
     public function headings(): array
     {

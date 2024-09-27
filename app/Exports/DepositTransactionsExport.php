@@ -25,12 +25,10 @@ class DepositTransactionsExport implements FromQuery,  WithHeadings, WithStyles,
     {
         $this->shopId = $shopId;
     }
-
     public function query()
     {
-        $userId = Auth::User()->id;
         $today = Carbon::today();
-        return Cash::select(
+        $query = Cash::select(
             'cashes.id', 
             'shops.shop_name as shop_name',
             'users.user_name as user_name',
@@ -48,9 +46,14 @@ class DepositTransactionsExport implements FromQuery,  WithHeadings, WithStyles,
         ->join('shops', 'cashes.shop_id', '=', 'shops.id') 
         ->join('users', 'cashes.user_id', '=', 'users.id') 
         ->whereDate('cashes.created_at', $today) 
-        ->where('cashes.cash_type', 'deposit')
-        ->where('cashes.shop_id', $this->shopId);
+        ->where('cashes.cash_type', 'deposit');
+        \Log::info($query->toSql(), $query->getBindings());
 
+        if (Auth::user()->role == "shop") {
+            return $query->where('cashes.shop_id', $this->shopId); // No ->get() here, return the query builder
+        } elseif (Auth::user()->role == "admin") {
+            return $query;
+        }
     }
 
     public function headings(): array{

@@ -37,6 +37,7 @@ Route::post('/shop/cashForm', [CashController::class, 'store'])->name('shop.cash
 Route::get('/shop/depositDetailList', [CashController::class, 'depositDetailList'])->name('shop.cash.depositDetailList');
 Route::get('/shop/withdrawalDetailList', [CashController::class, 'withdrawalDetailList'])->name('shop.cash.withdrawalDetailList');
 Route::get('/shop/expenseDetailList', [CashController::class, 'expenseDetailList'])->name('shop.cash.expenseDetailList');
+
 Route::get('/export-deposits', [CashController::class, 'depositExportExcel'])->name('export.deposits')->middleware('auth');
 Route::get('/export-withdrawals', [CashController::class, 'withdrawalExportExcel'])->name('export.withdrawals')->middleware('auth');
 Route::get('/export-expenses', [CashController::class, 'expenseExportExcel'])->name('export.expenses')->middleware('auth');
@@ -80,5 +81,4 @@ Route::post('/admin/expense/delete', [BankController::class, 'adminExpenseDestro
 Route::get('/admin/shopListDetail', [ReportController::class, 'shopListDetail'])->name('admin.report.shopListDetail');
 Route::post('/admin/dailyReport', [ReportController::class, 'adminDailyReport'])->name('admin.report.dailyReport');
 Route::get('/admin/monthlyReport', [ReportController::class, 'adminMonthlyReport'])->name('admin.report.monthlyReport');
-
 });

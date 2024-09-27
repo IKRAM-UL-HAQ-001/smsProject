@@ -28,7 +28,6 @@ class ExpenseTransactionsExport implements FromQuery,  WithHeadings, WithStyles,
 
     public function query()
     {
-        $userId = Auth::User()->id;
         $today = Carbon::today();
         return Cash::select(
             'cashes.id', 
@@ -44,11 +43,16 @@ class ExpenseTransactionsExport implements FromQuery,  WithHeadings, WithStyles,
         ->join('shops', 'cashes.shop_id', '=', 'shops.id') 
         ->join('users', 'cashes.user_id', '=', 'users.id') 
         ->whereDate('cashes.created_at', $today) 
-        ->where('cashes.cash_type', 'expense')
-        ->where('cashes.shop_id', $this->shopId);
+        ->where('cashes.cash_type', 'expense');
+        \Log::info($query->toSql(), $query->getBindings());
 
+        if (Auth::user()->role == "shop") {
+            return $query->where('cashes.shop_id', $this->shopId); // No ->get() here, return the query builder
+        } elseif (Auth::user()->role == "admin") {
+            return $query;
+        }
     }
-
+    
     public function headings(): array
     {
         return [
