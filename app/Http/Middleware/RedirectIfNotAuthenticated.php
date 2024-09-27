@@ -18,7 +18,7 @@ class RedirectIfNotAuthenticated
     {
         if (!Auth::check()) {
             // Redirect to the login page or any other page
-            return redirect()->route('login');
+            return redirect()->route('firstpage')->with('error', 'Please log in to access this page.');
         }
         else{
         return $next($request);
