@@ -54,9 +54,9 @@ class ReportController extends Controller
             $latestCashEntry = Cash::where('shop_id', $shopId)
                 ->orderBy('created_at', 'desc')
                 ->first();
-
+            $latestBalance =    $deposit -  $withdrawal -  $expense;
             // Get the latest balance if entry exists
-            $latestBalance = $latestCashEntry ? $latestCashEntry->total_shop_balance : null;
+            // $latestBalance = $latestCashEntry ? $latestCashEntry->total_shop_balance : null;
 
             // Prepare the date for display
             $date = $today->format('Y-m-d');
@@ -179,9 +179,9 @@ class ReportController extends Controller
             $latestCashEntry = Cash::where('shop_id', $shopId)
                 ->orderBy('created_at', 'desc')
                 ->first();
-
+                $latestBalance =    $deposit -  $withdrawal -  $expense;
             // Get the latest balance if entry exists
-            $latestBalance = $latestCashEntry ? $latestCashEntry->total_shop_balance : null;
+            // $latestBalance = $latestCashEntry ? $latestCashEntry->total_shop_balance : null;
 
             // Prepare the date for display
             $date = $today->format('Y-m-d');
