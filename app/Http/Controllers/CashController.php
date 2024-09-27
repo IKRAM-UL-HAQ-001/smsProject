@@ -173,7 +173,7 @@ class CashController extends Controller
             $latestEntry = Cash::where('shop_id', $shopId) // Filter by shop_id
             ->orderBy('created_at', 'desc') // Order by created_at in descending order
             ->first(); // Get the first result
-            return $latestEntry ? $latestEntry->total_balance : 0; 
+            return $latestEntry ? $latestEntry->total_shop_balance : 0; 
         }
     }
 }
