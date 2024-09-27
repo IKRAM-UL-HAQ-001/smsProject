@@ -30,7 +30,7 @@
                                 <tr>
                                     <th>Exchange Name</th>
                                     <th>User Name</th>
-                                    <th>Customer ID</th>
+                                    <th>Customer Name</th>
                                     <th>Cash Type</th>
                                     <th>Cash Amount</th>
                                     <th>Total Exchange Balance</th>
@@ -42,8 +42,8 @@
                                 @foreach($withdrawalRecords as $withdrawal)
                                     <tr>
                                         <td>{{$withdrawal->shop_name}}</td>
-                                        <td>{{ $userNames[$withdrawal->user_id] ?? 'Unknown' }}</td>
-                                        <td>{{$withdrawal->reference_number}}</td>
+                                        <td>{{$userNames[$withdrawal->user_id] ?? 'Unknown' }}</td>
+                                        <td>{{$withdrawal->customer_name}}</td>
                                         <td>{{$withdrawal->cash_type}}</td>
                                         <td>{{$withdrawal->cash_amount}}</td>
                                         <td>{{$withdrawal->total_shop_balance}}</td>
@@ -55,7 +55,7 @@
                                 <tr>
                                     <th>Exchange Name</th>
                                     <th>User Name</th>
-                                    <th>Customer ID</th>
+                                    <th>Customer Name</th>
                                     <th>Cash Type</th>
                                     <th>Cash Amount</th>
                                     <th>Total Exchange Balance</th>

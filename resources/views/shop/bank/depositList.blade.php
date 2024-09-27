@@ -30,7 +30,8 @@
                                 <tr>
                                     <th>Exchange Name</th>
                                     <th>User Name</th>
-                                    <th>Customer ID</th>
+                                    <th>reference Number</th>
+                                    <th>Customer Name</th>
                                     <th>Cash Type</th>
                                     <th>Payment Method</th>
                                     <th>Cash Amount</th>
@@ -46,6 +47,7 @@
                                         <td>{{$deposit->shop_name}}</td>
                                         <td>{{ $userNames[$deposit->user_id] ?? 'Unknown' }}</td>
                                         <td>{{$deposit->reference_number}}</td>
+                                        <td>{{$deposit->customer_name}}</td>
                                         <td>{{$deposit->cash_type}}</td>
                                         <td>{{$deposit->payment_type}}</td>
                                         <td>{{$deposit->cash_amount}}</td>
