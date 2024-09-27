@@ -17,35 +17,54 @@ class AuthController extends Controller
         return view("/auth.forget");
     }
 
-    public function loginAuth(Request $request){
-        $request->validate([
-            'user_name' => 'required|string|max:255',
-            'password' => 'required',
-        ]);
+    public function loginAuth(Request $request)
+{
+    $request->validate([
+        'user_name' => 'required|string|max:255',
+        'password' => 'required',
+    ]);
 
-        if (Auth::attempt($request->only('user_name', 'password'))) {
-            $request->session()->regenerate();
-            $user = Auth::user();
-            if ($user->role=="admin") {
-                return redirect()->route('admin.dashBoard');
-            } elseif ($user->role=="shop") {
-                return redirect()->route('shop.dashBoard');
-            }
+    if (Auth::attempt($request->only('user_name', 'password'))) {
+        $request->session()->regenerate();
+        $user = Auth::user();
+
+        // Check if the user is already logged in elsewhere
+        if ($user->session_id && $user->session_id !== session()->getId()) {
+            Auth::logout();
+            return redirect()->route("auth.login")->withErrors(['user_name' => 'You are already logged in on another device.']);
         }
 
-        return back()->withErrors([
-            'user_name' => 'The provided credentials do not match our records.',
-        ]);
+        // Update the session_id for the user
+        $user->session_id = session()->getId();
+        $user->save();
+
+        // Redirect based on user role
+        if ($user->role == "admin") {
+            return redirect()->route('admin.dashBoard');
+        } elseif ($user->role == "shop") {
+            return redirect()->route('shop.dashBoard');
+        }
     }
+
+    return back()->withErrors([
+        'user_name' => 'The provided credentials do not match our records.',
+    ]);
+}
+
 
     public function logout(Request $request){
         if (!auth()->check()) {
             return redirect()->route('firstpage');
         }
         else{
+            $user = Auth::user();
+            if ($user) {
+                $user->session_id = null; // Clear session ID
+                $user->save();
+            }
             Auth::logout();
-            $request->session()->invalidate();
-            $request->session()->regenerateToken();
+            // $request->session()->invalidate();
+            // $request->session()->regenerateToken();
             return redirect()->route('firstpage');
         }
     }

@@ -61,6 +61,7 @@
                                 <tr>
                                     <th>Exchange Name</th>
                                     <th>User Name</th>
+                                    <th>Referene Number</th>
                                     <th>Customer ID</th>
                                     <th>Cash Type</th>
                                     <th>Payment Method</th>

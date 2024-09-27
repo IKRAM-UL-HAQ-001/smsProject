@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();$table->string('user_name')->unique();
             $table->string('password');
             $table->string('role');
+            $table->string('session_id')->nullable();
             $table->unsignedBigInteger('shop_id')->nullable();
             $table->foreign('shop_id')->references('id')->on('shops')->onDelete('cascade');
+
             $table->rememberToken();
             $table->timestamps();
         });

@@ -21,6 +21,16 @@
                             <div class="col-xl-12">
                                 <div class="auth-form">
                                     <h3 class="text-center mb-4" style="font-size:25px;color:#343957"></b>Login to Admin Account</b></h3>
+                                    <!-- Display error messages -->
+                                    @if ($errors->any())
+                                        <div class="alert alert-danger">
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
                                     <form action="{{route('auth.post')}}" method="post">
                                         @csrf
                                         <div class="form-group">
