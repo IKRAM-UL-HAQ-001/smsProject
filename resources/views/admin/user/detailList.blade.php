@@ -39,10 +39,11 @@
                                                 <td>{{$user->user_name}}</td>
                                                 <td>{{$user->shop->shop_name}}</td>
                                                 <td>
+                                                {{ dd(route('users.update')) }}
                                                     <form action="{{ route('users.update') }}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to update this user?');">
                                                         @csrf
                                                         <input type="hidden" name="user_id" value="{{ $user->id }}">
-                                                        <button type="submit" class="btn btn-primary">Update </button>
+                                                        <button type="submit" class="btn btn-primary">Update</button>
                                                     </form>
                                                     <form action="{{ route('users.destroy') }}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this user?');">
                                                         @csrf
