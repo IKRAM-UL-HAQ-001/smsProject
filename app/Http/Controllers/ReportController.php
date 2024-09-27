@@ -107,45 +107,6 @@ class ReportController extends Controller
         }
     }
 
-    // public function adminDailyReport(){
-    //     if (!auth()->check()) {
-    //         return redirect()->route('firstpage');
-    //     }
-    //     else{
-    //         $user = Auth::user();
-    //         $today = Carbon::today();
-
-    //         // Get sums for today's deposits, withdrawals, expenses, and bonuses
-    //         $deposit = Cash::whereDate('created_at', $today)
-    //             ->where('cash_type', 'deposit')
-    //             ->sum('cash_amount');
-
-    //         $withdrawal = Cash::whereDate('created_at', $today)
-    //             ->where('cash_type', 'withdrawal')
-    //             ->sum('cash_amount');
-
-    //         $expense = Cash::whereDate('created_at', $today)
-    //             ->where('cash_type', 'expense')
-    //             ->sum('cash_amount');
-
-    //         $bonus = Cash::whereDate('created_at', $today)
-    //             ->where('cash_type', 'deposit')
-    //             ->sum('bonus_amount');
-
-    //         // Get the latest cash entry for the shop
-    //         $latestCashEntry = Cash::latest()->first();
-
-    //         // Get the latest balance if entry exists
-    //         $latestBalance = $latestCashEntry ? $latestCashEntry->total_balance : null;
-
-    //         // Prepare the date for display
-    //         $date = $today->format('Y-m-d');
-
-    //         // Return the view with the collected data
-    //         return view('admin.report.dailyReport', compact('deposit', 'expense', 'withdrawal', 'bonus', 'date', 'latestBalance'));
-    //     }
-
-    // }
     public function adminDailyReport(Request $request){
         if (!auth()->check()) {
             return redirect()->route('firstpage');
@@ -219,7 +180,7 @@ class ReportController extends Controller
                 $latestCashEntry = Cash::latest()->first();
 
                 // Get the latest balance if entry exists
-                $latestBalance = $latestCashEntry ? $latestCashEntry->total_balance : null;
+                $latestBalance = $deposit - $withdrawal - $expense;
         
         
             
