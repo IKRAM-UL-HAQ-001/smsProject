@@ -7,6 +7,7 @@ use App\Models\Shop;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -67,6 +68,44 @@ class UserController extends Controller
             $user = User::findOrFail($userId);
             $user->delete();
             return redirect()->back()->with('success', 'User deleted successfully!');
+        }
+    }
+
+    public function edit(Request $request){
+        if (!auth()->check()) {
+            return redirect()->route('firstpage');
+        }
+        else{
+            if (Auth::user()->role=="admin"){
+                $id= $request->user_id;
+                $userRecords=User::find($id);
+                return view('admin.user.update',compact('userRecords'));
+            }
+            else{
+                return redirect()->back()->witherror("you are not allowd to update user");
+            }
+
+        }
+    }
+    public function update(Request $request){
+
+        $request->validate([
+            'password' => 'required|string|min:8',
+        ]);
+    
+        if (!auth()->check()) {
+            return redirect()->route('firstpage');
+        }
+        else{
+            if (Auth::user()->role=="admin"){
+                $user = user::find($request->user_id);
+                $user->password =  Hash::make($request->password);
+                $user->save();
+                return redirect()->route('admin.dashBoard');
+            }
+            else{
+                return redirect()->route('admin.dashBoard');
+            }
         }
     }
 }
