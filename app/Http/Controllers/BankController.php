@@ -107,4 +107,29 @@ class BankController extends Controller
             return view('/admin.bank.expenseList',compact('expenseRecords','userNames'));
         }
     }
+
+    public function adminRevenueDestroy(Request $request){
+        
+        if (!auth()->check()) {
+            return redirect()->route('firstpage');
+        }
+        else{
+            $revenueId = $request->input('revenue_id');
+            $shop = Cash::findOrFail($revenueId);
+            $shop->delete();
+            return redirect()->back()->with('success', 'Cash Entry Deleted Successfully!');
+        }
+    }
+    
+    public function adminExpenseDestroy(Request $request){
+        if (!auth()->check()) {
+            return redirect()->route('firstpage');
+        }
+        else{
+            $expenseId = $request->input('expense_id');
+            $shop = Cash::findOrFail($expenseId);
+            $shop->delete();
+            return redirect()->back()->with('success', 'Cash Entry Deleted Successfully!');
+        }
+    }
 }
