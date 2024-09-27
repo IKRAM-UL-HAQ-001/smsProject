@@ -5,11 +5,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Frank Exchange Management System</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="../images/avatar/5.png">
-    <link href="../css/style.css" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/avatar/5.png') }}">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <!-- Datatable -->
-    <link href="../vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
-  
+    <link href="{{ asset('vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
   </head>
 
 
