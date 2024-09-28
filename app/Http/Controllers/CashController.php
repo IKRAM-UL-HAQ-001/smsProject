@@ -132,12 +132,12 @@ class CashController extends Controller
                         $total_balance = $currentBalance - $cash_amount;
                     }
                     $cash = new Cash();
-                    $cash->reference_number = $validatedData['reference_number'] ?? '-';
-                    $cash->customer_name = $validatedData['customer_name'] ?? '-';
+                    $cash->reference_number = $validatedData['reference_number'] ?? NULL;
+                    $cash->customer_name = $validatedData['customer_name'] ?? NULL;
                     $cash->cash_amount = $validatedData['cash_amount'];
                     $cash->cash_type = $validatedData['cash_type'];
-                    $cash->bonus_amount = $validatedData['bonus_amount'] ?? '-';
-                    $cash->payment_type = $validatedData['payment_type'] ?? '-';
+                    $cash->bonus_amount = $validatedData['bonus_amount'] ?? NULL;
+                    $cash->payment_type = $validatedData['payment_type'] ?? NULL;
                     $cash->remarks = $validatedData['remarks'];
                     $cash->user_id = $user_id;
                     $cash->shop_id = $shopId;

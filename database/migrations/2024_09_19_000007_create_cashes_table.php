@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('customer_name')->nullable();
             $table->integer('cash_amount');
             $table->string('cash_type');
-            $table->string('bonus_amount')->nullable();
+            $table->integer('bonus_amount')->nullable();
             $table->integer('total_balance')->nullable();
             $table->integer('total_shop_balance')->nullable();
             $table->string('payment_type')->nullable();
