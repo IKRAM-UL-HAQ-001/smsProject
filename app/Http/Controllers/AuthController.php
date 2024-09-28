@@ -29,14 +29,14 @@ class AuthController extends Controller
         $user = Auth::user();
 
         // Check if the user is already logged in elsewhere
-        if ($user->session_id && $user->session_id !== session()->getId()) {
-            Auth::logout();
-            return redirect()->route("auth.login")->withErrors(['user_name' => 'You are already logged in on another device.']);
-        }
+        // if ($user->session_id && $user->session_id !== session()->getId()) {
+        //     Auth::logout();
+        //     return redirect()->route("auth.login")->withErrors(['user_name' => 'You are already logged in on another device.']);
+        // }
 
         // Update the session_id for the user
-        $user->session_id = session()->getId();
-        $user->save();
+        // $user->session_id = session()->getId();
+        // $user->save();
 
         // Redirect based on user role
         if ($user->role == "admin") {

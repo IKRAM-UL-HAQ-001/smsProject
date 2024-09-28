@@ -23,7 +23,7 @@ Route::post('/auth/login', [AuthController::class, 'loginAuth'])->name('auth.pos
 Route::get('/admin/login', [AuthController::class, 'index'])->name('auth.adminLogin');
 
 
-Route::middleware(['auth.check','check.session'])->group(function () {
+Route::middleware(['auth.check'])->group(function () {
     
     Route::get('/auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
     Route::get('/auth/forgetPassword', [AuthController::class, 'forgetPassword'])->name('auth.forget');

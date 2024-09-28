@@ -67,6 +67,5 @@ class Kernel extends HttpKernel
     protected $routeMiddleware = [
         'auth.check' => \App\Http\Middleware\RedirectIfNotAuthenticated::class,
         'cache.control' => \App\Http\Middleware\CacheControl::class,
-        'check.session' => \App\Http\Middleware\CheckSession::class,
     ];
 }
