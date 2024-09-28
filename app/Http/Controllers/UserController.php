@@ -82,9 +82,8 @@ class UserController extends Controller
                 return view('admin.user.update',compact('userRecords'));
             }
             else{
-                return redirect()->back()->witherror("you are not allowd to update user");
+                return redirect()->route('firstpage')->witherror("you are not allowd to update user");
             }
-
         }
     }
     public function update(Request $request){
@@ -104,7 +103,7 @@ class UserController extends Controller
                 return redirect()->route('admin.dashBoard');
             }
             else{
-                return redirect()->route('admin.dashBoard');
+                return redirect()->route('users.edit');
             }
         }
     }

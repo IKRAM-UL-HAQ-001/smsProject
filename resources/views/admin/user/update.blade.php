@@ -6,7 +6,7 @@
             <div class="col-sm-6 p-md-0">
                 <div class="welcome-text">
                     <h4>Hi, welcome back!</h4>
-                    <p class="mb-0">Update user</p>
+                    <p class="mb-0">Update user</p> 
                 </div>
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
@@ -37,9 +37,14 @@
                                         </ul>
                                     </div>
                                 @endif
-
+                                <b class="text-dark">Password must be Minimum 8 Characters!</b>
                                 <form class="form-valide" action="{{route('password.update')}}" method="post">
                                     @csrf
+                                    <div class="form-group row">
+                                        <div class="col-lg-12">
+                                            <input type="hidden" class="form-control" id="user_id" name="user_id" value="{{$userRecords->id}}"required>
+                                        </div>
+                                    </div>
                                     <div class="form-group row">
                                         <label class="col-lg-4 col-form-label" for="password">Password <span class="text-danger">*</span></label>
                                         <div class="col-lg-8">

@@ -65,8 +65,8 @@ Route::get('/admin/userForm', [UserController::class, 'form'])->name('admin.user
 Route::post('/admin/userForm', [UserController::class, 'store'])->name('admin.user.post');
 Route::get('/admin/userDetailList', [UserController::class, 'detailList'])->name('admin.user.detailList');
 Route::post('/users/delete', [UserController::class, 'destroy'])->name('users.destroy');
-Route::post('/admin/password/update', [UserController::class, 'edit'])->name('users.update');
-Route::post('/admin/user/update', [UserController::class, 'update'])->name('password.update');
+Route::post('/admin/password', [UserController::class, 'edit'])->name('users.edit');
+Route::post('/admin/password/update', [UserController::class, 'update'])->name('password.update');
 
 // shop page display
 Route::get('/admin/shopForm', [ShopController::class, 'form'])->name('admin.shop.form');
