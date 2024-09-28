@@ -17,7 +17,7 @@ class ReportController extends Controller
         }
         else{
             $shopRecords=Shop::all();
-            return view('shop.report.shopListDetail',compact('shopRecords'));
+            return view('admin.report.shopListDetail',compact('shopRecords'));
         }
     }
 
