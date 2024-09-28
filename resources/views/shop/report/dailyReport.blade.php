@@ -23,7 +23,7 @@
                         <div class="col-lg-4 col-sm-12">
                             <div class="card equal-height">
                                 <div class="card-header">
-                                    <h4 class="card-title">Deposits and Withdrawals</h4>
+                                    <h4 class="card-title">Withdrawals and Deposits</h4>
                                 </div>
                                 <div class="card-header" style="color:black">
                                     <span>{{$date}}</span>

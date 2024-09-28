@@ -44,7 +44,7 @@
                                 class="icon icon-form"></i><span class="nav-text">Reports</span></a>
                         <ul aria-expanded="false">
                             <li><a href="{{route('shop.report.dailyReport')}}">Daily Report</a></li>
-                            <li><a href="{{route('shop.report.monthlyReport')}}">Monthly Report</a></li>
+                            <li><a href="{{route('shop.report.SearchDate')}}">Monthly Report</a></li>
                         </ul>
                     </li>
             <!-- shop sidenavbar end -->
@@ -64,7 +64,6 @@
                             <li><a href="{{route('admin.user.detailList')}}">User Detail List</a></li>
                         </ul>
                     </li>
-                    <!-- <br> -->
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon icon-app-store"></i>
@@ -75,26 +74,23 @@
                             <li><a href="{{route('admin.shop.detailList')}}">Exchange Detail List</a></li>
                         </ul>
                     </li>
-                    <!-- <br> -->
                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
                                 class="icon icon-world-2"></i><span class="nav-text">Exchange Income</span></a>
                         <ul aria-expanded="false">
                             <li><a href="{{route('admin.bank.revenueList')}}">Entry List</a></li>
                         </ul>
                     </li>
-                    <!-- <br> -->
                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
                                 class="icon icon-world-2"></i><span class="nav-text">Bank</span></a>
                         <ul aria-expanded="false">
                             <li><a href="{{route('admin.bank.expenseList')}}">Expense List</a></li>
                         </ul>
                     </li>
-                    <!-- <br> -->
                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
                                 class="icon icon-form"></i><span class="nav-text">Reports</span></a>
                         <ul aria-expanded="false">
                             <li><a href="{{route('admin.report.shopListDetail')}}">Daily Report</a></li>
-                            <li><a href="{{route('admin.report.monthlyReport')}}">Monthly Report</a></li>
+                            <li><a href="{{route('admin.report.shopSearchDate')}}">Monthly Report</a></li>
                         </ul>
                     </li>
                 @endif

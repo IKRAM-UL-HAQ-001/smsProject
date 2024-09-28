@@ -5,7 +5,7 @@
             <div class="col-sm-6 p-md-0">
                 <div class="welcome-text">
                     <h4>Hi, welcome back!</h4>
-                    <!-- <p class="mb-0">Your business dashboard template</p> -->
+                    <p class="mb-0">Your business dashboard template</p>
                 </div>
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
@@ -22,7 +22,7 @@
                     <div class="col-lg-4 col-sm-12">
                         <div class="card equal-height">
                             <div class="card-header">
-                                <h4 class="card-title">Deposits and Withdrawals</h4>
+                                <h4 class="card-title">Withdrawals and Deposits</h4>
                                 <span style="color:black">{{$dateRange}}</span>
                             </div>
                             <div class="card-body">

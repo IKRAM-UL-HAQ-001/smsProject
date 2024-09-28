@@ -11,17 +11,36 @@ use Auth;
 class ReportController extends Controller
 {
 
-    public function shopListDetail(){
+    public function shopListDetail(Request $request){
         if (!auth()->check()) {
             return redirect()->route('firstpage');
         }
         else{
             $shopRecords=Shop::all();
-            return view('admin.report.shopListDetail',compact('shopRecords'));
+            return view('shop.report.shopListDetail',compact('shopRecords'));
         }
     }
 
-    public function shopDailyReport(){
+    public function adminShopDateSearch(Request $request){
+        if (!auth()->check()) {
+            return redirect()->route('firstpage');
+        }
+        else{
+            $shopRecords=Shop::all();
+            return view('admin.report.shopSearchDate',compact('shopRecords'));
+        }
+    }
+
+    public function shopDateSearch(Request $request){
+        if (!auth()->check()) {
+            return redirect()->route('firstpage');
+        }
+        else{
+            return view('shop.report.SearchDate');
+        }
+    }
+
+    public function shopDailyReport(Request $request){
         if (!auth()->check()) {
             return redirect()->route('firstpage');
         }
@@ -66,44 +85,47 @@ class ReportController extends Controller
         }
     }
     
-    public function shopMonthlyReport(){
+    public function shopMonthlyReport(Request $request){
         if (!auth()->check()) {
             return redirect()->route('firstpage');
-        }
-        else{
+        } else {
             $user = Auth::user();
-            $shopId = $user->shop_id;
-            $startDate = Carbon::now()->subDays(30);
-            $endDate = Carbon::now();
+            $shopId= $user->shop_id;
+            $request->validate([
+                'from_date' => 'required|date',
+                'to_date' => 'required|date|after_or_equal:from_date',
+            ]);
 
-            $deposit = Cash::whereBetween('created_at', [$startDate, $endDate])
+            $startDate = Carbon::parse($request->from_date);
+            $endDate = Carbon::parse($request->to_date);
+
+            // Perform the calculations using the provided date range
+            $deposits = Cash::whereBetween('created_at', [$startDate, $endDate])
+                ->where('shop_id', $shopId)    
+                ->where('cash_type', 'deposit')->get();
+                // ->sum('cash_amount');
+                $deposit = $deposits->sum('cash_amount') ?: 0;
+            
+            $withdrawals = Cash::whereBetween('created_at', [$startDate, $endDate])
                 ->where('shop_id', $shopId)
-                ->where('cash_type', 'deposit')
-                ->sum('cash_amount');
+                ->where('cash_type', 'withdrawal')->get();
+                $withdrawal = $withdrawals->sum('cash_amount');
 
-            $withdrawal = Cash::whereBetween('created_at', [$startDate, $endDate])
+            $expenses = Cash::whereBetween('created_at', [$startDate, $endDate])
                 ->where('shop_id', $shopId)
-                ->where('cash_type', 'withdrawal')
-                ->sum('cash_amount');
+                ->where('cash_type', 'expense')->get();
+                $expense = $expenses->sum('cash_amount');
 
-            $expense = Cash::whereBetween('created_at', [$startDate, $endDate])
-                ->where('shop_id', $shopId)
-                ->where('cash_type', 'expense')
-                ->sum('cash_amount');
+            $bonuses = Cash::whereBetween('created_at', [$startDate, $endDate])
+                ->where('shop_id', $shopId)->get();
+                $bonus = $bonuses->sum('bonus_amount');
 
-            $bonus = Cash::whereBetween('created_at', [$startDate, $endDate])
-                ->where('shop_id', $shopId)
-                ->sum('bonus_amount');
-
-            $latestBalance = Cash::where('shop_id', $shopId)
-            ->orderBy('created_at', 'desc')
-            ->value('total_shop_balance'); // Latest total shop balance
+            // Calculate the latest balance
+            $latestBalance = $deposit - $withdrawal - $expense;
             
             $dateRange = $startDate->format('Y-m-d') . ' to ' . $endDate->format('Y-m-d');
 
-            // Add any other calculations needed for the monthly report
-
-            return view('shop.report.monthlyReport', compact('dateRange','latestBalance','deposit', 'withdrawal', 'expense', 'bonus'));
+            return view('admin.report.monthlyReport', compact('dateRange', 'latestBalance', 'deposit', 'withdrawal', 'expense', 'bonus'));
         }
     }
 
@@ -152,46 +174,53 @@ class ReportController extends Controller
         }
     }
     
-    public function adminMonthlyReport(){
+
+    public function adminMonthlyReport(Request $request){
         if (!auth()->check()) {
             return redirect()->route('firstpage');
-        }
-        else{
+        } else {
             $user = Auth::user();
-            $startDate = Carbon::now()->subDays(30);
-            $endDate = Carbon::now();
+            $request->validate([
+                'from_date' => 'required|date',
+                'to_date' => 'required|date|after_or_equal:from_date',
+                'shop_id' => 'required|string',
+            ]);
 
-            $deposit = Cash::whereBetween('created_at', [$startDate, $endDate])
-                ->where('cash_type', 'deposit')
-                ->sum('cash_amount');
+            $startDate = Carbon::parse($request->from_date);
+            $endDate = Carbon::parse($request->to_date);
+            $shopId = $request->shop_id;
 
-            $withdrawal = Cash::whereBetween('created_at', [$startDate, $endDate])
-                ->where('cash_type', 'withdrawal')
-                ->sum('cash_amount');
-
-            $expense = Cash::whereBetween('created_at', [$startDate, $endDate])
-                ->where('cash_type', 'expense')
-                ->sum('cash_amount');
-
-            $bonus = Cash::whereBetween('created_at', [$startDate, $endDate])
-                ->sum('bonus_amount');
-
-
-                $latestCashEntry = Cash::latest()->first();
-
-                // Get the latest balance if entry exists
-                $latestBalance = $deposit - $withdrawal - $expense;
+            // Perform the calculations using the provided date range
+            $deposits = Cash::whereBetween('created_at', [$startDate, $endDate])
+                ->where('shop_id', $shopId)    
+                ->where('cash_type', 'deposit')->get();
+                $deposit = $deposits->sum('cash_amount') ?: 0;
         
-        
-            
+            $withdrawals = Cash::whereBetween('created_at', [$startDate, $endDate])
+                ->where('shop_id', $shopId)
+                ->where('cash_type', 'withdrawal')->get();
+                $withdrawal = $withdrawals->sum('cash_amount');
+
+            $expenses = Cash::whereBetween('created_at', [$startDate, $endDate])
+                ->where('shop_id', $shopId)
+                ->where('cash_type', 'expense')->get();
+                $expense = $expenses->sum('cash_amount');
+
+            $bonuses = Cash::whereBetween('created_at', [$startDate, $endDate])
+                ->where('shop_id', $shopId)->get();
+                $bonus = $bonuses->sum('bonus_amount');
+
+            // Calculate the latest balance
+            $latestBalance = $deposit - $withdrawal - $expense;
+
             $dateRange = $startDate->format('Y-m-d') . ' to ' . $endDate->format('Y-m-d');
 
-            // Add any other calculations needed for the monthly report
-
-            return view('admin.report.monthlyReport', compact('dateRange','latestBalance','deposit', 'withdrawal', 'expense', 'bonus'));
+            // Return the view with the computed data
+            return view('admin.report.monthlyReport', compact('dateRange', 'latestBalance', 'deposit', 'withdrawal', 'expense', 'bonus'));
         }
     }
 
+ 
     public function adminRevenueDestroy(Request $request){
         if (!auth()->check()) {
             return redirect()->route('firstpage');

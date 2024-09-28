@@ -6,13 +6,13 @@
             <div class="col-sm-6 p-md-0">
                 <div class="welcome-text">
                     <h4>Hi, welcome back!</h4>
-                    <p class="mb-0">Create a new user</p>
+                    <p class="mb-0">Searh Shop</p> 
                 </div>
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="javascript:void(0)">Admin</a></li>
-                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Create User</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Date and Shop Search</a></li>
                 </ol>
             </div>
         </div>
@@ -37,31 +37,30 @@
                                         </ul>
                                     </div>
                                 @endif
-
                                 <form class="form-valide" action="{{ route('admin.report.monthlyReport') }}" method="post">
                                     @csrf
                                     <div class="form-group row">
-                                        <label class="col-lg-4 col-form-label" for="user_name">User Name <span class="text-danger">*</span></label>
+                                        <label class="col-lg-4 col-form-label" for="from_date">From Date <span class="text-danger">*</span></label>
                                         <div class="col-lg-8">
-                                            <input type="text" class="form-control" id="user_name" name="user_name" placeholder="Enter a User Name" value="{{ old('user_name') }}" required>
+                                            <input type="date" class="form-control" id="from_date" name="from_date" required>
                                         </div>
-                                        @error('user_name')
+                                        @error('from_date')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-lg-4 col-form-label" for="password">Password <span class="text-danger">*</span></label>
+                                        <label class="col-lg-4 col-form-label" for="to_date">To Date <span class="text-danger">*</span></label>
                                         <div class="col-lg-8">
-                                            <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" required>
+                                            <input type="date" class="form-control" id="to_date" name="to_date"required>
                                         </div>
-                                        @error('password')
+                                        @error('to_date')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-lg-4 col-form-label" for="shop_list">Exchange List<span class="text-danger">*</span></label>
+                                        <label class="col-lg-4 col-form-label" for="shop_id">Exchange  List<span class="text-danger">*</span></label>
                                         <div class="col-lg-8">
-                                            <select class="js-select2 form-control" id="shop_list" name="shop_list" data-placeholder="Choose one.." required>
+                                            <select class="js-select2 form-control" id="shop_id" name="shop_id" data-placeholder="Choose one.." required>
                                                 <option disabled selected>Choose Exchange List</option>
                                                 @foreach($shopRecords as $shop)
                                                     <option value="{{$shop->id}}" >{{$shop->shop_name}}</option>

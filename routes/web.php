@@ -51,8 +51,9 @@ Route::get('/shop/expenseList', [BankController::class, 'shopExpenseList'])->nam
 
 
 // report page display
+Route::get('/shop/shopDateSearch', [ReportController::class, 'shopDateSearch'])->name('shop.report.SearchDate');
 Route::get('/shop/dailyReport', [ReportController::class, 'shopDailyReport'])->name('shop.report.dailyReport');
-Route::get('/shop/monthlyReport', [ReportController::class, 'shopMonthlyReport'])->name('shop.report.monthlyReport');
+Route::post('/shop/monthlyReport', [ReportController::class, 'shopMonthlyReport'])->name('shop.report.monthlyReport');
 
 
 //Admin Routes
@@ -82,6 +83,7 @@ Route::post('/admin/expense/delete', [BankController::class, 'adminExpenseDestro
 
 // report page display
 Route::get('/admin/shopListDetail', [ReportController::class, 'shopListDetail'])->name('admin.report.shopListDetail');
+Route::get('/admin/shopDateSearch', [ReportController::class, 'adminShopDateSearch'])->name('admin.report.shopSearchDate');
 Route::post('/admin/dailyReport', [ReportController::class, 'adminDailyReport'])->name('admin.report.dailyReport');
-Route::get('/admin/monthlyReport', [ReportController::class, 'adminMonthlyReport'])->name('admin.report.monthlyReport');
+Route::post('/admin/monthlyReport', [ReportController::class, 'adminMonthlyReport'])->name('admin.report.monthlyReport');
 });

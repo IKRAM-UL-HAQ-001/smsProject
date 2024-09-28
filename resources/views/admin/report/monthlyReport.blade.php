@@ -22,7 +22,7 @@
                     <div class="col-lg-4 col-sm-12">
                         <div class="card equal-height">
                             <div class="card-header">
-                                <h4 class="card-title">Deposits and Withdrawals</h4>
+                                <h4 class="card-title">Withdrawals and Deposits</h4>
                                 <span style="color:black">{{$dateRange}}</span>
                             </div>
                             <div class="card-body">
