@@ -48,7 +48,7 @@ class ReportController extends Controller
             $user = Auth::user();
             $shopId = $user->shop_id;
             $today = Carbon::today();
-
+            
             $deposit = Cash::whereDate('created_at', $today)
                 ->where('shop_id', $shopId)
                 ->where('cash_type', 'deposit')
