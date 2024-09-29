@@ -12,7 +12,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('balance:reset')->dailyAt('18:30');
+        $schedule->command('balance:reset')->dailyAt('00:00');
     }
 
     /**
