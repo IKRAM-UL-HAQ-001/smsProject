@@ -28,7 +28,6 @@
                             <thead>
                                 <tr>
                                     <th>Exchange Name</th>
-                                    <th>Reference Number</th>
                                     <th>Customer Name</th>
                                     <th>Cash Amount</th>
                                     <th>Cash Type</th>
@@ -39,7 +38,6 @@
                                 @foreach($cashRecords as $cash)
                                     <tr>
                                         <td>{{$cash->shop->shop_name}}</td>
-                                        <td>{{$cash->reference_number}}</td>
                                         <td>{{$cash->customer_name}}</td>
                                         <td>{{$cash->cash_amount}}</td>
                                         <td>{{$cash->cash_type}}</td>
@@ -50,7 +48,6 @@
                             <tfoot>
                                 <tr>
                                     <th>Exchange Name</th>
-                                    <th>Reference Number</th>
                                     <th>Customer Name</th>
                                     <th>Cash Amount</th>
                                     <th>Cash Type</th>

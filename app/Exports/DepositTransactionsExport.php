@@ -28,21 +28,21 @@ class DepositTransactionsExport implements FromQuery,  WithHeadings, WithStyles,
     public function query()
     {
         $today = Carbon::today();
-        $query = Cash::select(
-            'cashes.id', 
-            'shops.shop_name as shop_name',
-            'users.user_name as user_name',
-            'cashes.reference_number',
-            'cashes.customer_name',
-            'cashes.cash_type',
-            'cashes.cash_amount',
-            'cashes.bonus_amount',
-            'cashes.payment_type',
-            'cashes.total_shop_balance',
-            'cashes.remarks',
-            'cashes.created_at',
-            'cashes.updated_at'
-        )
+        $query = Cash::selectRaw('
+            cashes.id, 
+            shops.shop_name as shop_name,
+            users.user_name as user_name,
+            cashes.reference_number,
+            cashes.customer_name,
+            cashes.cash_type,
+            cashes.cash_amount,
+            cashes.bonus_amount,
+            cashes.payment_type,
+            cashes.total_shop_balance,
+            cashes.remarks,
+            DATE_FORMAT(CONVERT_TZ(cashes.created_at, "+00:00", "+05:30"), "%Y-%m-%d %H:%i:%s") as created_at,
+            DATE_FORMAT(CONVERT_TZ(cashes.updated_at, "+00:00", "+05:30"), "%Y-%m-%d %H:%i:%s") as updated_at
+        ')
         ->join('shops', 'cashes.shop_id', '=', 'shops.id') 
         ->join('users', 'cashes.user_id', '=', 'users.id') 
         ->whereDate('cashes.created_at', $today) 

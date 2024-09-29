@@ -7,7 +7,7 @@ use App\Models\Cash;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Auth;
-
+use Carbon\Carbon;
 class BankController extends Controller
 {
 
@@ -15,93 +15,113 @@ class BankController extends Controller
         if (!auth()->check()) {
             return redirect()->route('firstpage');
         }
-        else{
-            $user_id = Auth::User()->id;
-            $userName = Auth::User()->user_name;
-            $shopId = Auth::User()->shop_id;
-            $userIds = Cash::where('shop_id', $shopId)
-            ->pluck('user_id')
-            ->unique();
-            $userNames = User::whereIn('id', $userIds)->pluck('user_name', 'id');
-            $depositRecords = Cash::select('cashes.*', 'shops.shop_name')
-            ->join('shops', 'cashes.shop_id', '=', 'shops.id') // Join based on shop_id
-            ->where('cashes.shop_id', $shopId) // Filter by shop_id only
-            ->where('cashes.cash_type', 'deposit') // Include only deposit and withdrawal records
+
+        $today = Carbon::today();
+        $user = Auth::user();
+        $shopId = $user->shop_id;
+
+        // Fetch deposit records along with user names in a single query
+        $depositRecords = Cash::select('cashes.*', 'shops.shop_name', 'users.user_name')
+            ->join('shops', 'cashes.shop_id', '=', 'shops.id')
+            ->join('users', 'cashes.user_id', '=', 'users.id') // Join with users table
+            ->whereDate('cashes.created_at', $today)
+            ->where('cashes.shop_id', $shopId)
+            ->where('cashes.cash_type', 'deposit')
             ->get();
-            return view('/shop.bank.depositList',compact('depositRecords','userNames'));
-        }
+
+        // Fetch unique usernames for display
+        $userNames = User::whereIn('id', $depositRecords->pluck('user_id'))->pluck('user_name', 'id');
+
+        return view('shop.bank.depositList', compact('depositRecords', 'userNames'));
     }
+
 
     public function shopWithdrawalList(){
         if (!auth()->check()) {
             return redirect()->route('firstpage');
         }
-        else{
-            $user_id = Auth::User()->id;
-            $userName = Auth::User()->user_name;
-            $shopId = Auth::User()->shop_id;
-            $userIds = Cash::where('shop_id', $shopId)
-            ->pluck('user_id')
-            ->unique();
-            $userNames = User::whereIn('id', $userIds)->pluck('user_name', 'id');
-            $withdrawalRecords = Cash::select('cashes.*', 'shops.shop_name')
-            ->join('shops', 'cashes.shop_id', '=', 'shops.id') // Join based on shop_id
-            ->where('cashes.shop_id', $shopId) // Filter by shop_id only
-            ->where('cashes.cash_type', 'withdrawal') // Include only deposit and withdrawal records
+    
+        $today = Carbon::today();
+        $user = Auth::user();
+        $shopId = $user->shop_id;
+    
+        // Fetch withdrawal records along with user names in a single query
+        $withdrawalRecords = Cash::select('cashes.*', 'shops.shop_name', 'users.user_name')
+            ->join('shops', 'cashes.shop_id', '=', 'shops.id')
+            ->join('users', 'cashes.user_id', '=', 'users.id') // Join with users table
+            ->whereDate('cashes.created_at', $today)
+            ->where('cashes.shop_id', $shopId)
+            ->where('cashes.cash_type', 'withdrawal')
             ->get();
-            return view('/shop.bank.withdrawalList',compact('withdrawalRecords','userNames'));
-        }
+    
+        // Fetch unique usernames for display
+        $userNames = User::whereIn('id', $withdrawalRecords->pluck('user_id'))->pluck('user_name', 'id');
+    
+        return view('shop.bank.withdrawalList', compact('withdrawalRecords', 'userNames'));
     }
+    
     
     public function shopExpenseList(){
         if (!auth()->check()) {
             return redirect()->route('firstpage');
         }
-        else{
-            $user_id = Auth::User();
-            $userName = Auth::User()->user_name;
-            $shopId = Auth::User()->shop_id;
-            $userIds = Cash::where('shop_id', $shopId)
-            ->pluck('user_id')
-            ->unique();
-            $usernames = User::whereIn('id', $userIds)->pluck('user_name', 'id');
-            $expenseRecords = Cash::select('cashes.*', 'shops.shop_name')
-            ->join('shops', 'cashes.shop_id', '=', 'shops.id') // Join based on shop_id
-            ->where('cashes.shop_id', $shopId) // Filter by shop_id only
-            ->where('cashes.cash_type','expense') // Include only deposit and withdrawal records
+
+        $today = Carbon::today();
+        $user = Auth::user();
+        $shopId = $user->shop_id;
+
+        // Fetch expense records along with user names in a single query
+        $expenseRecords = Cash::select('cashes.*', 'shops.shop_name', 'users.user_name')
+            ->join('shops', 'cashes.shop_id', '=', 'shops.id')
+            ->join('users', 'cashes.user_id', '=', 'users.id') // Join with users table
+            ->whereDate('cashes.created_at', $today)
+            ->where('cashes.shop_id', $shopId)
+            ->where('cashes.cash_type', 'expense')
             ->get();
-            return view('/shop.bank.expenseList',compact('expenseRecords','usernames'));
-        }
+
+        // Fetch unique usernames for display
+        $usernames = User::whereIn('id', $expenseRecords->pluck('user_id'))->pluck('user_name', 'id');
+
+        return view('shop.bank.expenseList', compact('expenseRecords', 'usernames'));
     }
+
 
     public function adminRevenueList(){
         if (!auth()->check()) {
             return redirect()->route('firstpage');
         }
-        else{
-            $user_id = Auth::User()->id;
-            $userName = Auth::User()->user_name;
-            $shopId = Auth::User()->shop_id;
-            $userIds = Cash::distinct()->pluck('user_id');
-            $userNames = User::whereIn('id', $userIds)->pluck('user_name', 'id');
-            $revenueRecords = Cash::whereIn('cashes.cash_type', ['deposit', 'withdrawal'])
+
+        $today = Carbon::today();
+        $user = Auth::user();
+        $shopId = $user->shop_id;
+
+        // Get distinct user IDs
+        $userIds = Cash::distinct()->pluck('user_id');
+        $userNames = User::whereIn('id', $userIds)->pluck('user_name', 'id');
+
+        // Fetch revenue records for today's date
+        $revenueRecords = Cash::whereIn('cashes.cash_type', ['deposit', 'withdrawal'])
+            ->whereDate('created_at', $today) // Filter by today's date
             ->with('shop')
             ->get();
-            return view('/admin.bank.revenueList',compact('revenueRecords','userNames' ));
-        }
+
+        return view('admin.bank.revenueList', compact('revenueRecords', 'userNames'));
     }
+
     
     public function adminExpenseList(){
         if (!auth()->check()) {
             return redirect()->route('firstpage');
         }
         else{
+            $today = Carbon::today();
             $user_id = Auth::User()->id;
             $userName = Auth::User()->user_name;
             $shopId = Auth::User()->shop_id;
             $userIds = Cash::distinct()->pluck('user_id');
             $userNames = User::whereIn('id', $userIds)->pluck('user_name', 'id');
             $expenseRecords = Cash::where('cashes.cash_type', 'expense')
+            ->whereDate('created_at', $today) // Filter by today's date
             ->with('shop')
             ->get();
             return view('/admin.bank.expenseList',compact('expenseRecords','userNames'));
