@@ -38,7 +38,7 @@
                                     </div>
                                 @endif
 
-                                <form class="form-valide" action="{{ route('admin.report.monthlyReport') }}" method="post">
+                                <form class="form-valide" action="{{ route('admin.user.post') }}" method="post">
                                     @csrf
                                     <div class="form-group row">
                                         <label class="col-lg-4 col-form-label" for="user_name">User Name <span class="text-danger">*</span></label>
