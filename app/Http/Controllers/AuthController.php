@@ -57,14 +57,8 @@ class AuthController extends Controller
             return redirect()->route('firstpage');
         }
         else{
-            $user = Auth::user();
-            if ($user) {
-                $user->session_id = null; // Clear session ID
-                $user->save();
-            }
+
             Auth::logout();
-            // $request->session()->invalidate();
-            // $request->session()->regenerateToken();
             return redirect()->route('firstpage');
         }
     }
