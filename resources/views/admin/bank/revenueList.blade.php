@@ -31,7 +31,7 @@
                                 <tr>
                                     <th>Exchange Name</th>
                                     <th>User Name</th>
-                                    <th>Customer ID</th>
+                                    <th>Customer Name</th>
                                     <th>Cash Type</th>
                                     <th>Payment Method</th>
                                     <th>Cash Amount</th>
@@ -48,7 +48,7 @@
                                     <tr>
                                         <td>{{$revenue->shop->shop_name}}</td>
                                         <td>{{ $userNames[$revenue->user_id] ?? 'Unknown' }}</td>
-                                        <td>{{$revenue->reference_number}}</td>
+                                        <td>{{$revenue->customer_name}}</td>
                                         <td>{{$revenue->cash_type}}</td>
                                         <td>{{$revenue->payment_type}}</td>
                                         <td>{{$revenue->cash_amount}}</td>
@@ -70,7 +70,7 @@
                                 <tr>
                                     <th>Exchange Name</th>
                                     <th>User Name</th>
-                                    <th>Customer ID</th>
+                                    <th>Customer Name</th>
                                     <th>Cash Type</th>
                                     <th>Payment Method</th>
                                     <th>Cash Amount</th>
