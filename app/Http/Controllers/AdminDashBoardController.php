@@ -42,6 +42,7 @@ class AdminDashBoardController extends Controller
             $totalCustomersDaily = Cash::whereDate('created_at', $today)
                 ->distinct('reference_number')
                 ->count('reference_number');
+            
             $totalHkDaily = HK::whereDate('created_at', $today)
                 ->distinct('id')
                 ->sum('cash_amount');

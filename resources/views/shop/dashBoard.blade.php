@@ -24,7 +24,9 @@
             ['Total Expense', $totalExpenseDaily, 'ti-money text-light border-light'],
             ['Total Bonus', $totalBonusDaily, 'ti-money text-light border-light'],
             ['Exchange User', $userCount, 'ti-user text-light border-light'],
-            ['Total Exchange Customer', $customerCountDaily, 'ti-user text-light border-light']
+            ['Total Exchange Customer', $customerCountDaily, 'ti-user text-light border-light'],
+            ['Total HK Amount', $totalHkDaily, 'ti-money text-light border-light'],
+            ['Total New IDs', $totalNewIdsCreatedDaily, 'ti-money text-light border-light'],
         ] as $card)
             <div class="col-md-4 col-sm-6 mb-4">
                 <div class="card h-100" style="background:#343957">
@@ -67,7 +69,9 @@
             ['Total Expense', $totalExpenseMonthly, 'ti-money text-light border-light'],
             ['Total Bonus', $totalBonusMonthly, 'ti-money text-light border-light'],
             ['Exchange User', $userCount, 'ti-user text-light border-light'],
-            ['Total Exchange Customer', $customerCountMonthly, 'ti-user text-light border-light']
+            ['Total Exchange Customer', $customerCountMonthly, 'ti-user text-light border-light'],
+            ['Total HK Amount', $totalHkMonthly, 'ti-money text-light border-light'],
+            ['Total New IDs', $totalNewIdsCreatedMonthly, 'ti-money text-light border-light'],
         ] as $card)
             <div class="col-md-4 col-sm-6 mb-4">
                 <div class="card h-100" style="background:#343957">

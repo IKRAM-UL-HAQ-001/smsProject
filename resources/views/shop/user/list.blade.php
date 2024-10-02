@@ -20,8 +20,8 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Exchange New User List </h4>
-                    <a href="{{ route('export.userList') }}" class="btn btn-primary">Download New Users List</a>
+                    <h4 class="card-title">Exchange New Customer List </h4>
+                    <a href="{{ route('export.customerList') }}" class="btn btn-primary">Download New Customer List</a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
