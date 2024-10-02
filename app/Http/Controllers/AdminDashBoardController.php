@@ -6,6 +6,7 @@ use App\Models\AdminDashBoard;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\Cash;
+use App\Models\Customer;
 use App\Models\Shop;
 use App\Models\User;
 use App\Models\BankBalance;
