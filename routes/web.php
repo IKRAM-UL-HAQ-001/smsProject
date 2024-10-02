@@ -11,7 +11,9 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminDashBoardController;
 use App\Http\Controllers\ShopDashBoardController;
-
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\HKController;
+use App\Http\Controllers\BalanceController;
 
 
 // first page
@@ -39,9 +41,13 @@ Route::get('/shop/depositDetailList', [CashController::class, 'depositDetailList
 Route::get('/shop/withdrawalDetailList', [CashController::class, 'withdrawalDetailList'])->name('shop.cash.withdrawalDetailList');
 Route::get('/shop/expenseDetailList', [CashController::class, 'expenseDetailList'])->name('shop.cash.expenseDetailList');
 
+// Excel
 Route::get('/export-deposits', [CashController::class, 'depositExportExcel'])->name('export.deposits')->middleware('auth');
 Route::get('/export-withdrawals', [CashController::class, 'withdrawalExportExcel'])->name('export.withdrawals')->middleware('auth');
 Route::get('/export-expenses', [CashController::class, 'expenseExportExcel'])->name('export.expenses')->middleware('auth');
+Route::get('/export-customerList', [CustomerController::class, 'customerListExportExcel'])->name('export.customerList')->middleware('auth');
+Route::get('/export-hkList', [HKController::class, 'hkListExportExcel'])->name('export.hkList')->middleware('auth');
+Route::get('/export-balance', [BalanceController::class, 'balanceListExportExcel'])->name('export.balanceList')->middleware('auth');
 
 
 // bank page display
@@ -55,6 +61,22 @@ Route::get('/shop/shopDateSearch', [ReportController::class, 'shopDateSearch'])-
 Route::get('/shop/dailyReport', [ReportController::class, 'shopDailyReport'])->name('shop.report.dailyReport');
 Route::post('/shop/monthlyReport', [ReportController::class, 'shopMonthlyReport'])->name('shop.report.monthlyReport');
 
+//new customer
+
+Route::get('/shop/user/form', [CustomerController::class, 'index'])->name('shop.user.form');
+Route::post('/shop/user/post', [CustomerController::class, 'store'])->name('shop.user.post');
+Route::get('/shop/user/list', [CustomerController::class, 'userListDetail'])->name('shop.user.list');
+
+// HK
+Route::get('/shop/hk/form', [HKController::class, 'index'])->name('shop.hk.form');
+Route::post('/shop/hk/post', [HKController::class, 'store'])->name('shop.hk.post');
+Route::get('/shop/hk/list', [HKController::class, 'hkListDetail'])->name('shop.hk.list');
+
+//new specific Bank Balance
+
+Route::get('/shop/balance/form', [BalanceController::class, 'index'])->name('shop.balance.form');
+Route::post('/shop/balance/post', [BalanceController::class, 'store'])->name('shop.balance.post');
+Route::get('/shop/balance/list', [BalanceController::class, 'balanceListDetail'])->name('shop.balance.list');
 
 //Admin Routes
 
@@ -86,4 +108,11 @@ Route::get('/admin/shopListDetail', [ReportController::class, 'shopListDetail'])
 Route::get('/admin/shopDateSearch', [ReportController::class, 'adminShopDateSearch'])->name('admin.report.shopSearchDate');
 Route::post('/admin/dailyReport', [ReportController::class, 'adminDailyReport'])->name('admin.report.dailyReport');
 Route::post('/admin/monthlyReport', [ReportController::class, 'adminMonthlyReport'])->name('admin.report.monthlyReport');
+
+// New customers
+Route::get('/admin/customer/list', [CustomerController::class, 'adminCustomerListDetail'])->name('admin.customer.list');
+Route::post('/admin/customer/delete', [CustomerController::class, 'destroy'])->name('customer.destroy');
+// hk
+Route::get('/admin/hk/list', [HKController::class, 'adminHkListDetail'])->name('admin.hk.list');
+Route::post('/admin/hk/delete', [HKController::class, 'destroy'])->name('hk.destroy');
 });

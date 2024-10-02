@@ -19,7 +19,22 @@
                             <span class="nav-text">Dashboard</span>
                         </a>
                     </li>
-                    <br>
+                    @if(Auth::user()->role == "shop" && Auth::user()->id===2)
+                        <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
+                                    class="icon icon-form"></i><span class="nav-text">Bank</span></a>
+                            <ul aria-expanded="false">
+                                <li><a href="{{route('shop.balance.form')}}">Form</a></li>
+                                <li><a href="{{route('shop.balance.list')}}">Bank List</a></li>
+                            </ul>
+                        </li>
+                    @endif
+                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
+                                class="icon icon-form"></i><span class="nav-text">Create ID</span></a>
+                        <ul aria-expanded="false">
+                            <li><a href="{{route('shop.user.form')}}">Form</a></li>
+                            <li><a href="{{route('shop.user.list')}}">User List</a></li>
+                        </ul>
+                    </li>
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon icon-app-store"></i>
@@ -30,6 +45,13 @@
                             <li><a href="{{route('shop.cash.depositDetailList')}}">Deposit Transaction List</a></li>
                             <li><a href="{{route('shop.cash.withdrawalDetailList')}}">Withdrawal Transaction List</a></li>
                             <li><a href="{{route('shop.cash.expenseDetailList')}}">Expense Transaction List</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
+                                class="icon icon-form"></i><span class="nav-text">HK</span></a>
+                        <ul aria-expanded="false">
+                            <li><a href="{{route('shop.hk.form')}}">Form</a></li>
+                            <li><a href="{{route('shop.hk.list')}}">HK List</a></li>
                         </ul>
                     </li>
                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
@@ -53,7 +75,18 @@
                     <li class="nav-label first">Main Menu</li>
                     <li><a href="{{route('admin.dashBoard')}}"><i class="icon icon-single-04"></i><span class="nav-text">Dashboard</span></a>
                     </li>
-                    <!-- <br> -->
+                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
+                                class="icon icon-form"></i><span class="nav-text">Created ID</span></a>
+                        <ul aria-expanded="false">
+                            <li><a href="{{route('admin.customer.list')}}">User List</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
+                                class="icon icon-form"></i><span class="nav-text">HK</span></a>
+                        <ul aria-expanded="false">
+                            <li><a href="{{route('admin.hk.list')}}">HK List</a></li>
+                        </ul>
+                    </li>
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon icon-app-store"></i>

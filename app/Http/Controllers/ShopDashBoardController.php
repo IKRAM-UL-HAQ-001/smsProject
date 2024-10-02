@@ -7,7 +7,7 @@ use App\Models\Cash;
 use App\Models\Shop;
 use Illuminate\Http\Request;
 use Auth;
-
+use Carbon\Carbon;
 class ShopDashBoardController extends Controller
 {
     public function index(){
@@ -15,38 +15,85 @@ class ShopDashBoardController extends Controller
             return redirect()->route('firstpage');
         }
         else{
+            $today = Carbon::today();
+            $currentMonth = Carbon::now()->month;
+            $currentYear = Carbon::now()->year;
+            
             $userId= Auth::User()->id;
             $shop = Cash::where('user_id', $userId)->first();
             if ($shop) {
                 $shopId = $shop->shop_id;
+                $shop_name = $shop->shop_name;
             } else {
                 $shopId = null;
+                $shop_name = null;
             }
             $shop = Shop::where('id', $shopId)->first();
 
-            if ($shop) {
-                $shop_name = $shop->shop_name;
-            } else {
-                $shop_name = null;
-            }
             $userCount = Cash::where('shop_id', $shopId)->distinct('user_id')->count('user_id');
-            $customerCount = Cash::where('shop_id', $shopId)->distinct('reference_number')->count('reference_number');
             
-            $totalDeposit = Cash::where('shop_id', $shopId)
-            ->where('cash_type', 'deposit')
-            ->sum('cash_amount');
+            $customerCountDaily = Cash::where('shop_id', $shopId)
+                ->whereDate('created_at', $today)
+                ->distinct('reference_number')
+                ->count('reference_number');
 
-            $totalWithdrawal = Cash::where('shop_id', $shopId)
-            ->where('cash_type', 'withdrawal')
-            ->sum('cash_amount');
+            $totalDepositDaily = Cash::where('shop_id', $shopId)
+                ->where('cash_type', 'deposit')
+                ->whereDate('created_at', $today)
+                ->sum('cash_amount');
+
+            $totalWithdrawalDaily = Cash::where('shop_id', $shopId)
+                ->where('cash_type', 'withdrawal')
+                ->whereDate('created_at', $today)
+                ->sum('cash_amount');
+
+            $totalExpenseDaily = Cash::where('shop_id', $shopId)
+                ->where('cash_type', 'expense')
+                ->whereDate('created_at', $today)
+                ->sum('cash_amount');
+
+            $totalBonusDaily = Cash::where('shop_id', $shopId)
+                ->whereDate('created_at', $today)
+                ->sum('bonus_amount');
+
+            $totalBalanceDaily = $totalDepositDaily - $totalWithdrawalDaily - $totalExpenseDaily;
+
+            $customerCountMonthly = Cash::where('shop_id', $shopId)
+                ->whereMonth('created_at', $currentMonth)
+                ->whereYear('created_at', $currentYear)
+                ->distinct('reference_number')
+                ->count('reference_number');
+
+            $totalDepositMonthly = Cash::where('shop_id', $shopId)
+                ->where('cash_type', 'deposit')
+                ->whereMonth('created_at', $currentMonth)
+                ->whereYear('created_at', $currentYear)
+                ->sum('cash_amount');
+
+            $totalWithdrawalMonthly = Cash::where('shop_id', $shopId)
+                ->where('cash_type', 'withdrawal')
+                ->whereMonth('created_at', $currentMonth)
+                ->whereYear('created_at', $currentYear)
+                ->sum('cash_amount');
             
-            $totalExpense = Cash::where('shop_id', $shopId)
-            ->where('cash_type', 'expense')
-            ->sum('cash_amount');
+            $totalExpenseMonthly = Cash::where('shop_id', $shopId)
+                ->where('cash_type', 'expense')
+                ->whereMonth('created_at', $currentMonth)
+                ->whereYear('created_at', $currentYear)
+                ->sum('cash_amount');
 
-            $totalBonus = Cash::where('shop_id', $shopId)->sum('bonus_amount');
-            $totalBalance = $totalDeposit - $totalWithdrawal - $totalExpense;
-            return view("/shop.dashBoard",compact('shop_name','totalBonus','customerCount','userCount','totalBalance','totalDeposit','totalWithdrawal','totalExpense'));
+            $totalBonusMonthly = Cash::where('shop_id', $shopId)
+                ->whereMonth('created_at', $currentMonth)
+                ->whereYear('created_at', $currentYear)
+                ->sum('bonus_amount');
+
+            $totalBalanceMonthly = $totalDepositMonthly - $totalWithdrawalMonthly - $totalExpenseMonthly;
+
+            return view("/shop.dashBoard",compact('shop_name','userCount',
+                'totalBalanceDaily','totalDepositDaily','totalWithdrawalDaily','totalExpenseDaily',
+                'customerCountDaily','totalBonusDaily','totalBalanceMonthly','totalDepositMonthly',
+                'totalWithdrawalMonthly','totalExpenseMonthly','totalBonusMonthly','customerCountMonthly'
+            ));
         }
     }
 }
