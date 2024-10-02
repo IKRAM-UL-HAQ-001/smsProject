@@ -17,6 +17,7 @@
 
         <div class="row text-light">
             @foreach ([
+                ['Total Bank Balance', $totalBankBalance, 'ti-money text-light border-light'],
                 ['Total Balance', $totalBalanceDaily, 'ti-money text-light border-light'],
                 ['Total Deposit', $totalDepositDaily, 'ti-money text-light border-light'],
                 ['Total Withdrawal', $totalWithdrawalDaily, 'ti-money text-light border-light'],

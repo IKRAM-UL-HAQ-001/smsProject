@@ -14,7 +14,7 @@ use App\Http\Controllers\ShopDashBoardController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\HKController;
 use App\Http\Controllers\BalanceController;
-
+use App\Http\Controllers\BankBalanceController;
 
 // first page
     Route::get('/', [FirstPageController::class, 'index'])->name('firstpage');
@@ -47,7 +47,7 @@ Route::get('/export-withdrawals', [CashController::class, 'withdrawalExportExcel
 Route::get('/export-expenses', [CashController::class, 'expenseExportExcel'])->name('export.expenses')->middleware('auth');
 Route::get('/export-customerList', [CustomerController::class, 'customerListExportExcel'])->name('export.customerList')->middleware('auth');
 Route::get('/export-hkList', [HKController::class, 'hkListExportExcel'])->name('export.hkList')->middleware('auth');
-Route::get('/export-balance', [BalanceController::class, 'balanceListExportExcel'])->name('export.balanceList')->middleware('auth');
+Route::get('/export-balance', [BankBalanceController::class, 'balanceListExportExcel'])->name('export.balanceList')->middleware('auth');
 
 
 // bank page display
@@ -74,9 +74,9 @@ Route::get('/shop/hk/list', [HKController::class, 'hkListDetail'])->name('shop.h
 
 //new specific Bank Balance
 
-Route::get('/shop/balance/form', [BalanceController::class, 'index'])->name('shop.balance.form');
-Route::post('/shop/balance/post', [BalanceController::class, 'store'])->name('shop.balance.post');
-Route::get('/shop/balance/list', [BalanceController::class, 'balanceListDetail'])->name('shop.balance.list');
+Route::get('/shop/balance/form', [BankBalanceController::class, 'index'])->name('shop.balance.form');
+Route::post('/shop/balance/post', [BankBalanceController::class, 'store'])->name('shop.balance.post');
+Route::get('/shop/balance/list', [BankBalanceController::class, 'balanceListDetail'])->name('shop.balance.list');
 
 //Admin Routes
 
@@ -112,7 +112,14 @@ Route::post('/admin/monthlyReport', [ReportController::class, 'adminMonthlyRepor
 // New customers
 Route::get('/admin/customer/list', [CustomerController::class, 'adminCustomerListDetail'])->name('admin.customer.list');
 Route::post('/admin/customer/delete', [CustomerController::class, 'destroy'])->name('customer.destroy');
+
 // hk
 Route::get('/admin/hk/list', [HKController::class, 'adminHkListDetail'])->name('admin.hk.list');
 Route::post('/admin/hk/delete', [HKController::class, 'destroy'])->name('hk.destroy');
+
+//balance
+Route::get('/admin/bank/form', [BalanceController::class, 'index'])->name('admin.bank.form');
+Route::post('/admin/bank/post', [BalanceController::class, 'store'])->name('admin.bank.post');
+Route::get('/admin/bank/list', [BalanceController::class, 'ListDetail'])->name('admin.bank.list');
+Route::post('/admin/bank/delete', [BalanceController::class, 'destroy'])->name('admin.destroy');
 });

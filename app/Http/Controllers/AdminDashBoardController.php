@@ -8,6 +8,7 @@ use Auth;
 use App\Models\Cash;
 use App\Models\Shop;
 use App\Models\User;
+use App\Models\BankBalance;
 use Carbon\Carbon;
 
 class AdminDashBoardController extends Controller
@@ -65,6 +66,14 @@ class AdminDashBoardController extends Controller
                 ->distinct('reference_number')
                 ->count('reference_number');
             
+            $totalAmountAdd = BankBalance::where('cash_type', 'add')
+                ->sum('cash_amount');
+
+            $totalAmountSubtract = BankBalance::where('cash_type', 'minus')
+                ->sum('cash_amount');
+
+            $totalBankBalance = $totalAmountAdd - $totalAmountSubtract;
+            
             $totalBalanceMonthly = $totalDepositMonthly - $totalWithdrawalMonthly - $totalExpenseMonthly;
             $totalUsers = User::count();
             $totalShops = Shop::count();
@@ -72,7 +81,7 @@ class AdminDashBoardController extends Controller
                 'totalBalanceMonthly','totalDepositMonthly','totalWithdrawalMonthly','totalExpenseMonthly',
                 'totalBonusMonthly','totalCustomersMonthly',
                 'totalBalanceDaily','totalDepositDaily','totalWithdrawalDaily','totalExpenseDaily',
-                'totalBonusDaily','totalCustomersDaily',
+                'totalBonusDaily','totalCustomersDaily','totalBankBalance',
             ));
         }   
     }

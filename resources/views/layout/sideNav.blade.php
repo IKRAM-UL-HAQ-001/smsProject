@@ -116,6 +116,8 @@
                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
                                 class="icon icon-world-2"></i><span class="nav-text">Bank</span></a>
                         <ul aria-expanded="false">
+                        <li><a href="{{route('admin.bank.form')}}">Form</a></li>
+                        <li><a href="{{route('admin.bank.list')}}">Bank List</a></li>
                             <li><a href="{{route('admin.bank.expenseList')}}">Expense List</a></li>
                         </ul>
                     </li>

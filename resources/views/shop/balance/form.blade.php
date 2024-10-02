@@ -55,10 +55,15 @@
                                     <div class="form-group row">
                                         <label class="col-lg-4 col-form-label" for="bank_name">Bank Name<span class="text-danger">*</span></label>
                                         <div class="col-lg-8">
-                                            <input type="text" class="form-control" id="bank_name" name="bank_name" placeholder="Enter Bank Name"  required>
+                                            <select class="js-select2 form-control" id="bank_name" name="bank_name" data-placeholder="Choose one.." required>
+                                                <option disabled selected>Choose Bank Name</option>
+                                                @foreach($bankBalanceRecords as $bankBalance)
+                                                <option value="{{$bankBalance->id}}" >{{$bankBalance->bank_name}}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                         @error('bank_name')
-                                            <div class="invalid-feedback" style="color: white">{{ $message }}</div>
+                                            <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="form-group row">
@@ -71,7 +76,7 @@
                                         @enderror
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-lg-4 col-form-label" for="cash_amount">Amount<span class="text-danger">*</span></label>
+                                        <label class="col-lg-4 col-form-label" for="cash_amount">Cash Amount<span class="text-danger">*</span></label>
                                         <div class="col-lg-8">
                                             <input type="text" class="form-control" id="cash_amount" name="cash_amount" placeholder="Enter Cash Amount" value="{{ old('cash_amount') }}" required>
                                         </div>
