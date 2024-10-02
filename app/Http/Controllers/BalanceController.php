@@ -34,22 +34,6 @@ class BalanceController extends Controller
         return view('/admin/bank/list',compact('bankRecords'));
     }
 
-    // public function balanceListDetail(){
-    //     if (!auth()->check()) {
-    //         return redirect()->route('firstpage');
-    //     }
-    //         else{
-    //             $today = Carbon::today(); // Get today's date
-    //             $user = Auth::user();
-    //             $userName = $user->user_name;
-    //             $shopId= $user->shop_id;
-    //             $balanceRecords = Balance::where('shop_id', $shopId)
-    //             ->whereDate('created_at', $today)
-    //             ->get();
-    //             return view('/shop/balance/list',compact('balanceRecords','userName'));
-    //     }
-    // }
-
     /**
      * Store a newly created resource in storage.
      */

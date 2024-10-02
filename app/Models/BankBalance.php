@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class BankBalance extends Model
 {
     use HasFactory;
+    public function shop()
+    {
+        return $this->belongsTo(Shop::class);
+    }
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
 }

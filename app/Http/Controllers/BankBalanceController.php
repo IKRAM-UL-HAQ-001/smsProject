@@ -7,7 +7,7 @@ use App\Models\Balance;
 use Illuminate\Http\Request;
 use Auth;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\CustomerListExport;
+use App\Exports\BalanceListExport;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
 
@@ -40,40 +40,55 @@ class BankBalanceController extends Controller
         //
     }
     public function store(Request $request)
-{
-    if (!auth()->check()) {
-        return redirect()->route('firstpage');
-    }
-
-    // Validate the incoming request
-    $validatedData = $request->validate([
-        'account_number' => 'required|string|max:255',
-        'bank_name' => 'required|string|max:255',
-        'cash_amount' => 'required|numeric',
-        'cash_type' => 'required|string', // Only "add" for this step
-    ]);
-
-    try {
-        $user = Auth::user();
-
-        if ($user->shop_id != null) {
-            $shopId = $user->shop_id;
-            $userId = $user->id;
-            $newBankBalance = new BankBalance();
-            $newBankBalance->account_number = $validatedData['account_number'];
-            $newBankBalance->bank_name = $validatedData['bank_name'];
-            $newBankBalance->cash_amount = $validatedData['cash_amount']; // Store current transaction amount
-            $newBankBalance->cash_type = $validatedData['cash_type'];
-            $newBankBalance->shop_id = $shopId;
-            $newBankBalance->user_id = $userId;
-            $newBankBalance->save();
-
-            return redirect()->route('shop.balance.form')->with('success', 'Data saved successfully.');
+    {
+        if (!auth()->check()) {
+            return redirect()->route('firstpage');
         }
-    } catch (\Exception $e) {
-        Log::error('Error saving cash record: ' . $e->getMessage());
-        return redirect()->back()->with('error', 'An error occurred while saving data: ' . $e->getMessage());
+
+        // Validate the incoming request
+        $validatedData = $request->validate([
+            'account_number' => 'required|string|max:255',
+            'bank_name' => 'required|string|max:255',
+            'cash_amount' => 'required|numeric',
+            'cash_type' => 'required|string', // Only "add" for this step
+        ]);
+
+        try {
+            $user = Auth::user();
+
+            if ($user->shop_id != null) {
+                $shopId = $user->shop_id;
+                $userId = $user->id;
+                $newBankBalance = new BankBalance();
+                $newBankBalance->account_number = $validatedData['account_number'];
+                $newBankBalance->bank_name = $validatedData['bank_name'];
+                $newBankBalance->cash_amount = $validatedData['cash_amount']; // Store current transaction amount
+                $newBankBalance->cash_type = $validatedData['cash_type'];
+                $newBankBalance->shop_id = $shopId;
+                $newBankBalance->user_id = $userId;
+                $newBankBalance->save();
+
+                return redirect()->route('shop.balance.form')->with('success', 'Data saved successfully.');
+            }
+        } catch (\Exception $e) {
+            Log::error('Error saving cash record: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'An error occurred while saving data: ' . $e->getMessage());
+        }
     }
-}
+    public function balanceListDetail(){
+        if (!auth()->check()) {
+            return redirect()->route('firstpage');
+        }
+        else{
+            $today = Carbon::today(); // Get today's date
+            $user = Auth::user();
+            $userName = $user->user_name;
+            $shopId= $user->shop_id;
+            $balanceRecords = BankBalance::where('shop_id', $shopId)
+            ->whereDate('created_at', $today)
+            ->get();
+            return view('/shop/balance/list',compact('balanceRecords','userName'));
+        }
+    }
 
 }
