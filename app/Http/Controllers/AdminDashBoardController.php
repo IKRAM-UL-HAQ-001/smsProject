@@ -9,6 +9,7 @@ use App\Models\Cash;
 use App\Models\Shop;
 use App\Models\User;
 use App\Models\BankBalance;
+use App\Models\HK;
 use Carbon\Carbon;
 
 class AdminDashBoardController extends Controller
@@ -40,6 +41,14 @@ class AdminDashBoardController extends Controller
             $totalCustomersDaily = Cash::whereDate('created_at', $today)
                 ->distinct('reference_number')
                 ->count('reference_number');
+            $totalHkDaily = HK::whereDate('created_at', $today)
+                ->distinct('id')
+                ->sum('cash_amount');
+                
+            $totalNewIdsCreatedDaily = Customer::whereDate('created_at', $today)
+                ->distinct('id')
+                ->count('id');
+
             $totalBalanceDaily =  $totalDepositDaily -  $totalWithdrawalDaily -  $totalExpenseDaily ;
             
             $totalDepositMonthly = Cash::where('cash_type', 'deposit')
@@ -66,6 +75,16 @@ class AdminDashBoardController extends Controller
                 ->distinct('reference_number')
                 ->count('reference_number');
             
+            $totalHkMonthly = HK::whereMonth('created_at', $currentMonth)
+                ->whereYear('created_at', $currentYear)
+                ->distinct('id')
+                ->sum('cash_amount');
+            
+            $totalNewIdsCreatedMonthly = Customer::whereMonth('created_at', $currentMonth)
+                ->whereYear('created_at', $currentYear)
+                ->distinct('id')
+                ->count('id');
+            
             $totalAmountAdd = BankBalance::where('cash_type', 'add')
                 ->sum('cash_amount');
 
@@ -79,9 +98,10 @@ class AdminDashBoardController extends Controller
             $totalShops = Shop::count();
             return view('/admin.dashBoard',compact('totalUsers','totalShops',
                 'totalBalanceMonthly','totalDepositMonthly','totalWithdrawalMonthly','totalExpenseMonthly',
-                'totalBonusMonthly','totalCustomersMonthly',
+                'totalBonusMonthly','totalCustomersMonthly','totalHkMonthly','totalNewIdsCreatedMonthly',
                 'totalBalanceDaily','totalDepositDaily','totalWithdrawalDaily','totalExpenseDaily',
-                'totalBonusDaily','totalCustomersDaily','totalBankBalance',
+                'totalBonusDaily','totalCustomersDaily','totalHkDaily','totalNewIdsCreatedDaily',
+                'totalBankBalance',
             ));
         }   
     }

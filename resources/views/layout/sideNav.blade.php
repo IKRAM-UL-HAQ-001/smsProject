@@ -19,7 +19,7 @@
                             <span class="nav-text">Dashboard</span>
                         </a>
                     </li>
-                    @if(Auth::user()->role == "shop" && Auth::user()->id===2)
+                    @if(Auth::user()->role == "shop" && Auth::user()->id===18)
                         <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
                                     class="icon icon-form"></i><span class="nav-text">Bank</span></a>
                             <ul aria-expanded="false">
