@@ -58,11 +58,13 @@ class ShopDashBoardController extends Controller
                 ->whereDate('created_at', $today)
                 ->sum('bonus_amount');
             
-            $totalHkDaily = HK::whereDate('created_at', $today)
+            $totalHkDaily = HK::where('shop_id', $shopId)
+                ->whereDate('created_at', $today)
                 ->distinct('id')
                 ->sum('cash_amount');
                 
-            $totalNewIdsCreatedDaily = Customer::whereDate('created_at', $today)
+            $totalNewIdsCreatedDaily = Customer::where('shop_id', $shopId)
+                ->whereDate('created_at', $today)
                 ->distinct('id')
                 ->count('id');
 
@@ -97,12 +99,14 @@ class ShopDashBoardController extends Controller
                 ->whereYear('created_at', $currentYear)
                 ->sum('bonus_amount');
             
-            $totalHkMonthly = HK::whereMonth('created_at', $currentMonth)
+            $totalHkMonthly = HK::where('shop_id', $shopId)
+                ->whereMonth('created_at', $currentMonth)
                 ->whereYear('created_at', $currentYear)
                 ->distinct('id')
                 ->sum('cash_amount');
             
-            $totalNewIdsCreatedMonthly = Customer::whereMonth('created_at', $currentMonth)
+            $totalNewIdsCreatedMonthly = Customer::where('shop_id', $shopId)
+                ->whereMonth('created_at', $currentMonth)
                 ->whereYear('created_at', $currentYear)
                 ->distinct('id')
                 ->count('id');
