@@ -95,7 +95,8 @@ class ShopDashBoardController extends Controller
                 ->whereYear('created_at', $currentYear)
                 ->sum('bonus_amount');
             
-            $totalMasterSettlingMonthly = MasterSettling::whereMonth('created_at', $currentMonth)
+            $totalMasterSettlingMonthly = MasterSettling::where('shop_id', $shopId)
+                ->whereMonth('created_at', $currentMonth)
                 ->whereYear('created_at', $currentYear)
                 ->distinct('settle_point')
                 ->sum('settle_point');

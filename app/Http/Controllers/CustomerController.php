@@ -46,15 +46,16 @@ class CustomerController extends Controller
         if (!auth()->check()) {
             return redirect()->route('firstpage');
         }
-            else{
-                $today = Carbon::today(); // Get today's date
-                $user = Auth::user();
-                $userName = $user->user_name;
-                $shopId= $user->shop_id;
-                $userRecords = Customer::where('shop_id', $shopId)
-                ->whereDate('created_at', $today)
-                ->get();
-                return view('/shop/user/list',compact('userRecords','userName'));
+        else{
+            $today = Carbon::today(); // Get today's date
+            $user = Auth::user();
+            $Customer = Customer::find($user->id); 
+            $userName = $Customer ? $Customer->user->user_name : null;
+            $shopId= $user->shop_id;
+            $userRecords = Customer::where('shop_id', $shopId)
+            ->whereDate('created_at', $today)
+            ->get();
+            return view('/shop/user/list',compact('userRecords','userName'));
         }
     }
     

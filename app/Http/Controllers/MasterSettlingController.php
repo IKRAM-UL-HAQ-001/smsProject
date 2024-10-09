@@ -3,24 +3,51 @@
 namespace App\Http\Controllers;
 
 use App\Models\MasterSettling;
+use App\Models\Shop;
 use Illuminate\Http\Request;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\masterSettlingListExport;
+use App\Exports\masterSettlingListMonthlyExport;
+use App\Exports\masterSettlingListWeeklyExport;
 
 class MasterSettlingController extends Controller
 {
     
-    public function masterSettlingListExportExcel()
+    public function masterSettlingListMonthlyExportExcel(Request $request,$shopId)
     {
         if (!auth()->check()) {
             return redirect()->route('firstpage');
         }
         else{
-            $shopId= Auth::user()->shop_id;
-            return Excel::download(new MasterSettlingListExport($shopId), 'MonthlyMasterSettlingList.xlsx');
+            $user = Auth::user();
+            $role = $user->role;
+            if($role == "admin"){
+                $shopId = $shopId;
+            }
+            else{
+                $shopId = Auth::user()->shop_id;
+            }
+            return Excel::download(new MasterSettlingListMonthlyExport($shopId), 'MonthlyMasterSettlingList.xlsx');
+        }
+    }
+
+    public function masterSettlingListWeeklyExportExcel(Request $request,$shopId)
+    {
+        if (!auth()->check()) {
+            return redirect()->route('firstpage');
+        }
+        else{
+            $user = Auth::user();
+            $role = $user->role;
+            if($role == "admin"){
+                $shopId = $shopId;
+            }
+            else{
+                $shopId = Auth::user()->shop_id;
+            }
+            return Excel::download(new MasterSettlingListWeeklyExport($shopId), 'WeeklyMasterSettlingList.xlsx');
         }
     }
 
@@ -37,16 +64,17 @@ class MasterSettlingController extends Controller
         else{
             $today = Carbon::today(); // Get today's date
             $user = Auth::user();
-            $userName = $user->user_name;
+            $masterSettling = MasterSettling::find($user->id);  
+            $userName = $masterSettling ? $masterSettling->user->user_name : null;          
             $shopId= $user->shop_id;
             $settlingRecords= MasterSettling::where('shop_id', $shopId)
             ->whereDate('created_at', $today)
             ->get();
-            return View('/shop/settling/list',compact('settlingRecords','userName'));
+            return View('/shop/settling/list',compact('settlingRecords','userName','shopId'));
         }
     }
 
-    public function adminMasterSettlingListDetail()
+    public function adminMasterSettlingListDetail(Request $request)
     {
         if (!auth()->check()) {
             return redirect()->route('firstpage');
@@ -55,10 +83,11 @@ class MasterSettlingController extends Controller
             $today = Carbon::today(); // Get today's date
             $user = Auth::user();
             $userName = $user->user_name;
+            $shopId= $request->shop_id;
             $settlingRecords= MasterSettling::with(['shop', 'user'])
-                ->whereDate('created_at', $today)
+                ->where('shop_id', $shopId)
                 ->get();
-            return View('/admin/settling/list',compact('settlingRecords'));
+            return View('/admin/settling/list',compact('settlingRecords','shopId'));
         }
     }
 
@@ -152,6 +181,15 @@ class MasterSettlingController extends Controller
             $masterSettling = masterSettling::findOrFail($masterSettlingId);
             $masterSettling->delete();
             return redirect()->back()->with('success', 'Master Settling Entry deleted successfully!');
+        }
+    }
+    public function shopListDetail(){
+        if (!auth()->check()) {
+            return redirect()->route('firstpage');
+        }
+        else{
+            $shopRecords=Shop::all();
+            return view('admin.settling.shopListDetail',compact('shopRecords'));
         }
     }
 }

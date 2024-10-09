@@ -11,11 +11,12 @@ use Maatwebsite\Excel\Concerns\WithColumnWidths;
 use Illuminate\Support\Facades\DB;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use PhpOffice\PhpSpreadsheet\Style\Color;
+use Illuminate\Support\Facades\Log;
 use PhpOffice\PhpSpreadsheet\Style\Font;
 use Carbon\Carbon;
 use Auth;
 
-class MasterSettlingListExport implements FromQuery,  WithHeadings, WithStyles, WithColumnWidths
+class MasterSettlingListMonthlyExport implements FromQuery,  WithHeadings, WithStyles, WithColumnWidths
 {
     use Exportable;
 
@@ -43,20 +44,11 @@ class MasterSettlingListExport implements FromQuery,  WithHeadings, WithStyles, 
             ->join('shops', 'master_settlings.shop_id', '=', 'shops.id') // Join with shops
             ->join('users', 'master_settlings.user_id', '=', 'users.id') // Join with users based on user_id
             ->whereMonth('master_settlings.created_at', $currentMonth) // Filter by today's date
+            ->where('master_settlings.shop_id', $this->shopId)
             ->distinct(); // Ensure unique results
-    
-        switch (Auth::user()->role) {
-            case "shop":
-                return $query->where('master_settlings.shop_id', Auth::user()->shop_id);
-            case "admin":
-                return $query; // Return all customers for admin
-            default:
-                return $query->whereNull('master_settlings.id'); // For unrecognized roles, return an empty result set
-        }
-    }
+        return $query;
+     }
         
-
-
     public function headings(): array
     {
         return [

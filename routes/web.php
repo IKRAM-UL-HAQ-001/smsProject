@@ -49,7 +49,8 @@ Route::get('/export-expenses', [CashController::class, 'expenseExportExcel'])->n
 Route::get('/export-customerList', [CustomerController::class, 'customerListExportExcel'])->name('export.customerList')->middleware('auth');
 Route::get('/export-hkList', [HKController::class, 'hkListExportExcel'])->name('export.hkList')->middleware('auth');
 Route::get('/export-balance', [BankBalanceController::class, 'balanceListExportExcel'])->name('export.balanceList')->middleware('auth');
-Route::get('/export-masterSettling', [MasterSettlingController::class, 'masterSettlingListExportExcel'])->name('export.masterSettlingList')->middleware('auth');
+Route::get('/export-masterSettlingMonthly/{shopId}', [MasterSettlingController::class, 'masterSettlingListMonthlyExportExcel'])->name('export.masterSettlingListMonthly')->middleware('auth');
+Route::get('/export-masterSettlingWeekly/{shopId}', [MasterSettlingController::class, 'masterSettlingListWeeklyExportExcel'])->name('export.masterSettlingListWeekly')->middleware('auth');
 
 
 // bank page display
@@ -132,7 +133,7 @@ Route::get('/admin/bank/list', [BalanceController::class, 'ListDetail'])->name('
 Route::post('/admin/bank/delete', [BalanceController::class, 'destroy'])->name('admin.destroy');
 
 //master settling
-Route::get('/admin/settling/list', [MasterSettlingController::class, 'adminMasterSettlingListDetail'])->name('admin.settling.list');
+Route::post('/admin/settling/list', [MasterSettlingController::class, 'adminMasterSettlingListDetail'])->name('admin.settling.list');
 Route::post('/admin/settling/delete', [MasterSettlingController::class, 'destroy'])->name('masterSettling.destroy');
-
+Route::get('/admin/settling/shopListDetail', [MasterSettlingController::class, 'shopListDetail'])->name('admin.settling.shopListDetail');
 });

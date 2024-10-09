@@ -43,12 +43,13 @@ class HKController extends Controller
         else{
             $today = Carbon::today(); // Get today's date
             $user = Auth::user();
-            $userName = $user->user_name;
+            $HK = HK::find($user->id); 
+            $userName = $HK ? $HK->user->user_name : null;
             $shopId= $user->shop_id;
             $hkRecords = HK::where('shop_id', $shopId)
             ->whereDate('created_at', $today)
             ->get();
-            return view('/shop/hk/list',compact('hkRecords','userName'));
+            return view('/shop/hk/list',compact('hkRecords','userName'));                
         }
     }
 
@@ -59,7 +60,7 @@ class HKController extends Controller
         } else {
             $today = Carbon::today(); // Get today's date
             $hkRecords = HK::with(['shop', 'user'])
-            ->whereDate('created_at', $today)
+                ->whereDate('created_at', $today)
                 ->get();
             return view('admin.hk.list', compact('hkRecords'));
         }

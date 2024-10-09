@@ -30,18 +30,6 @@ class WithdrawalTransactionsExport implements FromQuery,  WithHeadings, WithStyl
 {
     $today = Carbon::today();
 
-    // $query = Cash::select(
-    //     'cashes.id', 
-    //     'shops.shop_name as shop_name',
-    //     'users.user_name as user_name',
-    //     'cashes.customer_name',
-    //     'cashes.cash_type',
-    //     'cashes.cash_amount',
-    //     'cashes.total_shop_balance',
-    //     'cashes.remarks',
-    //     'cashes.created_at',
-    //     'cashes.updated_at'
-    // );
         $query = Cash::selectRaw('
         cashes.id, 
         shops.shop_name as shop_name,
