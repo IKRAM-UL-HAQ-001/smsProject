@@ -27,7 +27,7 @@
                             <table id="example" class="display" style="min-width: 845px">
                                 <thead>
                                     <tr>
-                                        <th>Shop Name</th>
+                                        <th>Exchange Name</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -47,7 +47,7 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th>Shop Name</th>
+                                        <th>Exchage Name</th>
                                         <th>Action</th>
                                     </tr>
                                 </tfoot>
