@@ -11,7 +11,7 @@
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="javascript:void(0)">Layout</a></li>
-                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Form</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">HK Form</a></li>
                 </ol>
             </div>
         </div>
@@ -37,29 +37,42 @@
                             @endif
 
                             <div class="form-validation">
-                                <form class="form-valide" action="{{ route('admin.bank.post') }}" method="post">
-                                    @csrf                                    
+                                <form class="form-valide" action="{{ route('shop.settling.post') }}" method="post">
+                                    @csrf
                                     <div class="form-group row">
-                                        <label class="col-lg-4 col-form-label mb-1" for="bank_name">Bank Name<span class="text-info">(optional)</span></label>
+                                        <label class="col-lg-4 col-form-label" for="white_label">White Label<span class="text-danger">*</span></label>
                                         <div class="col-lg-8">
-                                            <input type="text" class="form-control" id="bank_name" name="bank_name" placeholder="Enter Bank Name" >
+                                            <input type="text" class="form-control" id="white_label" name="white_label" placeholder="Enter White Label Number" required>
                                         </div>
-                                        @error('bank_name')
+                                        @error('white_label')
                                             <div class="invalid-feedback" style="color: white">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-lg-4 col-form-label mb-1" for="user_list">User List<span class="text-info">(option)</span></label>
+                                        <label class="col-lg-4 col-form-label" for="credit_reff">Credit Reff<span class="text-danger">*</span></label>
                                         <div class="col-lg-8">
-                                            <select class="js-select2 form-control" id="user_list" name="user_list" data-placeholder="Choose one.." >
-                                                <option disabled selected>Select One User</option>
-                                                @foreach($userRecords as $user)
-                                                    <option value="{{$user->id}}" >{{$user->user_name}}</option>
-                                                @endforeach
-                                            </select>
+                                            <input type="text" class="form-control" id="credit_reff" name="credit_reff" placeholder="Enter Credit Reff Number" required>
                                         </div>
-                                        @error('user_list')
-                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @error('credit_reff')
+                                            <div class="invalid-feedback" style="color: white">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-4 col-form-label" for="settling_point">Settling Point<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" class="form-control" id="settling_point" name="settling_point" placeholder="Enter Settling Point" required>
+                                        </div>
+                                        @error('settling_point')
+                                            <div class="invalid-feedback" style="color: white">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-4 col-form-label" for="price">Price<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" class="form-control" id="price" name="price" placeholder="Enter Price" required>
+                                        </div>
+                                        @error('price')
+                                            <div class="invalid-feedback" style="color: white">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="form-group row">

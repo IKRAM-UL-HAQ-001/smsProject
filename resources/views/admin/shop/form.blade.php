@@ -37,9 +37,9 @@
                                 <form class="form-valide" action="{{ route('admin.shop.post') }}" method="post" enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-group row">
-                                        <label class="col-lg-4 col-form-label" for="shop_name">Shop Name <span class="text-danger">*</span></label>
+                                        <label class="col-lg-4 col-form-label" for="shop_name">Exhange Name <span class="text-danger">*</span></label>
                                         <div class="col-lg-8">
-                                            <input type="text" class="form-control" id="shop_name" name="shop_name" placeholder="Enter a Shop Name" required>
+                                            <input type="text" class="form-control" id="shop_name" name="shop_name" placeholder="Enter a Exchange Name" required>
                                         </div>
                                         @error('shop_name')
                                             <div class="invalid-feedback">{{ $message }}</div>

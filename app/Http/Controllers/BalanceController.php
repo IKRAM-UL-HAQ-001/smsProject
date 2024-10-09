@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Balance;
+use App\Models\User;
+use App\Models\SpecialBankUser;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Auth;
@@ -19,7 +21,8 @@ class BalanceController extends Controller
      */
     public function index()
     {
-        return view('/admin/bank/form');
+        $userRecords = User::where('role' ,'!=','admin')->get();
+        return view('/admin/bank/form',compact('userRecords'));
     }
 
     /**
@@ -34,34 +37,45 @@ class BalanceController extends Controller
         return view('/admin/bank/list',compact('bankRecords'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         if (!auth()->check()) {
             return redirect()->route('firstpage');
         }
-        else{
-            $validatedData = $request->validate([
-                'bank_name' => 'nullable|string|max:255',
-            ]);
-            
-            try {
-                $user = Auth::User();
-                    $balance = new Balance();
-                    $balance->bank_name = $validatedData['bank_name'] ?? NULL;
-                    $balance->save();
-                    return redirect()->route('admin.balance.form')->with('success', 'Data saved successfully.');
-            } catch (\Exception $e) {
-            
-                // Log error and return error response
-                Log::error('Error saving cash record: ' . $e->getMessage());
-                return redirect()->back()->with('error', 'An error occurred while saving data.',$e->getMessage());
-            }    
-        }
+    
+        $validatedData = $request->validate([
+            'bank_name' => 'nullable|string|max:255|unique:balances,bank_name',
+            'user_list' => 'nullable|exists:users,id',
+        ]);
+    
+        try {
+            $user = Auth::user(); // Get the authenticated user
+    
+            // Create a new balance record if bank_name is provided
+            if ($request->bank_name) {
+                $balance = new Balance();
+                $balance->bank_name = $validatedData['bank_name'];
+                $balance->save();
+            }
+    
+            if ($request->user_list) {
+                $count = SpecialBankUser::count();
+                if ($count === 0) {
+                    $specialBankUser = new SpecialBankUser();
+                    $specialBankUser->user_id = $validatedData['user_list'];
+                    $specialBankUser->save();
+                }else{
+                    $specialBankUser = SpecialBankUser::first();
+                    $specialBankUser->user_id = $validatedData['user_list'];
+                    $specialBankUser->save();
+                }
+            } 
+            return redirect()->route('admin.bank.form')->with('success', 'Data saved successfully.');
+        } catch (\Exception $e) {
+            Log::error('Error saving data: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'An error occurred while saving data: ' . $e->getMessage());
+        }     
     }
-
     /**
      * Display the specified resource.
      */

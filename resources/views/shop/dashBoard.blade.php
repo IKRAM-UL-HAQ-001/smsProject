@@ -2,16 +2,17 @@
 
 @section('content')
 <div class="container-fluid">
-    <div class="row page-titles mx-0">
+    <div class="row page-titles mx-0" style="color:#ffffff;background-color:#343957">
         <div class="col-sm-6 p-md-0">
             <div class="welcome-text">
-                <h4>Daily Bases Transaction Record</h4><h3>{{$shop_name}}</h3>
+                <h4 style="color:#ffffff;">Daily Bases Transaction Record</h4>
+                <h6 style="color:#ffffff;">Shop Name: {{$shop_name}}</h6>
             </div>
         </div>
         <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0)">Layout</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Dashboard</a></li>
+            <ol class="breadcrumb" >
+                <li class="breadcrumb-item"><a href="javascript:void(0)"style="color:#ffffff;">Layout</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)" style="color:#ffffff;">Dashboard</a></li>
             </ol>
         </div>
     </div>
@@ -47,16 +48,16 @@
     </div>
 </div>
 <div class="container-fluid">
-    <div class="row page-titles mx-0">
+    <div class="row page-titles mx-0" style="color:white;background-color:#343957">
         <div class="col-sm-6 p-md-0">
             <div class="welcome-text">
-                <h4>Monthly Bases Transaction Record</h4>
+                <h4 style="color:#ffffff;">Monthly Bases Transaction Record</h4>
             </div>
         </div>
         <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0)">Layout</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0)" style="color:#ffffff;">Layout</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)" style="color:#ffffff;">Dashboard</a></li>
             </ol>
         </div>
     </div>
@@ -72,6 +73,7 @@
             ['Total Exchange Customer', $customerCountMonthly, 'ti-user text-light border-light'],
             ['Total HK Amount', $totalHkMonthly, 'ti-money text-light border-light'],
             ['Total New IDs', $totalNewIdsCreatedMonthly, 'ti-money text-light border-light'],
+            ['Total Settling Points', $totalMasterSettlingMonthly, 'ti-money text-light border-light'],
         ] as $card)
             <div class="col-md-4 col-sm-6 mb-4">
                 <div class="card h-100" style="background:#343957">

@@ -90,8 +90,6 @@ class BankController extends Controller
         if (!auth()->check()) {
             return redirect()->route('firstpage');
         }
-
-        $today = Carbon::today();
         $user = Auth::user();
         $shopId = $user->shop_id;
 
@@ -101,7 +99,6 @@ class BankController extends Controller
 
         // Fetch revenue records for today's date
         $revenueRecords = Cash::whereIn('cashes.cash_type', ['deposit', 'withdrawal'])
-            ->whereDate('created_at', $today) // Filter by today's date
             ->with('shop')
             ->get();
 
@@ -114,14 +111,12 @@ class BankController extends Controller
             return redirect()->route('firstpage');
         }
         else{
-            $today = Carbon::today();
             $user_id = Auth::User()->id;
             $userName = Auth::User()->user_name;
             $shopId = Auth::User()->shop_id;
             $userIds = Cash::distinct()->pluck('user_id');
             $userNames = User::whereIn('id', $userIds)->pluck('user_name', 'id');
             $expenseRecords = Cash::where('cashes.cash_type', 'expense')
-            ->whereDate('created_at', $today) // Filter by today's date
             ->with('shop')
             ->get();
             return view('/admin.bank.expenseList',compact('expenseRecords','userNames'));

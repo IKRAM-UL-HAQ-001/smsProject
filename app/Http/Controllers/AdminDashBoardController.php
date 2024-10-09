@@ -11,6 +11,7 @@ use App\Models\Shop;
 use App\Models\User;
 use App\Models\BankBalance;
 use App\Models\HK;
+use App\Models\MasterSettling;
 use Carbon\Carbon;
 
 class AdminDashBoardController extends Controller
@@ -77,7 +78,12 @@ class AdminDashBoardController extends Controller
                 ->distinct('reference_number')
                 ->count('reference_number');
             
-            $totalHkMonthly = HK::whereMonth('created_at', $currentMonth)
+            $totalMasterSettlingMonthly = MasterSettling::whereMonth('created_at', $currentMonth)
+            ->whereYear('created_at', $currentYear)
+            ->distinct('settle_point')
+            ->sum('settle_point');
+            
+            $totalHkMonthly= HK::whereMonth('created_at', $currentMonth)
                 ->whereYear('created_at', $currentYear)
                 ->distinct('id')
                 ->sum('cash_amount');
@@ -99,11 +105,12 @@ class AdminDashBoardController extends Controller
             $totalUsers = User::count();
             $totalShops = Shop::count();
             return view('/admin.dashBoard',compact('totalUsers','totalShops',
-                'totalBalanceMonthly','totalDepositMonthly','totalWithdrawalMonthly','totalExpenseMonthly',
-                'totalBonusMonthly','totalCustomersMonthly','totalHkMonthly','totalNewIdsCreatedMonthly',
-                'totalBalanceDaily','totalDepositDaily','totalWithdrawalDaily','totalExpenseDaily',
-                'totalBonusDaily','totalCustomersDaily','totalHkDaily','totalNewIdsCreatedDaily',
-                'totalBankBalance',
+                'totalBalanceMonthly','totalDepositMonthly','totalWithdrawalMonthly',
+                'totalExpenseMonthly','totalMasterSettlingMonthly',
+                'totalBonusMonthly','totalCustomersMonthly','totalHkMonthly',
+                'totalNewIdsCreatedMonthly','totalBalanceDaily','totalDepositDaily',
+                'totalWithdrawalDaily','totalExpenseDaily','totalBonusDaily','totalCustomersDaily',
+                'totalHkDaily','totalNewIdsCreatedDaily','totalBankBalance',
             ));
         }   
     }

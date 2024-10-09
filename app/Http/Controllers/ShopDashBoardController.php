@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\ShopDashBoard;
 use App\Models\Cash;
 use App\Models\Shop;
+use App\Models\User;
 use App\Models\HK;
 use App\Models\Customer;
+use App\Models\MasterSettling;
 use Illuminate\Http\Request;
 use Auth;
 use Carbon\Carbon;
@@ -22,16 +24,10 @@ class ShopDashBoardController extends Controller
             $currentYear = Carbon::now()->year;
             
             $userId= Auth::User()->id;
-            $shop = Cash::where('user_id', $userId)->first();
-            if ($shop) {
-                $shopId = $shop->shop_id;
-                $shop_name = $shop->shop_name;
-            } else {
-                $shopId = null;
-                $shop_name = null;
-            }
-            $shop = Shop::where('id', $shopId)->first();
-
+            $user = User::find($userId);
+            $shopId = $user->shop_id;
+            $shop = Shop::find($shopId);
+            $shop_name = $shop ? $shop->shop_name : null;
             $userCount = Cash::where('shop_id', $shopId)->distinct('user_id')->count('user_id');
             
             $customerCountDaily = Cash::where('shop_id', $shopId)
@@ -99,6 +95,11 @@ class ShopDashBoardController extends Controller
                 ->whereYear('created_at', $currentYear)
                 ->sum('bonus_amount');
             
+            $totalMasterSettlingMonthly = MasterSettling::whereMonth('created_at', $currentMonth)
+                ->whereYear('created_at', $currentYear)
+                ->distinct('settle_point')
+                ->sum('settle_point');
+            
             $totalHkMonthly = HK::where('shop_id', $shopId)
                 ->whereMonth('created_at', $currentMonth)
                 ->whereYear('created_at', $currentYear)
@@ -117,7 +118,7 @@ class ShopDashBoardController extends Controller
                 'totalBalanceDaily','totalDepositDaily','totalWithdrawalDaily','totalExpenseDaily',
                 'customerCountDaily','totalBonusDaily','totalNewIdsCreatedDaily','totalHkDaily',
                 'totalBalanceMonthly','totalDepositMonthly','totalWithdrawalMonthly','totalExpenseMonthly',
-                'totalBonusMonthly','customerCountMonthly','totalNewIdsCreatedMonthly','totalHkMonthly'
+                'totalMasterSettlingMonthly','totalBonusMonthly','customerCountMonthly','totalNewIdsCreatedMonthly','totalHkMonthly'
             ));
         }
     }

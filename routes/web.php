@@ -15,6 +15,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\HKController;
 use App\Http\Controllers\BalanceController;
 use App\Http\Controllers\BankBalanceController;
+use App\Http\Controllers\MasterSettlingController;
 
 // first page
     Route::get('/', [FirstPageController::class, 'index'])->name('firstpage');
@@ -48,6 +49,7 @@ Route::get('/export-expenses', [CashController::class, 'expenseExportExcel'])->n
 Route::get('/export-customerList', [CustomerController::class, 'customerListExportExcel'])->name('export.customerList')->middleware('auth');
 Route::get('/export-hkList', [HKController::class, 'hkListExportExcel'])->name('export.hkList')->middleware('auth');
 Route::get('/export-balance', [BankBalanceController::class, 'balanceListExportExcel'])->name('export.balanceList')->middleware('auth');
+Route::get('/export-masterSettling', [MasterSettlingController::class, 'masterSettlingListExportExcel'])->name('export.masterSettlingList')->middleware('auth');
 
 
 // bank page display
@@ -77,6 +79,12 @@ Route::get('/shop/hk/list', [HKController::class, 'hkListDetail'])->name('shop.h
 Route::get('/shop/balance/form', [BankBalanceController::class, 'index'])->name('shop.balance.form');
 Route::post('/shop/balance/post', [BankBalanceController::class, 'store'])->name('shop.balance.post');
 Route::get('/shop/balance/list', [BankBalanceController::class, 'balanceListDetail'])->name('shop.balance.list');
+
+//new specific Master Settling
+
+Route::get('/shop/settling/form', [MasterSettlingController::class, 'index'])->name('shop.settling.form');
+Route::post('/shop/settling/post', [MasterSettlingController::class, 'store'])->name('shop.settling.post');
+Route::get('/shop/settling/list', [MasterSettlingController::class, 'masterSettlingListDetail'])->name('shop.settling.list');
 
 //Admin Routes
 
@@ -122,4 +130,9 @@ Route::get('/admin/bank/form', [BalanceController::class, 'index'])->name('admin
 Route::post('/admin/bank/post', [BalanceController::class, 'store'])->name('admin.bank.post');
 Route::get('/admin/bank/list', [BalanceController::class, 'ListDetail'])->name('admin.bank.list');
 Route::post('/admin/bank/delete', [BalanceController::class, 'destroy'])->name('admin.destroy');
+
+//master settling
+Route::get('/admin/settling/list', [MasterSettlingController::class, 'adminMasterSettlingListDetail'])->name('admin.settling.list');
+Route::post('/admin/settling/delete', [MasterSettlingController::class, 'destroy'])->name('masterSettling.destroy');
+
 });

@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
-use app\Models\User;
-use app\Models\Role;
+use App\Models\User;
+use App\Models\SpecialBankUser;
+use App\Models\Role;
 class AuthController extends Controller
 {
 
@@ -28,20 +29,12 @@ class AuthController extends Controller
         $request->session()->regenerate();
         $user = Auth::user();
 
-        // Check if the user is already logged in elsewhere
-        // if ($user->session_id && $user->session_id !== session()->getId()) {
-        //     Auth::logout();
-        //     return redirect()->route("auth.login")->withErrors(['user_name' => 'You are already logged in on another device.']);
-        // }
-
-        // Update the session_id for the user
-        // $user->session_id = session()->getId();
-        // $user->save();
-
         // Redirect based on user role
-        if ($user->role == "admin") {
+        if ($user->role === "admin") {
             return redirect()->route('admin.dashBoard');
-        } elseif ($user->role == "shop") {
+        } elseif ($user->role === "shop") {
+            $specialBankUser = SpecialBankUser::where('user_id', Auth::id())->first();
+            session(['specialBankUser' => $specialBankUser]);
             return redirect()->route('shop.dashBoard');
         }
     }

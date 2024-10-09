@@ -19,7 +19,7 @@
                             <span class="nav-text">Dashboard</span>
                         </a>
                     </li>
-                    @if(Auth::user()->role == "shop" && Auth::user()->id===18)
+                    @if(Auth::user()->role == "shop" && session('specialBankUser') && session('specialBankUser')->user_id == Auth::id())
                         <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
                                     class="icon icon-form"></i><span class="nav-text">Bank</span></a>
                             <ul aria-expanded="false">
@@ -60,6 +60,13 @@
                             <li><a href="{{route('shop.bank.depositList')}}">Deposit List</a></li>
                             <li><a href="{{route('shop.bank.withdrawalList')}}">Withdrawal List</a></li>
                             <li><a href="{{route('shop.bank.expenseList')}}">Expense List</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
+                                class="icon icon-form"></i><span class="nav-text">Master Settling</span></a>
+                        <ul aria-expanded="false">
+                            <li><a href="{{route('shop.settling.form')}}">Form</a></li>
+                            <li><a href="{{route('shop.settling.list')}}">Master Settling List</a></li>
                         </ul>
                     </li>
                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
@@ -108,7 +115,7 @@
                         </ul>
                     </li>
                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
-                                class="icon icon-world-2"></i><span class="nav-text">Exchange Income</span></a>
+                                class="icon icon-world-2"></i><span class="nav-text">Deposit - Withdrawal</span></a>
                         <ul aria-expanded="false">
                             <li><a href="{{route('admin.bank.revenueList')}}">Entry List</a></li>
                         </ul>
@@ -119,6 +126,12 @@
                         <li><a href="{{route('admin.bank.form')}}">Form</a></li>
                         <li><a href="{{route('admin.bank.list')}}">Bank List</a></li>
                             <li><a href="{{route('admin.bank.expenseList')}}">Expense List</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
+                                class="icon icon-form"></i><span class="nav-text">Master Settling</span></a>
+                        <ul aria-expanded="false">
+                            <li><a href="{{route('admin.settling.list')}}">Master Settling List</a></li>
                         </ul>
                     </li>
                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
