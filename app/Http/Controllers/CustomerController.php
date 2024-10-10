@@ -64,9 +64,9 @@ class CustomerController extends Controller
         if (!auth()->check()) {
             return redirect()->route('firstpage');
         } else {
-            $today = Carbon::today(); // Get today's date
+            $currentMonth = Carbon::now()->month;  // Get today's date
             $customerRecords = Customer::with(['shop', 'user'])
-            ->whereDate('created_at', $today)
+            ->whereMonth('created_at', $currentMonth)
                 ->get();
             return view('admin.customer.list', compact('customerRecords'));
         }

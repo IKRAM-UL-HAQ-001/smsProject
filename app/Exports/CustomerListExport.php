@@ -27,8 +27,7 @@ class CustomerListExport implements FromQuery,  WithHeadings, WithStyles, WithCo
 
     public function query()
     {
-        $today = Carbon::today(); // Get today's date
-    
+        $currentMonth = Carbon::now()->month; 
         $query = Customer::selectRaw('
                 customers.id, 
                 shops.shop_name AS shop_name,
@@ -41,7 +40,7 @@ class CustomerListExport implements FromQuery,  WithHeadings, WithStyles, WithCo
             ')
             ->join('shops', 'customers.shop_id', '=', 'shops.id') // Join with shops
             ->join('users', 'customers.user_id', '=', 'users.id') // Join with users based on user_id
-            ->whereDate('customers.created_at', $today) // Filter by today's date
+            ->whereMonth('customers.created_at', $currentMont) // Filter by today's date
             ->distinct(); // Ensure unique results
     
         switch (Auth::user()->role) {
