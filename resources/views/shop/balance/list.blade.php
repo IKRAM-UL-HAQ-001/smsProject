@@ -40,7 +40,7 @@
                                         <td>{{$balance->shop->shop_name}}</td>
                                         <td>{{$userName}}</td>
                                         <td>{{$balance->bank_type}}</td>
-                                        <td>{{$user->cash_amount}}</td>
+                                        <td>{{$balance->cash_amount}}</td>
                                         
                                     </tr>
                                 @endforeach
