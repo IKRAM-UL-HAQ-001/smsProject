@@ -91,6 +91,23 @@
                 </div>
             </div>
         @endforeach
+        @if(Auth::user()->role == "shop" && session('specialBankUser') && session('specialBankUser')->user_id == Auth::id())
+            <div class="col-md-4 col-sm-6 mb-4">
+                <div class="card h-100" style="background:#343957">
+                    <div class="stat-widget-one card-body d-flex align-items-center">
+                        <div class="stat-icon d-inline-block">
+                            <i class="ti-money text-light border-light"></i>
+                        </div>
+                        <div class="stat-content d-inline-block ml-3">
+                            <div class="stat-text text-light">
+                                <h4 class="text-light">Total Bank Balance</h4>
+                            </div>
+                            <div class="stat-digit text-light">{{ $totalBankBalance }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
     </div>
 </div>
 @endsection

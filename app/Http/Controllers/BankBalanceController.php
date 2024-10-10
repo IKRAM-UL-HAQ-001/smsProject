@@ -93,4 +93,10 @@ class BankBalanceController extends Controller
             return view('/shop/balance/list',compact('balanceRecords','userName'));
         }
     }
+    public function getBankBalance(Request $request){
+        $request->validate(['bank_name' => 'required|string']);
+        $sumBalance = BankBalance::where('bank_name', $request->bank_name)
+            ->sum('cash_amount');    
+        return response()->json(['balance' => $sumBalance]);
+    }
 }

@@ -11,6 +11,7 @@ use App\Models\Customer;
 use App\Models\MasterSettling;
 use Illuminate\Http\Request;
 use Auth;
+use App\Models\BankBalance;
 use Carbon\Carbon;
 class ShopDashBoardController extends Controller
 {
@@ -107,6 +108,14 @@ class ShopDashBoardController extends Controller
                 ->distinct('id')
                 ->sum('cash_amount');
             
+            $totalAmountAdd = BankBalance::where('cash_type', 'add')
+                ->sum('cash_amount');
+
+            $totalAmountSubtract = BankBalance::where('cash_type', 'minus')
+                ->sum('cash_amount');
+
+            $totalBankBalance = $totalAmountAdd - $totalAmountSubtract;
+            
             $totalNewIdsCreatedMonthly = Customer::where('shop_id', $shopId)
                 ->whereMonth('created_at', $currentMonth)
                 ->whereYear('created_at', $currentYear)
@@ -115,7 +124,7 @@ class ShopDashBoardController extends Controller
 
             $totalBalanceMonthly = $totalDepositMonthly - $totalWithdrawalMonthly - $totalExpenseMonthly;
 
-            return view("/shop.dashBoard",compact('shop_name','userCount',
+            return view("/shop.dashBoard",compact('totalBankBalance','shop_name','userCount',
                 'totalBalanceDaily','totalDepositDaily','totalWithdrawalDaily','totalExpenseDaily',
                 'customerCountDaily','totalBonusDaily','totalNewIdsCreatedDaily','totalHkDaily',
                 'totalBalanceMonthly','totalDepositMonthly','totalWithdrawalMonthly','totalExpenseMonthly',

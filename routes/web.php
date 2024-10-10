@@ -31,6 +31,7 @@ Route::middleware(['auth.check'])->group(function () {
     
     Route::get('/auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
     Route::get('/auth/forgetPassword', [AuthController::class, 'forgetPassword'])->name('auth.forget');
+    Route::post('/auth/updatePassword', [AuthController::class, 'update'])->name('admin.auth.post');
 // shop Routes
 
 // shop dashboard page display
@@ -79,6 +80,7 @@ Route::get('/shop/hk/list', [HKController::class, 'hkListDetail'])->name('shop.h
 //new specific Bank Balance
 
 Route::get('/shop/balance/form', [BankBalanceController::class, 'index'])->name('shop.balance.form');
+Route::post('/shop/balance/BankBalance', [BankBalanceController::class, 'getBankBalance'])->name('shop.balance.getBankBalance');
 Route::post('/shop/balance/post', [BankBalanceController::class, 'store'])->name('shop.balance.post');
 Route::get('/shop/balance/list', [BankBalanceController::class, 'balanceListDetail'])->name('shop.balance.list');
 

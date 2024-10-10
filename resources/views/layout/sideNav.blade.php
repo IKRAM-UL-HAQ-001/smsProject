@@ -77,6 +77,7 @@
                         </ul>
                     </li>
             <!-- shop sidenavbar end -->
+
             <!-- admin sidenavbar start -->
                 @elseif(Auth::user()->role === "admin")
                     <li class="nav-label first">Main Menu</li>
@@ -155,5 +156,5 @@
 </div>
 
 <!--**********************************
-    Sidebar end
+            Sidebar end
 ***********************************-->

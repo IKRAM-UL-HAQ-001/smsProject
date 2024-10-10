@@ -1,4 +1,4 @@
-@extends("layout.layout")
+<!-- @extends("layout.layout")
 @section('content')
     <div class="container-fluid">
         <div class="row page-titles mx-0">
@@ -37,15 +37,15 @@
                             @endif
 
                             <div class="form-validation">
-                                <form class="form-valide" id="bankForm" action="{{ route('shop.balance.post') }}" method="post">
+                                <form class="form-valide" action="{{ route('shop.balance.post') }}" method="post">
                                     @csrf
                                     <div class="form-group row">
                                         <label class="col-lg-4 col-form-label" for="cash_type">Cash Type<span class="text-danger">*</span></label>
                                         <div class="col-lg-8">
                                             <select class="js-select2 form-control" id="cash_type" name="cash_type" data-placeholder="Choose one.." required>
                                                 <option disabled selected>Choose Cash Type</option>
-                                                <option value="add">Add</option>
-                                                <option value="minus">Minus</option>
+                                                <option value="add" >Add</option>
+                                                <option value="minus" >Minus</option>
                                             </select>
                                         </div>
                                         @error('cash_type')
@@ -58,7 +58,7 @@
                                             <select class="js-select2 form-control" id="bank_name" name="bank_name" data-placeholder="Choose one.." required>
                                                 <option disabled selected>Choose Bank Name</option>
                                                 @foreach($bankBalanceRecords as $bankBalance)
-                                                    <option value="{{ $bankBalance->bank_name }}">{{ $bankBalance->bank_name }}</option>
+                                                    <option value="{{$bankBalance->bank_name}}" >{{$bankBalance->bank_name}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -67,21 +67,12 @@
                                         @enderror
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-lg-4 col-form-label" for="bank_balance">Bank Balance</label>
-                                        <div class="col-lg-8">
-                                            <input type="text" class="form-control" id="bank_balance" name="bank_balance" readonly>
-                                        </div>
-                                        @error('bank_balance')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group row">
                                         <label class="col-lg-4 col-form-label" for="account_number">Account Number<span class="text-danger">*</span></label>
                                         <div class="col-lg-8">
-                                            <input type="text" class="form-control" id="account_number" name="account_number" placeholder="Enter Account Number" required>
+                                            <input type="text" class="form-control" id="account_number" name="account_number" placeholder="Enter Account Number"  required>
                                         </div>
                                         @error('account_number')
-                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            <div class="invalid-feedback" style="color: white">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="form-group row">
@@ -90,7 +81,7 @@
                                             <input type="text" class="form-control" id="cash_amount" name="cash_amount" placeholder="Enter Cash Amount" value="{{ old('cash_amount') }}" required>
                                         </div>
                                         @error('cash_amount')
-                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            <div class="invalid-feedback" style="color: white">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="form-group row">
@@ -106,16 +97,12 @@
             </div>
         </section>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+@section('scripts')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
         $('#bank_name').change(function() {
             var bankName = $(this).val();
-            console.log(bankName);  // Corrected variable name
-            
-            // Disable all form inputs
-            $('#bankForm input, #bankForm select').prop('disabled', true);
-            
             $.ajax({
                 url: '{{ route("shop.balance.getBankBalance") }}', // Define your route here
                 type: 'POST', // Use POST method
@@ -124,23 +111,15 @@
                     _token: '{{ csrf_token() }}' // Include CSRF token
                 },
                 success: function(response) {
-                    // Check if response has a balance property
-                    if (response.balance !== undefined) {
-                        $('#bank_balance').val(response.balance); // Make sure this input exists
-                    } else {
-                        console.warn('Balance not found in response:', response);
-                    }
+                    $('#bank_balance').val(response.balance);
                 },
                 error: function(xhr) {
-                    console.error('Error:', xhr);
-                },
-                complete: function() {
-                    // Re-enable all form inputs after the AJAX call is complete
-                    $('#bankForm input, #bankForm select').prop('disabled', false);
+                    console.error(xhr);
                 }
             });
         });
     });
 </script>
-
 @endsection
+@endsection -->
+

@@ -7,6 +7,8 @@ use Auth;
 use App\Models\User;
 use App\Models\SpecialBankUser;
 use App\Models\Role;
+use Illuminate\Support\Facades\Hash;
+
 class AuthController extends Controller
 {
 
@@ -57,5 +59,20 @@ class AuthController extends Controller
             return redirect()->route('firstpage');
         }
     }
+    public function update(Request $request)
+    {
+        // Validate the incoming request
+        $request->validate([
+            'password' => 'required|string|min:8',
+        ]);
 
+        $user = auth()->user();
+
+        // Update the password
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        return redirect()->route('auth.forget')->with('success', 'Password updated successfully.');
+    }
 }
+

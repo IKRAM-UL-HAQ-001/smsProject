@@ -27,8 +27,9 @@ class HKListExport implements FromQuery,  WithHeadings, WithStyles, WithColumnWi
 
     public function query()
     {
-        $today = Carbon::today(); // Get today's date
-    
+
+        $currentMonth = Carbon::now()->month; 
+
         $query = HK::selectRaw('
                 h_k_s.id, 
                 shops.shop_name AS shop_name,
@@ -40,7 +41,7 @@ class HKListExport implements FromQuery,  WithHeadings, WithStyles, WithColumnWi
             ')
             ->join('shops', 'h_k_s.shop_id', '=', 'shops.id') // Join with shops
             ->join('users', 'h_k_s.user_id', '=', 'users.id') // Join with users based on user_id
-            ->whereDate('h_k_s.created_at', $today) // Filter by today's date
+            ->whereMonth('h_k_s.created_at', $currentMonth) // Filter by today's date
             ->distinct(); // Ensure unique results
     
         switch (Auth::user()->role) {

@@ -1,57 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends("layout.layout")
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Shop Management System</title>
-
-    <!-- ================= Favicon ================== -->
-    <!-- Standard -->
-    <link rel="shortcut icon" href="http://placehold.it/64.png/000/fff">
-    <!-- Retina iPad Touch Icon-->
-    <link rel="apple-touch-icon" sizes="144x144" href="http://placehold.it/144.png/000/fff">
-    <!-- Retina iPhone Touch Icon-->
-    <link rel="apple-touch-icon" sizes="114x114" href="http://placehold.it/114.png/000/fff">
-    <!-- Standard iPad Touch Icon-->
-    <link rel="apple-touch-icon" sizes="72x72" href="http://placehold.it/72.png/000/fff">
-    <!-- Standard iPhone Touch Icon-->
-    <link rel="apple-touch-icon" sizes="57x57" href="http://placehold.it/57.png/000/fff">
-
-    <!-- Styles -->
-    <link href="assets/css/lib/font-awesome.min.css" rel="stylesheet">
-    <link href="assets/css/lib/themify-icons.css" rel="stylesheet">
-    <link href="assets/css/lib/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/css/lib/helper.css" rel="stylesheet">
-    <link href="assets/css/style.css" rel="stylesheet">
-</head>
-
-<body class="bg-primary">
-
-    <div class="unix-login">
-        <div class="container-fluid">
-            <div class="row justify-content-center">
-                <div class="col-lg-6">
-                    <div class="login-content">
-                        <div class="login-logo">
-                            <a href="#"><span>Shop Management System</span></a>
-                        </div>
-                        <div class="login-form">
-                            <h4>Reset Password</h4>
-                            <form>
-                                <div class="form-group">
-                                    <label>Email address</label>
-                                    <input type="email" class="form-control" placeholder="Email">
+@section('content')
+    <div class="container-fluid">
+        <div class="row page-titles mx-0">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h4>Hi, welcome back!</h4>
+                    <p class="mb-0">Your business dashboard template</p>
+                </div>
+            </div>
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Layout</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Blank</a></li>
+                </ol>
+            </div>
+        </div>
+        <section id="main-content">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-body">
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
                                 </div>
-                                <button type="submit" class="btn btn-primary btn-flat m-b-15">Submit</button>
-                            </form>
+                            @endif
+
+                            @if (session('error'))
+                                <div class="alert alert-danger">
+                                    {{ session('error') }}
+                                </div>
+                            @endif
+
+                            <div class="form-validation">
+                                <form class="form-valide" action="{{ route('admin.auth.post') }}" method="post" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="form-group row">
+                                        <label class="col-lg-4 col-form-label" for="password">New Password <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" class="form-control" id="password" name="password" placeholder="Enter New Password" required>
+                                        </div>
+                                        @error('password')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-lg-8 ml-auto">
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     </div>
-</body>
-</html>
+@endsection

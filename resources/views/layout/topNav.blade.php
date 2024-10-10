@@ -35,6 +35,12 @@
                             <span class="ml-2" style="color:white">{{Auth::user()->user_name}} </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
+                            @if(Auth::user()->role === "admin")
+                                <a href="{{route('auth.forget')}}" class="dropdown-item">
+                                    <i class="icon-edit fa-1x"></i>
+                                    <span class="ml-2" style="font-size:20px">Update Password</span>
+                                </a>
+                            @endif
                             <a href="{{route('auth.logout')}}" class="dropdown-item">
                                 <i class="icon-logout fa-1x"></i>
                                 <span class="ml-2" style="font-size:20px">Logout </span>
