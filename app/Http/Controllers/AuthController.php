@@ -36,6 +36,8 @@ class AuthController extends Controller
             $specialBankUser = SpecialBankUser::where('user_id', Auth::id())->first();
             session(['specialBankUser' => $specialBankUser]);
             return redirect()->route('shop.dashBoard');
+        } else{
+            return redirect()->route('assistant.dashBoard');
         }
     }
 

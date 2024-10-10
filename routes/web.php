@@ -11,6 +11,7 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminDashBoardController;
 use App\Http\Controllers\ShopDashBoardController;
+use App\Http\Controllers\AssistantDashBoardController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\HKController;
 use App\Http\Controllers\BalanceController;
@@ -138,4 +139,10 @@ Route::post('/admin/balance/delete', [BalanceController::class, 'bankBalanceDest
 Route::post('/admin/settling/list', [MasterSettlingController::class, 'adminMasterSettlingListDetail'])->name('admin.settling.list');
 Route::post('/admin/settling/delete', [MasterSettlingController::class, 'destroy'])->name('masterSettling.destroy');
 Route::get('/admin/settling/shopListDetail', [MasterSettlingController::class, 'shopListDetail'])->name('admin.settling.shopListDetail');
+
+
+//Assistant Routes
+
+// dashboard page display
+Route::get('/assistant/dashboard', [AssistantDashBoardController::class, 'index'])->name('assistant.dashBoard');
 });
