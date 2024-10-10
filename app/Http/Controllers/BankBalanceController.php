@@ -82,14 +82,15 @@ class BankBalanceController extends Controller
         else{
             $today = Carbon::today(); // Get today's date
             $user = Auth::user();
-            $BankBalance = BankBalance::find($user->id); 
+            $BankBalance = BankBalance::find($user->id);
             $userName = $BankBalance ? $BankBalance->user->user_name : null;
             $shopId= $user->shop_id;
+            
             $balanceRecords = BankBalance::where('shop_id', $shopId)
             ->whereDate('created_at', $today)
+            ->with('balance')
             ->get();
-            return view('/shop/balance/list',compact('balanceRecords','userName'));                
+            return view('/shop/balance/list',compact('balanceRecords','userName'));
         }
     }
-
 }

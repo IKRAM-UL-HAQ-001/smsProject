@@ -39,7 +39,7 @@
                                     <tr>
                                         <td>{{$balance->shop->shop_name}}</td>
                                         <td>{{$userName}}</td>
-                                        <td>{{$balance->bank_type}}</td>
+                                        <td>{{$balance->bank_name}}</td>
                                         <td>{{$balance->cash_amount}}</td>
                                         
                                     </tr>

@@ -58,7 +58,7 @@
                                             <select class="js-select2 form-control" id="bank_name" name="bank_name" data-placeholder="Choose one.." required>
                                                 <option disabled selected>Choose Bank Name</option>
                                                 @foreach($bankBalanceRecords as $bankBalance)
-                                                <option value="{{$bankBalance->id}}" >{{$bankBalance->bank_name}}</option>
+                                                    <option value="{{$bankBalance->bank_name}}" >{{$bankBalance->bank_name}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
