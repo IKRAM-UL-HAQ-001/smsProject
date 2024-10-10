@@ -32,16 +32,16 @@
                                 </tr>
                             </thead>
                             <tbody style="color:black">
-                                @foreach($balanceRecords as $bank)
+                                @foreach($balanceRecords as $balance)
                                     <tr>
-                                        <td>{{$bank->bank_name}}</td>
-                                        <td>{{$bank->cash_type}}</td>
-                                        <td>{{$bank->account_number}}</td>
-                                        <td>{{$bank->cash_amount}}</td>
+                                        <td>{{$balance->bank_name}}</td>
+                                        <td>{{$balance->cash_type}}</td>
+                                        <td>{{$balance->account_number}}</td>
+                                        <td>{{$balance->cash_amount}}</td>
                                         <td>
-                                            <form action="{{ route('balance.destroy') }}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this Bank ?');">
+                                            <form action="{{ route('balance.destroy') }}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this Balance ?');">
                                                 @csrf
-                                                <input type="hidden" name="bank_id" value="{{$bank->id}}">
+                                                <input type="hidden" name="balance_id" value="{{$balance->id}}">
                                                 <button type="submit" class="btn btn-danger">Delete </button>
                                             </form>
                                         </td>                                        

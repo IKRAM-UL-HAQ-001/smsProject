@@ -122,7 +122,7 @@ class BalanceController extends Controller
         }
         else{
             $balanceRecords =  BankBalance::all();
-             return view('/admin/bank/balancelist',compact('balanceRecords'));
+             return view('/admin/bank/balanceList',compact('balanceRecords'));
         }
     }
     public function bankBalanceDestroy(Request  $request)
@@ -131,10 +131,10 @@ class BalanceController extends Controller
             return redirect()->route('firstpage');
         }
         else{
-            $bankId = $request->input('bank_id');
-            $bank = BankBalance::findOrFail($bankId);
-            $bank->delete();
-            return redirect()->back()->with('success', 'Bank deleted successfully!');
+            $balanceId = $request->input('balance_id');
+            $balance = BankBalance::findOrFail($balanceId);
+            $balance->delete();
+            return redirect()->back()->with('success', 'Bank Balance deleted successfully!');
         }
     }
 }
