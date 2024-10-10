@@ -9,8 +9,8 @@ use Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\masterSettlingListMonthlyExport;
-use App\Exports\masterSettlingListWeeklyExport;
+use App\Exports\MasterSettlingListMonthlyExport;
+use App\Exports\MasterSettlingListWeeklyExport;
 
 class MasterSettlingController extends Controller
 {
