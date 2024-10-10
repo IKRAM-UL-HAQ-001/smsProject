@@ -82,17 +82,23 @@
                     <li class="nav-label first">Main Menu</li>
                     <li><a href="{{route('admin.dashBoard')}}"><i class="icon icon-single-04"></i><span class="nav-text">Dashboard</span></a>
                     </li>
-                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
-                                class="icon icon-form"></i><span class="nav-text">Created ID</span></a>
-                        <ul aria-expanded="false">
-                            <li><a href="{{route('admin.customer.list')}}">User List</a></li>
-                        </ul>
+                    <li>
+                        <a href="{{route('admin.bank.balanceList')}}" aria-expanded="false">
+                            <i class="icon icon-form"></i>
+                            <span class="nav-text">Bank Balance Entries</span>
+                        </a>
                     </li>
-                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
-                                class="icon icon-form"></i><span class="nav-text">HK</span></a>
-                        <ul aria-expanded="false">
-                            <li><a href="{{route('admin.hk.list')}}">HK List</a></li>
-                        </ul>
+                    <li>
+                        <a href="{{route('admin.customer.list')}}" aria-expanded="false">
+                            <i class="icon icon-form"></i>
+                            <span class="nav-text">Created IDs List</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{route('admin.hk.list')}}" aria-expanded="false">
+                            <i class="icon icon-form"></i>
+                            <span class="nav-text">HK List</span>
+                        </a>
                     </li>
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">

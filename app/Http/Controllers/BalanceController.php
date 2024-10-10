@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Balance;
 use App\Models\User;
 use App\Models\SpecialBankUser;
+use App\Models\BankBalance;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Auth;
@@ -111,6 +112,27 @@ class BalanceController extends Controller
         else{
             $bankId = $request->input('bank_id');
             $bank = Balance::findOrFail($bankId);
+            $bank->delete();
+            return redirect()->back()->with('success', 'Bank deleted successfully!');
+        }
+    }
+    public function adminBalanceListDetail(Request $request){
+        if (!auth()->check()) {
+            return redirect()->route('firstpage');
+        }
+        else{
+            $balanceRecords =  BankBalance::all();
+             return view('/admin/bank/balancelist',compact('balanceRecords'));
+        }
+    }
+    public function bankBalanceDestroy(Request  $request)
+    {
+        if (!auth()->check()) {
+            return redirect()->route('firstpage');
+        }
+        else{
+            $bankId = $request->input('bank_id');
+            $bank = BankBalance::findOrFail($bankId);
             $bank->delete();
             return redirect()->back()->with('success', 'Bank deleted successfully!');
         }
