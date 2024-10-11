@@ -26,7 +26,7 @@ class ExpenseTransactionsExport implements FromQuery,  WithHeadings, WithStyles,
     }
 
     public function query(){
-        $today = Carbon::today();
+        $currentMonth = Carbon::now()->month;
         $query = Cash::selectRaw('
                 cashes.id, 
                 shops.shop_name as shop_name,
@@ -40,7 +40,7 @@ class ExpenseTransactionsExport implements FromQuery,  WithHeadings, WithStyles,
             ')
             ->join('shops', 'cashes.shop_id', '=', 'shops.id') 
             ->join('users', 'cashes.user_id', '=', 'users.id') 
-            ->whereDate('cashes.created_at', $today) 
+            ->whereMonth('cashes.created_at', $currentMonth) 
             ->where('cashes.cash_type', 'expense');
 
         if (Auth::user()->role == "shop") {
