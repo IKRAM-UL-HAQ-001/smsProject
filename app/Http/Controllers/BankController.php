@@ -97,10 +97,14 @@ class BankController extends Controller
         $userIds = Cash::distinct()->pluck('user_id');
         $userNames = User::whereIn('id', $userIds)->pluck('user_name', 'id');
 
-        // Fetch revenue records for today's date
-        $revenueRecords = Cash::whereIn('cashes.cash_type', ['deposit', 'withdrawal'])
+        $startOfWeek = now()->startOfWeek(); // Start of the week
+        $endOfWeek = now()->endOfWeek(); // End of the week
+    
+        $revenueRecords = Cash::whereIn('cash_type', ['deposit', 'withdrawal'])
+            ->whereBetween('created_at', [$startOfWeek, $endOfWeek])
             ->with('shop')
             ->get();
+    
 
         return view('admin.bank.revenueList', compact('revenueRecords', 'userNames'));
     }
@@ -116,7 +120,11 @@ class BankController extends Controller
             $shopId = Auth::User()->shop_id;
             $userIds = Cash::distinct()->pluck('user_id');
             $userNames = User::whereIn('id', $userIds)->pluck('user_name', 'id');
+
+            $startOfWeek = now()->startOfWeek(); // Start of the week
+            $endOfWeek = now()->endOfWeek(); // End of the week
             $expenseRecords = Cash::where('cashes.cash_type', 'expense')
+            ->whereBetween('created_at', [$startOfWeek, $endOfWeek])
             ->with('shop')
             ->get();
             return view('/admin.bank.expenseList',compact('expenseRecords','userNames'));
