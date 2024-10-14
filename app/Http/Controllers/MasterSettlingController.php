@@ -41,7 +41,7 @@ class MasterSettlingController extends Controller
         else{
             $user = Auth::user();
             $role = $user->role;
-            if($role == "admin"){
+            if($role == "admin" || $role == "assistant"){
                 $shopId = $shopId;
             }
             else{
