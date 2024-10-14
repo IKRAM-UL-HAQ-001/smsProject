@@ -21,6 +21,7 @@
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">Master Settling List </h4>
+
                     <a href="{{ route('export.masterSettlingListWeekly',['shopId' => $shopId]) }}" class="btn btn-primary">Download Weekly Master Settling List</a>
                     <a href="{{ route('export.masterSettlingListMonthly',['shopId' => $shopId]) }}" class="btn btn-primary">Download Monthly Master Settling List</a>
                 </div>
