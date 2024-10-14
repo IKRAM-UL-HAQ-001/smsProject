@@ -57,7 +57,6 @@ class ShopDashBoardController extends Controller
             
             $totalHkDaily = HK::where('shop_id', $shopId)
                 ->whereDate('created_at', $today)
-                ->distinct('id')
                 ->sum('cash_amount');
                 
             $totalNewIdsCreatedDaily = Customer::where('shop_id', $shopId)
@@ -105,7 +104,6 @@ class ShopDashBoardController extends Controller
             $totalHkMonthly = HK::where('shop_id', $shopId)
                 ->whereMonth('created_at', $currentMonth)
                 ->whereYear('created_at', $currentYear)
-                ->distinct('id')
                 ->sum('cash_amount');
             
             $totalAmountAdd = BankBalance::where('cash_type', 'add')
