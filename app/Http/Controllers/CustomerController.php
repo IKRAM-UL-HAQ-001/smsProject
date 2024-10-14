@@ -50,7 +50,7 @@ class CustomerController extends Controller
             $today = Carbon::today(); // Get today's date
             $user = Auth::user();
             $Customer = Customer::find($user->id); 
-            $userName = $Customer ? $Customer->user->user_name : null;
+            $userName = $user ? $user->user_name : null;
             $shopId= $user->shop_id;
             $userRecords = Customer::where('shop_id', $shopId)
             ->whereDate('created_at', $today)

@@ -147,4 +147,11 @@ Route::get('/admin/settling/shopListDetail', [MasterSettlingController::class, '
 
 // dashboard page display
 Route::get('/assistant/dashboard', [AssistantDashBoardController::class, 'index'])->name('assistant.dashBoard');
+
+//new specific Master Settling
+Route::post('/assistant/settling/list', [MasterSettlingController::class, 'assistantMasterSettlingListDetail'])->name('assistant.settling.list');
+Route::get('/assistant/settling/shopListDetail', [MasterSettlingController::class, 'assistantShopListDetail'])->name('assistant.settling.shopListDetail');
+//bank 
+Route::get('/assistant/bank/balanceList', [BalanceController::class, 'assistantBalanceListDetail'])->name('assistant.bank.balanceList');
+Route::get('/assistant/revenueList', [BankController::class, 'assistantRevenueList'])->name('assistant.bank.revenueList');
 });

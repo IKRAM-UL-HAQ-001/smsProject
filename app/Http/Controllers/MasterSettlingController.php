@@ -64,8 +64,7 @@ class MasterSettlingController extends Controller
         else{
             $today = Carbon::today(); // Get today's date
             $user = Auth::user();
-            $masterSettling = MasterSettling::find($user->id);  
-            $userName = $masterSettling ? $masterSettling->user->user_name : null;          
+            $userName = $user ? $user->user_name : null;
             $shopId= $user->shop_id;
             $settlingRecords= MasterSettling::where('shop_id', $shopId)
             ->whereDate('created_at', $today)
@@ -80,9 +79,8 @@ class MasterSettlingController extends Controller
             return redirect()->route('firstpage');
         }
         else{
-            $today = Carbon::today(); // Get today's date
+
             $user = Auth::user();
-            $userName = $user->user_name;
             $shopId= $request->shop_id;
             $settlingRecords= MasterSettling::with(['shop', 'user'])
                 ->where('shop_id', $shopId)
@@ -120,7 +118,7 @@ class MasterSettlingController extends Controller
                 if (!Auth::check()) {
                     return redirect()->route('auth.login')->with('error', 'You need to be logged in to perform this action.');
                 }
-                elseif($user->shop_id!=null){
+                elseif(Auth::check()){
                     $shopId = Auth::user()->shop_id;
                     $userId = Auth::user()->id;
                     $MasterSettling = new MasterSettling();
@@ -132,7 +130,7 @@ class MasterSettlingController extends Controller
                     $MasterSettling->shop_id = $shopId;
                     $MasterSettling->user_id = $userId;
                     $MasterSettling->save();
-                    return redirect()->route('shop.settling.form')->with('success', 'Data saved successfully.');
+                    return redirect()->back()->with('success', 'Data saved successfully.');
                 }
             } catch (\Exception $e) {
             
@@ -190,6 +188,30 @@ class MasterSettlingController extends Controller
         else{
             $shopRecords=Shop::all();
             return view('admin.settling.shopListDetail',compact('shopRecords'));
+        }
+    }
+    public function assistantShopListDetail(){
+        if (!auth()->check()) {
+            return redirect()->route('firstpage');
+        }
+        else{
+            $shopRecords=Shop::all();
+            return view('assistant.settling.shopListDetail',compact('shopRecords'));
+        }
+    }
+
+    public function assistantMasterSettlingListDetail(Request $request)
+    {
+        if (!auth()->check()) {
+            return redirect()->route('firstpage');
+        }
+        else{
+            $user = Auth::user();
+            $shopId= $request->shop_id;
+            $settlingRecords= MasterSettling::with(['shop', 'user'])
+                ->where('shop_id', $shopId)
+                ->get();
+            return View('/assistant/settling/list',compact('settlingRecords','shopId'));
         }
     }
 }

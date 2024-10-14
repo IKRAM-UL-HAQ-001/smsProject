@@ -155,4 +155,25 @@ class BankController extends Controller
             return redirect()->back()->with('success', 'Cash Entry Deleted Successfully!');
         }
     }
+
+    public function assistantRevenueList(){
+        if (!auth()->check()) {
+            return redirect()->route('firstpage');
+        }
+        else{
+            $user = Auth::user();
+    
+            $userIds = Cash::distinct()->pluck('user_id');
+            $userNames = User::whereIn('id', $userIds)->pluck('user_name', 'id');
+    
+            $startOfWeek = now()->startOfWeek(); // Start of the week
+            $endOfWeek = now()->endOfWeek(); // End of the week
+        
+            $revenueRecords = Cash::whereIn('cash_type', ['deposit', 'withdrawal'])
+                ->whereBetween('created_at', [$startOfWeek, $endOfWeek])
+                ->with('shop')
+                ->get();
+            return view('assistant.bank.revenueList', compact('revenueRecords', 'userNames'));
+        }
+    }
 }

@@ -85,7 +85,7 @@ class BankBalanceController extends Controller
             $today = Carbon::today(); // Get today's date
             $user = Auth::user();
             $BankBalance = BankBalance::find($user->id);
-            $userName = $BankBalance ? $BankBalance->user->user_name : null;
+            $userName = $user ? $user->user_name : null;
             $shopId= $user->shop_id;
             
             $balanceRecords = BankBalance::where('shop_id', $shopId)

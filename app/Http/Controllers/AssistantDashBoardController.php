@@ -45,7 +45,6 @@ class AssistantDashBoardController extends Controller
                 ->count('reference_number');
             
             $totalHkDaily = HK::whereDate('created_at', $today)
-                ->distinct('id')
                 ->sum('cash_amount');
                 
             $totalNewIdsCreatedDaily = Customer::whereDate('created_at', $today)
@@ -85,7 +84,6 @@ class AssistantDashBoardController extends Controller
             
             $totalHkMonthly= HK::whereMonth('created_at', $currentMonth)
                 ->whereYear('created_at', $currentYear)
-                ->distinct('id')
                 ->sum('cash_amount');
             
             $totalNewIdsCreatedMonthly = Customer::whereMonth('created_at', $currentMonth)

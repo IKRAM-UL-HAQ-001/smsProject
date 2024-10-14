@@ -125,6 +125,15 @@ class BalanceController extends Controller
              return view('/admin/bank/balanceList',compact('balanceRecords'));
         }
     }
+    public function assistantBalanceListDetail(Request $request){
+        if (!auth()->check()) {
+            return redirect()->route('firstpage');
+        }
+        else{
+            $balanceRecords =  BankBalance::all();
+             return view('/assistant/bank/balanceList',compact('balanceRecords'));
+        }
+    }
     public function bankBalanceDestroy(Request  $request)
     {
         if (!auth()->check()) {

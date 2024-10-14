@@ -5,13 +5,9 @@
 
 <body>
     <div id="main-wrapper">
-        
-    
-    @if(Auth::user()->role != "assistant")
+            
         @include("layout.sideNav")
-    
-    @endif
-    @include("layout.topNav")    
+        @include("layout.topNav")    
         
         <div class="content-body">
             @yield("content")

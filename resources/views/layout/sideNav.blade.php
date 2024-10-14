@@ -148,6 +148,28 @@
                             <li><a href="{{route('admin.report.shopSearchDate')}}">Monthly Report</a></li>
                         </ul>
                     </li>
+                @elseif(Auth::user()->role === "assistant")
+                    <li class="nav-label first">Main Menu</li>
+                    <li><a href="{{route('assistant.dashBoard')}}"><i class="icon icon-single-04"></i><span class="nav-text">Dashboard</span></a>
+                    </li>
+                    <li>
+                        <a href="{{route('assistant.settling.shopListDetail')}}" aria-expanded="false">
+                            <i class="icon icon-form"></i>
+                            <span class="nav-text">Master Settling List</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{route('assistant.bank.balanceList')}}" aria-expanded="false">
+                            <i class="icon icon-form"></i>
+                            <span class="nav-text">Bank Balance Entries</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a  href="{{route('assistant.bank.revenueList')}}" aria-expanded="false">
+                            <i class="icon icon-world-2"></i>
+                            <span class="nav-text">Deposit - Withdrawal</span>
+                        </a>
+                    </li>
                 @endif
             @endif
             <!-- admin sidenavbar end -->

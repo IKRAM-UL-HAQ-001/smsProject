@@ -46,7 +46,7 @@ class HKController extends Controller
             $currentYear = Carbon::now()->year;
             $user = Auth::user();
             $HK = HK::find($user->id); 
-            $userName = $HK ? $HK->user->user_name : null;
+            $userName = $user ? $user->user_name : null;
             $shopId= $user->shop_id;
             $hkRecords = HK::where('shop_id', $shopId)
             ->whereMonth('created_at', $currentMonth)
