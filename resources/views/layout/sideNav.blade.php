@@ -165,7 +165,7 @@
                         </a>
                     </li>
                     <li>
-                        <a  href="{{route('assistant.bank.revenueList')}}" aria-expanded="false">
+                        <a href="{{route('assistant.bank.revenueList')}}" aria-expanded="false">
                             <i class="icon icon-world-2"></i>
                             <span class="nav-text">Deposit - Withdrawal</span>
                         </a>
