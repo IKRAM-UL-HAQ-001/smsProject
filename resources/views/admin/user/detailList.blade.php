@@ -28,14 +28,14 @@
                                 <thead>
                                     <tr>
                                         <th>Full Name</th>
-                                        <th>Shop Name</th>
+                                        <th>Exchange Name</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody style="color:black">
                                     @foreach($userRecords as $user)
                                         <tr>
-                                            @if($user->role!= "admin")
+                                            @if(!in_array($user->role, ['admin', 'assistant']))
                                                 <td>{{$user->user_name}}</td>
                                                 <td>{{$user->shop->shop_name}}</td>
                                                 <td>
@@ -57,7 +57,7 @@
                                 <tfoot>
                                     <tr>
                                         <th>Full Name</th>
-                                        <th>Shop Name</th>
+                                        <th>Exchange Name</th>
                                         <th>Action</th>
                                     </tr>
                                 </tfoot>

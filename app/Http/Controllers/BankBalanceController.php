@@ -50,7 +50,8 @@ class BankBalanceController extends Controller
             'account_number' => 'required|string|max:255',
             'bank_name' => 'required|string|max:255',
             'cash_amount' => 'required|numeric',
-            'cash_type' => 'required|string', // Only "add" for this step
+            'cash_type' => 'required|string',
+            'remarks' => 'required|string',
         ]);
 
         try {
@@ -64,6 +65,7 @@ class BankBalanceController extends Controller
                 $newBankBalance->bank_name = $validatedData['bank_name'];
                 $newBankBalance->cash_amount = $validatedData['cash_amount']; // Store current transaction amount
                 $newBankBalance->cash_type = $validatedData['cash_type'];
+                $newBankBalance->remarks = $validatedData['remarks'];
                 $newBankBalance->shop_id = $shopId;
                 $newBankBalance->user_id = $userId;
                 $newBankBalance->save();

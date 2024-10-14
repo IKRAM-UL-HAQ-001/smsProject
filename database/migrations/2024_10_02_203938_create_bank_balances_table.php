@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('cash_type');
             $table->string('account_number');
             $table->integer('cash_amount');
+            $table->string('remarks');
             $table->unsignedBigInteger('shop_id')->nullable();
             $table->foreign('shop_id')->references('id')->on('shops')->onDelete('cascade');
             $table->unsignedBigInteger('user_id')->nullable();

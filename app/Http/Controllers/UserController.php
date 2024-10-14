@@ -27,7 +27,7 @@ class UserController extends Controller
             return redirect()->route('firstpage');
         }
         else{
-            $userRecords = User::with('shop')->get(); 
+            $userRecords = User::with('shop')->get();
             return view('/admin.user.detailList',compact('userRecords'));
         }
     }

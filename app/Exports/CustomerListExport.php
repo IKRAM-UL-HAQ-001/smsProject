@@ -40,7 +40,7 @@ class CustomerListExport implements FromQuery,  WithHeadings, WithStyles, WithCo
             ')
             ->join('shops', 'customers.shop_id', '=', 'shops.id') // Join with shops
             ->join('users', 'customers.user_id', '=', 'users.id') // Join with users based on user_id
-            ->whereMonth('customers.created_at', $currentMont) // Filter by today's date
+            ->whereMonth('customers.created_at', $currentMonth) // Filter by today's date
             ->distinct(); // Ensure unique results
     
         switch (Auth::user()->role) {

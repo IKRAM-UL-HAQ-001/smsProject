@@ -41,13 +41,16 @@ class HKController extends Controller
             return redirect()->route('firstpage');
         }
         else{
-            $today = Carbon::today(); // Get today's date
+            $today = Carbon::today();
+            $currentMonth = Carbon::now()->month;
+            $currentYear = Carbon::now()->year;
             $user = Auth::user();
             $HK = HK::find($user->id); 
             $userName = $HK ? $HK->user->user_name : null;
             $shopId= $user->shop_id;
             $hkRecords = HK::where('shop_id', $shopId)
-            ->whereDate('created_at', $today)
+            ->whereMonth('created_at', $currentMonth)
+            ->whereYear('created_at', $currentYear)
             ->get();
             return view('/shop/hk/list',compact('hkRecords','userName'));                
         }
@@ -58,9 +61,12 @@ class HKController extends Controller
         if (!auth()->check()) {
             return redirect()->route('firstpage');
         } else {
-            $today = Carbon::today(); // Get today's date
+            $today = Carbon::today();
+            $currentMonth = Carbon::now()->month;
+            $currentYear = Carbon::now()->year;
             $hkRecords = HK::with(['shop', 'user'])
-                ->whereDate('created_at', $today)
+                ->whereMonth('created_at', $currentMonth)
+                ->whereYear('created_at', $currentYear)
                 ->get();
             return view('admin.hk.list', compact('hkRecords'));
         }
