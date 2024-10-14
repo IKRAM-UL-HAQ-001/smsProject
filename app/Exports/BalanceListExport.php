@@ -46,7 +46,9 @@ class BalanceListExport implements FromQuery,  WithHeadings, WithStyles, WithCol
             case "shop":
                 return $query->where('bank_balances.shop_id', Auth::user()->shop_id);
             case "admin":
-                return $query; // Return all customers for admin
+                return $query; 
+            case "assistant":
+                return $query; 
             default:
                 return $query->whereNull('balances.id'); // For unrecognized roles, return an empty result set
         }

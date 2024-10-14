@@ -53,6 +53,8 @@ class DepositTransactionsExport implements FromQuery,  WithHeadings, WithStyles,
             return $query->where('cashes.shop_id', $this->shopId); // No ->get() here, return the query builder
         } elseif (Auth::user()->role == "admin") {
             return $query;
+        }elseif(Auth::user()->role == "assistant"){
+            return $query;
         }
     }
 

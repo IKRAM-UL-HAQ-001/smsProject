@@ -51,6 +51,8 @@ class WithdrawalTransactionsExport implements FromQuery,  WithHeadings, WithStyl
         return $query->where('cashes.shop_id', $this->shopId); // No ->get() here, return the query builder
     } elseif (Auth::user()->role == "admin") {
         return $query;
+    } elseif (Auth::user()->role == "assistant") {
+        return $query;
     }
 
     // If the role does not match, return an empty collection or handle it accordingly
