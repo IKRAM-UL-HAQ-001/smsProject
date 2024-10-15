@@ -62,12 +62,14 @@ class MasterSettlingController extends Controller
             return redirect()->route('firstpage');
         }
         else{
-            $today = Carbon::today(); // Get today's date
+            $currentMonth = Carbon::now()->month;
+            $currentYear = Carbon::now()->year;
             $user = Auth::user();
             $userName = $user ? $user->user_name : null;
             $shopId= $user->shop_id;
             $settlingRecords= MasterSettling::where('shop_id', $shopId)
-            ->whereDate('created_at', $today)
+            ->whereMonth('created_at', $currentMonth)
+            ->whereYear('created_at', $currentYear)
             ->get();
             return View('/shop/settling/list',compact('settlingRecords','userName','shopId'));
         }
