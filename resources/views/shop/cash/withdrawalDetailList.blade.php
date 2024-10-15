@@ -31,6 +31,7 @@
                                     <th>Customer Name</th>
                                     <th>Cash Amount</th>
                                     <th>Cash Type</th>
+                                    <th>Total Shop Balance</th>
                                     <th>Remarks</th>
                                 </tr>
                             </thead>
@@ -41,6 +42,7 @@
                                         <td>{{$cash->customer_name}}</td>
                                         <td>{{$cash->cash_amount}}</td>
                                         <td>{{$cash->cash_type}}</td>
+                                        <td>{{$cash->total_shop_balance}}</td>
                                         <td>{{$cash->remarks}}</td>
                                     </tr>
                                 @endforeach
@@ -51,6 +53,7 @@
                                     <th>Customer Name</th>
                                     <th>Cash Amount</th>
                                     <th>Cash Type</th>
+                                    <th>Total Shop Balance</th>
                                     <th>Remarks</th>
                                 </tr>
                             </tfoot>

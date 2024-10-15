@@ -153,17 +153,55 @@ class MasterSettlingController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(MasterSettling $masterSettling)
+    public function edit(Request $request)
     {
-        //
+        if (!auth()->check()) {
+            return redirect()->route('firstpage');
+        }
+        elseif (Auth::user()->role=="admin"){
+            $masterSettling_id =$request->masterSettling_id;
+            $masterSettlingRecords=MasterSettling::find($masterSettling_id);
+            return view('admin.settling.editSettling',compact('masterSettlingRecords'));
+        }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, MasterSettling $masterSettling)
+    public function update(Request $request)
     {
-        //
+        if (!auth()->check()) {
+            return redirect()->route('auth.login')->with('error', 'You need to be logged in to perform this action.');
+        }
+    
+        // Validate incoming request data
+        $validatedData = $request->validate([
+            'white_label' => 'nullable|string|max:255',
+            'credit_reff' => 'nullable|string',
+            'settling_point' => 'nullable|string',
+            'price' => 'nullable|string',
+        ]);
+        // Calculate total amount
+        $total_amount = ($request->price) * ($request->settling_point);
+        try {
+            $settling_id = $request->settling_id;
+            $masterSettling = MasterSettling::findOrFail($settling_id); // Throws a ModelNotFoundException if not found
+            // Update the fields
+            $masterSettling->white_label = $validatedData['white_label'] ?? $masterSettling->white_label;
+            $masterSettling->credit_reff = $validatedData['credit_reff'] ?? $masterSettling->credit_reff;
+            $masterSettling->settle_point = $validatedData['settling_point'] ?? $masterSettling->settle_point;
+            $masterSettling->price = $validatedData['price'] ?? $masterSettling->price;
+            $masterSettling->total_amount = $total_amount; // Always update total_amount
+            $masterSettling->save();
+            return redirect()->route('admin.settling.shopListDetail')->with('success', 'Data updated successfully.');
+    
+        } catch (\ModelNotFoundException $e) {
+            return redirect()->back()->with('error', 'Record not found.');
+        } catch (\Exception $e) {
+            // Log error and return error response
+            Log::error('Error updating cash record: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'An error occurred while updating data: ' . $e->getMessage());
+        }
     }
 
     /**

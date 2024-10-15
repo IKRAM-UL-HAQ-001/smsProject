@@ -112,8 +112,6 @@ Route::post('/shops/delete', [ShopController::class, 'destroy'])->name('shops.de
 // bank page display
 Route::get('/admin/revenueList', [BankController::class, 'adminRevenueList'])->name('admin.bank.revenueList');
 Route::get('/admin/expenseList', [BankController::class, 'adminExpenseList'])->name('admin.bank.expenseList');
-Route::post('/admin/revenue/edit', [BankController::class, 'adminRevenueEdit'])->name('admin.bank.editRevenue');
-Route::post('/admin/revenue/update', [CashController::class, 'adminRevenueUpdate'])->name('revenue.update');
 Route::post('/admin/revenue/delete', [BankController::class, 'adminRevenueDestroy'])->name('admin.bank.revenue.destroy');
 Route::post('/admin/expense/delete', [BankController::class, 'adminExpenseDestroy'])->name('admin.bank.expense.destroy');
 
@@ -141,6 +139,8 @@ Route::post('/admin/balance/delete', [BalanceController::class, 'bankBalanceDest
 
 //master settling
 Route::post('/admin/settling/list', [MasterSettlingController::class, 'adminMasterSettlingListDetail'])->name('admin.settling.list');
+Route::post('/admin/settling/edit', [MasterSettlingController::class, 'edit'])->name('masterSettling.edit');
+Route::post('/admin/settling/update', [MasterSettlingController::class, 'update'])->name('masterSettling.update');
 Route::post('/admin/settling/delete', [MasterSettlingController::class, 'destroy'])->name('masterSettling.destroy');
 Route::get('/admin/settling/shopListDetail', [MasterSettlingController::class, 'shopListDetail'])->name('admin.settling.shopListDetail');
 

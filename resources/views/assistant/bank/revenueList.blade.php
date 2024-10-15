@@ -36,6 +36,7 @@
                                     <th>Payment Method</th>
                                     <th>Cash Amount</th>
                                     <th>Bouns Amount</th>
+                                    <th>Total Balance</th>
                                     <th>Remarks</th>
                                     <th>Date & Time</th>
                                     
@@ -51,6 +52,7 @@
                                         <td>{{$revenue->payment_type}}</td>
                                         <td>{{$revenue->cash_amount}}</td>
                                         <td>{{$revenue->bonus_amount}}</td>
+                                        <td>{{$revenue->total_balance}}</td>
                                         <td>{{$revenue->remarks}}</td>
                                         <td>{{$revenue->created_at}}</td>
                                     </tr>
@@ -65,6 +67,7 @@
                                     <th>Payment Method</th>
                                     <th>Cash Amount</th>
                                     <th>Bonus Amount</th>
+                                    <th>Total Balance</th>
                                     <th>Remarks</th>
                                     <th>Date & Time</th>
                                 </tr>

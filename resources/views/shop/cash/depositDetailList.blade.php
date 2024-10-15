@@ -34,6 +34,7 @@
                                     <th>Cash Type</th>
                                     <th>Bonus Amount</th>
                                     <th>Payment Type</th>
+                                    <th>Total Shop Balance</th>
                                     <th>Remarks</th>
                                 </tr>
                             </thead>
@@ -47,6 +48,7 @@
                                         <td>{{$cash->cash_type}}</td>
                                         <td>{{$cash->bonus_amount}}</td>
                                         <td>{{$cash->payment_type}}</td>
+                                        <td>{{$cash->total_shop_balance}}</td>
                                         <td>{{$cash->remarks}}</td>
                                     </tr>
                                 @endforeach
@@ -60,6 +62,7 @@
                                     <th>Cash Type</th>
                                     <th>Bonus Amount</th>
                                     <th>Payment Type</th>
+                                    <th>Total Shop Balance</th>
                                     <th>Remarks</th>
                                 </tr>
                             </tfoot>

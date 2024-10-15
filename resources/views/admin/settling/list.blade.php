@@ -48,12 +48,16 @@
                                         <td>{{$settlingRecord->settle_point}}</td>
                                         <td>{{$settlingRecord->price}}</td>
                                         <td>
+                                            <form action="{{ route('masterSettling.edit') }}" method="POST" style="display:inline;">
+                                                @csrf
+                                                <input type="hidden" name="masterSettling_id" value="{{$settlingRecord->id}}">
+                                                <button type="submit" class="btn btn-info">Edit </button>
+                                            </form>
                                             <form action="{{ route('masterSettling.destroy') }}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this Master Settling Entry?');">
                                                 @csrf
                                                 <input type="hidden" name="masterSettling_id" value="{{$settlingRecord->id}}">
                                                 <button type="submit" class="btn btn-danger">Delete </button>
                                             </form>
-
                                         </td>
                                     </tr>
                                 @endforeach
