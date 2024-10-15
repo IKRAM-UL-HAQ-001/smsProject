@@ -31,7 +31,6 @@
                                     <th>Exchange Name</th>
                                     <th>User Name</th>
                                     <th>Cash Amount</th>
-                                    <th>Total Exchange Balance</th>
                                     <th>Remarks</th>
                                 </tr>
                             </thead>
@@ -41,7 +40,6 @@
                                         <td>{{$expense->shop_name}}</td>
                                         <td>{{ $usernames[$expense->user_id] ?? 'Unknown' }}</td>
                                         <td>{{$expense->cash_amount}}</td>
-                                        <td>{{$expense->total_shop_balance}}</td>
                                         <td>{{$expense->remarks}}</td>
                                     </tr>
                                 @endforeach
@@ -51,7 +49,6 @@
                                     <th>Exchange Name</th>
                                     <th>User Name</th>
                                     <th>Cash Amount</th>
-                                    <th>Total Exchange Balance</th>
                                     <th>Remarks</th>
                                 </tr>
                             </tfoot>

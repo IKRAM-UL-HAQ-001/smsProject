@@ -33,7 +33,6 @@
                                     <th>Customer Name</th>
                                     <th>Cash Type</th>
                                     <th>Cash Amount</th>
-                                    <th>Total Exchange Balance</th>
                                     <th>Remarks</th>
                                     
                                 </tr>
@@ -46,7 +45,6 @@
                                         <td>{{$withdrawal->customer_name}}</td>
                                         <td>{{$withdrawal->cash_type}}</td>
                                         <td>{{$withdrawal->cash_amount}}</td>
-                                        <td>{{$withdrawal->total_shop_balance}}</td>
                                         <td>{{$withdrawal->remarks}}</td>
                                     </tr>
                                 @endforeach
@@ -58,7 +56,6 @@
                                     <th>Customer Name</th>
                                     <th>Cash Type</th>
                                     <th>Cash Amount</th>
-                                    <th>Total Exchange Balance</th>
                                     <th>Remarks</th>
                                 </tr>
                             </tfoot>

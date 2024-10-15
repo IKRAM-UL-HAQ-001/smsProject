@@ -31,7 +31,6 @@
                                     <th>Exchange Name</th>
                                     <th>User Name</th>
                                     <th>Cash Amount</th>
-                                    <th>Total Balance</th>
                                     <th>Remarks</th>
                                     <th>Date & Time</th>
                                     
@@ -43,7 +42,6 @@
                                         <td>{{$expense->shop->shop_name}}</td>
                                         <td>{{$userNames[$expense->user_id] ?? 'Unknown' }}</td>
                                         <td>{{$expense->cash_amount}}</td>
-                                        <td>{{$expense->total_balance}}</td>
                                         <td>{{$expense->remarks}}</td>
                                         <td>{{$expense->created_at}}</td>
                                         <td>
@@ -62,7 +60,6 @@
                                     <th>Exchange Name</th>
                                     <th>User Name</th>
                                     <th>Cash Amount</th>
-                                    <th>Total Balance</th>
                                     <th>Remarks</th>
                                     <th>Date & Time</th>
                                 </tr>

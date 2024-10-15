@@ -36,7 +36,6 @@
                                     <th>Payment Method</th>
                                     <th>Cash Amount</th>
                                     <th>Bouns Amount</th>
-                                    <th>Total Exchange Balance</th>
                                     <th>Remarks</th>
                                     
                                 </tr>
@@ -52,7 +51,6 @@
                                         <td>{{$deposit->payment_type}}</td>
                                         <td>{{$deposit->cash_amount}}</td>
                                         <td>{{$deposit->bonus_amount}}</td>
-                                        <td>{{$deposit->total_shop_balance}}</td>
                                         <td>{{$deposit->remarks}}</td>
                                     </tr>
                                 @endforeach
@@ -67,7 +65,6 @@
                                     <th>Payment Method</th>
                                     <th>Cash Amount</th>
                                     <th>Bonus Amount</th>
-                                    <th>Total Exchange Balance</th>
                                     <th>Remarks</th>
                                 </tr>
                             </tfoot>
