@@ -33,7 +33,7 @@
                                     <th>Cash Amount</th>
                                     <th>Remarks</th>
                                     <th>Date & Time</th>
-                                    
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody style="color:black">
@@ -62,6 +62,7 @@
                                     <th>Cash Amount</th>
                                     <th>Remarks</th>
                                     <th>Date & Time</th>
+                                    <th>Action</th>
                                 </tr>
                             </tfoot>
                         </table>
