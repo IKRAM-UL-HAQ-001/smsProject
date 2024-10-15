@@ -60,16 +60,20 @@ class BalanceController extends Controller
             }
     
             if ($request->user_list) {
-                $count = SpecialBankUser::count();
-                if ($count === 0) {
                     $specialBankUser = new SpecialBankUser();
                     $specialBankUser->user_id = $validatedData['user_list'];
                     $specialBankUser->save();
-                }else{
-                    $specialBankUser = SpecialBankUser::first();
-                    $specialBankUser->user_id = $validatedData['user_list'];
-                    $specialBankUser->save();
-                }
+                
+                // $count = SpecialBankUser::count();
+                // if ($count === 0) {
+                //     $specialBankUser = new SpecialBankUser();
+                //     $specialBankUser->user_id = $validatedData['user_list'];
+                //     $specialBankUser->save();
+                // }else{
+                //     $specialBankUser = SpecialBankUser::first();
+                //     $specialBankUser->user_id = $validatedData['user_list'];
+                //     $specialBankUser->save();
+                // }
             } 
             return redirect()->route('admin.bank.form')->with('success', 'Data saved successfully.');
         } catch (\Exception $e) {

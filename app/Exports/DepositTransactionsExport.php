@@ -38,7 +38,6 @@ class DepositTransactionsExport implements FromQuery,  WithHeadings, WithStyles,
             cashes.cash_amount,
             cashes.bonus_amount,
             cashes.payment_type,
-            cashes.total_shop_balance,
             cashes.remarks,
             DATE_FORMAT(CONVERT_TZ(cashes.created_at, "+00:00", "+05:30"), "%Y-%m-%d %H:%i:%s") as created_at,
             DATE_FORMAT(CONVERT_TZ(cashes.updated_at, "+00:00", "+05:30"), "%Y-%m-%d %H:%i:%s") as updated_at
@@ -69,7 +68,6 @@ class DepositTransactionsExport implements FromQuery,  WithHeadings, WithStyles,
             'Cash Amount',
             'Bonus Amount',
             'Payment Type',
-            'Total Shop Balance',
             'Remarks',
             'Created At',
             'Updated At',
@@ -96,7 +94,6 @@ class DepositTransactionsExport implements FromQuery,  WithHeadings, WithStyles,
             'J' => 20,
             'K' => 30,
             'L' => 30,
-            'M' => 30,
         ];
     }
 }

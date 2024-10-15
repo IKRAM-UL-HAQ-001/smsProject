@@ -37,7 +37,6 @@ class WithdrawalTransactionsExport implements FromQuery,  WithHeadings, WithStyl
         cashes.customer_name,
         cashes.cash_type,
         cashes.cash_amount,
-        cashes.total_shop_balance,
         cashes.remarks,
         DATE_FORMAT(CONVERT_TZ(cashes.created_at, "+00:00", "+05:30"), "%Y-%m-%d %H:%i:%s") as created_at,
         DATE_FORMAT(CONVERT_TZ(cashes.updated_at, "+00:00", "+05:30"), "%Y-%m-%d %H:%i:%s") as updated_at
@@ -69,7 +68,6 @@ class WithdrawalTransactionsExport implements FromQuery,  WithHeadings, WithStyl
             'Customer Name',
             'Cash Type',
             'Cash Amount',
-            'Total Shop Balance',
             'Remarks',
             'Created At',
             'Updated At',
@@ -77,8 +75,8 @@ class WithdrawalTransactionsExport implements FromQuery,  WithHeadings, WithStyl
     }
     public function styles(Worksheet $sheet)
     {
-        $sheet->getStyle('A1:J1')->getFont()->setBold(true); // Bold the header row
-        $sheet->getStyle('A1:J1')->getFont()->setSize(12); // Optional: set font size
+        $sheet->getStyle('A1:I1')->getFont()->setBold(true); // Bold the header row
+        $sheet->getStyle('A1:I1')->getFont()->setSize(12); // Optional: set font size
     }
 
     public function columnWidths(): array
@@ -91,9 +89,8 @@ class WithdrawalTransactionsExport implements FromQuery,  WithHeadings, WithStyl
             'E' => 15, // Cash Type
             'F' => 15, // Cash Amount
             'G' => 20, // Total Shop Balance
-            'H' => 25, // Remarks
+            'H' => 30, // Remarks
             'I' => 30, // created_at
-            'J' => 30, // updated_At
         ];
     }
 }

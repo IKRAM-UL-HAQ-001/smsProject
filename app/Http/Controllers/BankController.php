@@ -176,4 +176,15 @@ class BankController extends Controller
             return view('assistant.bank.revenueList', compact('revenueRecords', 'userNames'));
         }
     }
+    public function adminRevenueEdit(Request $request){
+        if (!auth()->check()) {
+            return redirect()->route('firstpage');
+        }
+        elseif (Auth::user()->role=="admin"){
+            $revenue_id =$request->revenue_id;
+            $revenueRecords=Cash::find($revenue_id);
+            return view('admin.bank.editRevenue',compact('revenueRecords'));
+        }
+    }
+
 }

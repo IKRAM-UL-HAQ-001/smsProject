@@ -112,6 +112,8 @@ Route::post('/shops/delete', [ShopController::class, 'destroy'])->name('shops.de
 // bank page display
 Route::get('/admin/revenueList', [BankController::class, 'adminRevenueList'])->name('admin.bank.revenueList');
 Route::get('/admin/expenseList', [BankController::class, 'adminExpenseList'])->name('admin.bank.expenseList');
+Route::post('/admin/revenue/edit', [BankController::class, 'adminRevenueEdit'])->name('admin.bank.editRevenue');
+Route::post('/admin/revenue/update', [CashController::class, 'adminRevenueUpdate'])->name('revenue.update');
 Route::post('/admin/revenue/delete', [BankController::class, 'adminRevenueDestroy'])->name('admin.bank.revenue.destroy');
 Route::post('/admin/expense/delete', [BankController::class, 'adminExpenseDestroy'])->name('admin.bank.expense.destroy');
 

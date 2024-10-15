@@ -36,7 +36,6 @@
                                     <th>Payment Method</th>
                                     <th>Cash Amount</th>
                                     <th>Bouns Amount</th>
-                                    <th>Total Balance</th>
                                     <th>Remarks</th>
                                     <th>Date & Time</th>
                                     <th>Action</th>
@@ -53,10 +52,14 @@
                                         <td>{{$revenue->payment_type}}</td>
                                         <td>{{$revenue->cash_amount}}</td>
                                         <td>{{$revenue->bonus_amount}}</td>
-                                        <td>{{$revenue->total_balance}}</td>
                                         <td>{{$revenue->remarks}}</td>
                                         <td>{{$revenue->created_at}}</td>
                                         <td>
+                                        <form action="{{ route('admin.bank.editRevenue') }}" method="POST" style="display:inline;">
+                                            @csrf
+                                            <input type="hidden" name="revenue_id" value="{{ $revenue->id }}">
+                                            <button type="submit" class="btn btn-secondary">Edit </button>
+                                        </form>
                                         <form action="{{ route('admin.bank.revenue.destroy') }}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to Delete this Revenue Entry?');">
                                             @csrf
                                             <input type="hidden" name="revenue_id" value="{{ $revenue->id }}">
@@ -75,7 +78,6 @@
                                     <th>Payment Method</th>
                                     <th>Cash Amount</th>
                                     <th>Bonus Amount</th>
-                                    <th>Total Balance</th>
                                     <th>Remarks</th>
                                     <th>Date & Time</th>
                                     <th>Action</th>
