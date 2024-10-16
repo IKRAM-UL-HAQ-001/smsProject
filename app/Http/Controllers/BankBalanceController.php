@@ -98,7 +98,9 @@ class BankBalanceController extends Controller
     public function getBankBalance(Request $request){
         $request->validate(['bank_name' => 'required|string']);
         $sumBalance = BankBalance::where('bank_name', $request->bank_name)
-            ->sum('cash_amount');    
-        return response()->json(['balance' => $sumBalance]);
+            // ->sum('cash_amount');    
+            ->selectRaw('SUM(CASE WHEN cash_type = "add" THEN cash_amount WHEN cash_type = "minus" THEN -cash_amount END) as balance')
+            ->value('balance');    
+        return response()->json(['balance' => $sumBalance ?? 0]);
     }
 }
