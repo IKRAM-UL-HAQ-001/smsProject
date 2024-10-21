@@ -24,39 +24,27 @@
                         <table id="example" class="display" style="min-width: 845px">
                             <thead>
                                 <tr>
-                                    <th>Bank Name</th>
                                     <th>User Name</th>
-                                    <th>Cash Type</th>
-                                    <th>Account Number</th>
-                                    <th>Cash Amount</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody style="color:black">
-                                @foreach($balanceRecords as $balance)
+                                @foreach($specialUserRecords as $specialUser)
                                     <tr>
-                                        <td>{{$balance->bank_name}}</td>
-                                        <td>{{$balance->user->user_name}}</td>
-                                        <td>{{$balance->cash_type}}</td>
-                                        <td>{{$balance->account_number}}</td>
-                                        <td>{{$balance->cash_amount}}</td>
+                                        <td>{{$specialUser->user->user_name}}</td>
                                         <td>
-                                            <form action="{{ route('balance.destroy') }}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this Balance ?');">
+                                            <form action="{{ route('admin.specialuser.destroy') }}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this bank special user ?');">
                                                 @csrf
-                                                <input type="hidden" name="balance_id" value="{{$balance->id}}">
+                                                <input type="hidden" name="specialUser_id" value="{{$specialUser->id}}">
                                                 <button type="submit" class="btn btn-danger">Delete </button>
                                             </form>
-                                        </td>                                        
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>Bank Name</th>
                                     <th>User Name</th>
-                                    <th>Cash Type</th>
-                                    <th>Account Number</th>
-                                    <th>Cash Amount</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>

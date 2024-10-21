@@ -6,6 +6,7 @@ use App\Models\Balance;
 use App\Models\User;
 use App\Models\SpecialBankUser;
 use App\Models\BankBalance;
+
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Auth;
@@ -60,20 +61,9 @@ class BalanceController extends Controller
             }
     
             if ($request->user_list) {
-                    $specialBankUser = new SpecialBankUser();
-                    $specialBankUser->user_id = $validatedData['user_list'];
-                    $specialBankUser->save();
-                
-                // $count = SpecialBankUser::count();
-                // if ($count === 0) {
-                //     $specialBankUser = new SpecialBankUser();
-                //     $specialBankUser->user_id = $validatedData['user_list'];
-                //     $specialBankUser->save();
-                // }else{
-                //     $specialBankUser = SpecialBankUser::first();
-                //     $specialBankUser->user_id = $validatedData['user_list'];
-                //     $specialBankUser->save();
-                // }
+                $specialBankUser = new SpecialBankUser();
+                $specialBankUser->user_id = $validatedData['user_list'];
+                $specialBankUser->save();
             } 
             return redirect()->route('admin.bank.form')->with('success', 'Data saved successfully.');
         } catch (\Exception $e) {
@@ -84,9 +74,13 @@ class BalanceController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Balance $balance)
+    public function bankUserListDetail(Request $request)
     {
-        //
+        if (!auth()->check()) {
+            return redirect()->route('firstpage');
+        }
+        $specialUserRecords= SpecialBankUser::all();
+        return view('/admin/bank/bankUserList',compact('specialUserRecords'));
     }
 
     /**
@@ -148,6 +142,18 @@ class BalanceController extends Controller
             $balance = BankBalance::findOrFail($balanceId);
             $balance->delete();
             return redirect()->back()->with('success', 'Bank Balance deleted successfully!');
+        }
+    }
+    public function bankSpecialUserDestroy(Request  $request)
+    {
+        if (!auth()->check()) {
+            return redirect()->route('firstpage');
+        }
+        else{
+            $specialUserId = $request->input('specialUser_id');
+            $specialUser = SpecialBankUser::findOrFail($specialUserId);
+            $specialUser->delete();
+            return redirect()->route("admin.bank.bankUserList")->with('success', 'Bank Special User deleted successfully!');
         }
     }
 }

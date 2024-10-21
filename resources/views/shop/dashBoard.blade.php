@@ -19,7 +19,7 @@
 
     <div class="row text-light">
         @foreach ([
-            ['Total Balance', $totalBalanceDaily, 'ti-money text-light border-light'],
+            ['Today Profit', $totalBalanceDaily, 'ti-money text-light border-light'],
             ['Total Deposit', $totalDepositDaily, 'ti-money text-light border-light'],
             ['Total Withdrawal', $totalWithdrawalDaily, 'ti-money text-light border-light'],
             ['Total Expense', $totalExpenseDaily, 'ti-money text-light border-light'],
@@ -64,7 +64,7 @@
 
     <div class="row text-light">
         @foreach ([
-            ['Total Balance', $totalBalanceMonthly, 'ti-money text-light border-light'],
+            ['Monthly Profit', $totalBalanceMonthly, 'ti-money text-light border-light'],
             ['Total Deposit', $totalDepositMonthly, 'ti-money text-light border-light'],
             ['Total Withdrawal', $totalWithdrawalMonthly, 'ti-money text-light border-light'],
             ['Total Expense', $totalExpenseMonthly, 'ti-money text-light border-light'],

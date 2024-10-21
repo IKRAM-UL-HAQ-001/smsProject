@@ -133,10 +133,11 @@ Route::post('/admin/hk/delete', [HKController::class, 'destroy'])->name('hk.dest
 Route::get('/admin/bank/form', [BalanceController::class, 'index'])->name('admin.bank.form');
 Route::post('/admin/bank/post', [BalanceController::class, 'store'])->name('admin.bank.post');
 Route::get('/admin/bank/list', [BalanceController::class, 'ListDetail'])->name('admin.bank.list');
+Route::get('/admin/bank/bankUserList', [BalanceController::class, 'bankUserListDetail'])->name('admin.bank.bankUserList');
 Route::get('/admin/bank/balanceList', [BalanceController::class, 'adminBalanceListDetail'])->name('admin.bank.balanceList');
 Route::post('/admin/bank/delete', [BalanceController::class, 'destroy'])->name('admin.destroy');
 Route::post('/admin/balance/delete', [BalanceController::class, 'bankBalanceDestroy'])->name('balance.destroy');
-
+Route::post('/admin/bank/bankUserList/delete', [BalanceController::class, 'bankSpecialUserDestroy'])->name('admin.specialuser.destroy');
 //master settling
 Route::post('/admin/settling/list', [MasterSettlingController::class, 'adminMasterSettlingListDetail'])->name('admin.settling.list');
 Route::post('/admin/settling/edit', [MasterSettlingController::class, 'edit'])->name('masterSettling.edit');

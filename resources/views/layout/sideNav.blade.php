@@ -84,11 +84,12 @@
                     <li><a href="{{route('admin.dashBoard')}}"><i class="icon icon-single-04"></i><span class="nav-text">Dashboard</span></a>
                     </li>
                     <li>
-                        <a href="{{route('admin.bank.balanceList')}}" aria-expanded="false">
+                        <a href="{{route('admin.bank.expenseList')}}" aria-expanded="false">
                             <i class="icon icon-form"></i>
-                            <span class="nav-text">Bank Balance Entries</span>
+                            <span class="nav-text"> Expense List</span>
                         </a>
                     </li>
+
                     <li>
                         <a href="{{route('admin.customer.list')}}" aria-expanded="false">
                             <i class="icon icon-form"></i>
@@ -132,7 +133,8 @@
                         <ul aria-expanded="false">
                         <li><a href="{{route('admin.bank.form')}}">Form</a></li>
                         <li><a href="{{route('admin.bank.list')}}">Bank List</a></li>
-                            <li><a href="{{route('admin.bank.expenseList')}}">Expense List</a></li>
+                        <li><a href="{{route('admin.bank.bankUserList')}}">Bank User List</a></li>
+                        <li><a href="{{route('admin.bank.balanceList')}}">Bank Balance Entries</a></li>
                         </ul>
                     </li>
                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
