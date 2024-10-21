@@ -33,6 +33,7 @@
                                     <th>Reference Number</th>
                                     <th>Customr Name</th>
                                     <th>Cash Amount</th>
+                                    <th>Remarks</th>
                                 </tr>
                             </thead>
                             <tbody style="color:black">
@@ -43,6 +44,7 @@
                                         <td>{{$user->reference_number}}</td>
                                         <td>{{$user->name}}</td>
                                         <td>{{$user->cash_amount}}</td>
+                                        <td>{{$user->remarks}}</td>
                                         
                                     </tr>
                                 @endforeach
@@ -54,6 +56,8 @@
                                     <th>Reference Number</th>
                                     <th>Customer Name</th>
                                     <th>Cash Amount</th>
+                                    <th>Remarks</th>
+
                                 </tr>
                             </tfoot>
                         </table>

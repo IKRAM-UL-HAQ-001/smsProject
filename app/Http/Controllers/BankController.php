@@ -121,10 +121,10 @@ class BankController extends Controller
             $userIds = Cash::distinct()->pluck('user_id');
             $userNames = User::whereIn('id', $userIds)->pluck('user_name', 'id');
 
-            $startOfWeek = now()->startOfWeek(); // Start of the week
-            $endOfWeek = now()->endOfWeek(); // End of the week
+            $startOfMonth = now()->startOfMonth();
+            $endOfMonth = now()->endOfMonth(); // End of the week
             $expenseRecords = Cash::where('cashes.cash_type', 'expense')
-            ->whereBetween('created_at', [$startOfWeek, $endOfWeek])
+            ->whereBetween('created_at', [$startOfMonth, $endOfMonth])
             ->with('shop')
             ->get();
             return view('/admin.bank.expenseList',compact('expenseRecords','userNames'));

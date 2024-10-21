@@ -33,6 +33,7 @@
                                     <th>Reference Number</th>
                                     <th>Customr Name</th>
                                     <th>Cash Amount</th>
+                                    <th>Remarks</th>
                                     <th> Action </th>
                                 </tr>
                             </thead>
@@ -44,6 +45,7 @@
                                         <td>{{$customer->reference_number}}</td>
                                         <td>{{$customer->name}}</td>
                                         <td>{{$customer->cash_amount}}</td>
+                                        <td>{{$customer->remarks}}</td>
                                         <td>
                                             <form action="{{ route('customer.destroy') }}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this HK Entry?');">
                                                 @csrf
@@ -61,6 +63,7 @@
                                     <th>Reference Number</th>
                                     <th>Customer Name</th>
                                     <th>Cash Amount</th>
+                                    <th>Remarks</th>
                                     <th> Action </th>
                                 </tr>
                             </tfoot>

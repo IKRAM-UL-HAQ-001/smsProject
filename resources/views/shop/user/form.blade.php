@@ -66,6 +66,15 @@
                                             <div class="invalid-feedback" style="color: white">{{ $message }}</div>
                                         @enderror
                                     </div>
+                                    <div class="form-group row" id="remarks">
+                                        <label class="col-lg-4 col-form-label" for="remarks">Remarks<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" class="form-control" id="remarks" name="remarks" placeholder="Enter a Remarks" >
+                                        </div>
+                                        @error('remarks')
+                                            <div class="invalid-feedback" style="color: white">{{ $message }}</div>
+                                        @enderror
+                                    </div>
                                     <div class="form-group row">
                                         <div class="col-lg-8 ml-auto">
                                             <button type="submit" class="btn btn-primary">Submit</button>

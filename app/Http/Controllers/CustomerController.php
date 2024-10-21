@@ -86,7 +86,7 @@ class CustomerController extends Controller
                'reference_number' => 'nullable|string|max:255|unique:cashes,reference_number',
                 'customer_name' => 'nullable|string|max:255',
                 'cash_amount' => 'required|numeric',
-                
+                'remarks' => 'required|string',
             ]);
             
             try {
@@ -101,6 +101,7 @@ class CustomerController extends Controller
                     $customer->reference_number = $validatedData['reference_number'] ?? NULL;
                     $customer->name = $validatedData['customer_name'] ?? NULL;
                     $customer->cash_amount = $validatedData['cash_amount'];
+                    $customer->remarks = $validatedData['remarks'];
                     $customer->shop_id = $shopId;
                     $customer->user_id = $userId;
                     $customer->save();
