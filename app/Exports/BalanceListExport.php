@@ -40,7 +40,7 @@ class BalanceListExport implements FromQuery,  WithHeadings, WithStyles, WithCol
             ')
             ->join('shops', 'bank_balances.shop_id', '=', 'shops.id') // Join with shops
             ->join('users', 'bank_balances.user_id', '=', 'users.id') // Join with users based on user_id
-            ->whereMonth('bank_balances.created_at',[$startOfWeek, $endOfWeek])
+            ->whereBetween('bank_balances.created_at',[$startOfWeek, $endOfWeek])
             ->distinct(); // Ensure unique results
     
         switch (Auth::user()->role) {

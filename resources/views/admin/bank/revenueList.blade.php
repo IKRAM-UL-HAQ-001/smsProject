@@ -5,7 +5,7 @@
         <div class="col-sm-6 p-md-0">
             <div class="welcome-text">
                 <h4>Hi, welcome back!</h4>
-                <span class="ml-1">Monday to Sunday</span>
+                <h5 class="ml-1">Monday to Sunday</h5>
             </div>
         </div>
         <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
