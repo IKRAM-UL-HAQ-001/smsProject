@@ -75,7 +75,7 @@ class BalanceListExport implements FromQuery,  WithHeadings, WithStyles, WithCol
 
     public function styles(Worksheet $sheet)
     {
-        $sheet->getStyle('A1:H')->getFont()->setBold(true); // Bold the header row
+        $sheet->getStyle('A1:H1')->getFont()->setBold(true); // Bold the header row
         $sheet->getStyle('A1:H1')->getFont()->setSize(12); // Optional: set font size
     }
 
