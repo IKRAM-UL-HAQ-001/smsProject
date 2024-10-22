@@ -28,6 +28,7 @@ class MasterSettlingListWeeklyExport implements FromQuery,  WithHeadings, WithSt
     public function query()
     {
         $startOfWeek = Carbon::now()->startOfWeek(); // Start of the week (Monday)
+        
         $endOfWeek = Carbon::now()->endOfWeek();
         Log::info('Querying MasterSettling with parameters:', [
             'startOfWeek' => $startOfWeek,
@@ -48,7 +49,7 @@ class MasterSettlingListWeeklyExport implements FromQuery,  WithHeadings, WithSt
             ')
             ->join('shops', 'master_settlings.shop_id', '=', 'shops.id') // Join with shops
             ->join('users', 'master_settlings.user_id', '=', 'users.id') // Join with users based on user_id
-            ->whereMonth('master_settlings.created_at',[$startOfWeek, $endOfWeek])  // Filter by today's date
+            ->whereBetween('master_settlings.created_at',[$startOfWeek, $endOfWeek])  // Filter by today's date
             ->where('master_settlings.shop_id', $this->shopId)
             ->distinct(); // Ensure unique results
             Log::info('Generated SQL query:', [

@@ -119,7 +119,9 @@ class BalanceController extends Controller
             return redirect()->route('firstpage');
         }
         else{
-            $balanceRecords =  BankBalance::all();
+            $startOfWeek = Carbon::now()->startOfWeek(); // Start of the week (Monday)
+            $endOfWeek = Carbon::now()->endOfWeek(); 
+            $balanceRecords = BankBalance::whereBetween('created_at', [$startOfWeek, $endOfWeek])->get();
              return view('/admin/bank/balanceList',compact('balanceRecords'));
         }
     }
