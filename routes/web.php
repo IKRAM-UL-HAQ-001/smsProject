@@ -54,7 +54,6 @@ Route::get('/export-balance', [BankBalanceController::class, 'balanceListExportE
 Route::get('/export-masterSettlingMonthly/{shopId}', [MasterSettlingController::class, 'masterSettlingListMonthlyExportExcel'])->name('export.masterSettlingListMonthly')->middleware('auth');
 Route::get('/export-masterSettlingWeekly/{shopId}', [MasterSettlingController::class, 'masterSettlingListWeeklyExportExcel'])->name('export.masterSettlingListWeekly')->middleware('auth');
 
-
 // bank page display
 Route::get('/shop/depositList', [BankController::class, 'shopDepositList'])->name('shop.bank.depositList');
 Route::get('/shop/withdrawalList', [BankController::class, 'shopWithdrawalList'])->name('shop.bank.withdrawalList');

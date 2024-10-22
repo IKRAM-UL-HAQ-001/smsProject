@@ -34,6 +34,8 @@ class BalanceListExport implements FromQuery,  WithHeadings, WithStyles, WithCol
                 bank_balances.id, 
                 shops.shop_name AS shop_name,
                 users.user_name AS user_name,
+                bank_balances.cash_type,
+                bank_balances.account_number,
                 bank_balances.cash_amount,
                 DATE_FORMAT(CONVERT_TZ(bank_balances.created_at, "+00:00", "+05:30"), "%Y-%m-%d %H:%i:%s") as created_at,
                 DATE_FORMAT(CONVERT_TZ(bank_balances.updated_at, "+00:00", "+05:30"), "%Y-%m-%d %H:%i:%s") as updated_at
@@ -63,7 +65,9 @@ class BalanceListExport implements FromQuery,  WithHeadings, WithStyles, WithCol
             'ID',
             'Exchange Name',
             'User Name',
+            'Cash Type',
             'Cash Amount',
+            'Account Number',
             'Created At',
             'Updated At',
         ];
@@ -71,8 +75,8 @@ class BalanceListExport implements FromQuery,  WithHeadings, WithStyles, WithCol
 
     public function styles(Worksheet $sheet)
     {
-        $sheet->getStyle('A1:F1')->getFont()->setBold(true); // Bold the header row
-        $sheet->getStyle('A1:F1')->getFont()->setSize(12); // Optional: set font size
+        $sheet->getStyle('A1:H')->getFont()->setBold(true); // Bold the header row
+        $sheet->getStyle('A1:H1')->getFont()->setSize(12); // Optional: set font size
     }
 
     public function columnWidths(): array
@@ -83,7 +87,9 @@ class BalanceListExport implements FromQuery,  WithHeadings, WithStyles, WithCol
             'C' => 15, // Cash Type
             'D' => 20, // Cash Amount
             'E' => 30, // Total Shop Balance
-            'F' => 30, // Remarks
+            'F' => 30,
+            'G' => 30,
+            'H' => 30,
         ];
     }
 }
