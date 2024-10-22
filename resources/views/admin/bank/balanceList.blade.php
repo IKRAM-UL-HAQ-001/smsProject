@@ -19,6 +19,10 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Bank Balance List Detail</h4>
+                    <a href="{{ route('export.balanceList') }}" class="btn btn-primary">Download Bank Balance</a>
+                </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table id="example" class="display" style="min-width: 845px">
