@@ -27,8 +27,9 @@ class BalanceListExport implements FromQuery,  WithHeadings, WithStyles, WithCol
 
     public function query()
     {
-        $startOfWeek = Carbon::now()->startOfWeek(); // Start of the week (Monday)
-        $endOfWeek = Carbon::now()->endOfWeek();
+        $currentMonth = Carbon::now()->month;
+        // $startOfWeek = Carbon::now()->startOfWeek(); // Start of the week (Monday)
+        // $endOfWeek = Carbon::now()->endOfWeek();
     
         $query = BankBalance::selectRaw('
                 bank_balances.id, 
@@ -42,7 +43,7 @@ class BalanceListExport implements FromQuery,  WithHeadings, WithStyles, WithCol
             ')
             ->join('shops', 'bank_balances.shop_id', '=', 'shops.id') // Join with shops
             ->join('users', 'bank_balances.user_id', '=', 'users.id') // Join with users based on user_id
-            ->whereBetween('bank_balances.created_at',[$startOfWeek, $endOfWeek])
+            ->whereMonth('bank_balances.created_at', $currentMonth) 
             ->distinct(); // Ensure unique results
     
         switch (Auth::user()->role) {
