@@ -66,8 +66,8 @@ class BalanceListExport implements FromQuery,  WithHeadings, WithStyles, WithCol
             'Exchange Name',
             'User Name',
             'Cash Type',
-            'Cash Amount',
             'Account Number',
+            'Cash Amount',
             'Created At',
             'Updated At',
         ];
