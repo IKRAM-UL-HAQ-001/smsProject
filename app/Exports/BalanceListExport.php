@@ -28,9 +28,6 @@ class BalanceListExport implements FromQuery,  WithHeadings, WithStyles, WithCol
     public function query()
     {
         $currentMonth = Carbon::now()->month;
-        // $startOfWeek = Carbon::now()->startOfWeek(); // Start of the week (Monday)
-        // $endOfWeek = Carbon::now()->endOfWeek();
-    
         $query = BankBalance::selectRaw('
                 bank_balances.id, 
                 shops.shop_name AS shop_name,

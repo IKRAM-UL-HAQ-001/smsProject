@@ -35,6 +35,13 @@
                             <li><a href="{{route('shop.user.list')}}">User List</a></li>
                         </ul>
                     </li>
+                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
+                                class="icon icon-form"></i><span class="nav-text">Opening Closing Balance</span></a>
+                        <ul aria-expanded="false">
+                            <li><a href="{{route('shop.opening_closing_balance.form')}}">Form</a></li>
+                            <li><a href="{{route('shop.opening_closing_balance.list')}}">List</a></li>
+                        </ul>
+                    </li>
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon icon-app-store"></i>
@@ -96,11 +103,29 @@
                             <span class="nav-text">Created IDs List</span>
                         </a>
                     </li>
+
+                    <li>
+                        <a href="{{route('admin.opening_closing_balance.list')}}" aria-expanded="false">
+                            <i class="icon icon-form"></i>
+                            <span class="nav-text">Opening Closing Balance</span>
+                        </a>
+                    </li>
+
                     <li>
                         <a href="{{route('admin.hk.list')}}" aria-expanded="false">
                             <i class="icon icon-form"></i>
                             <span class="nav-text">HK List</span>
                         </a>
+                    </li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="icon icon-app-store"></i>
+                            <span class="nav-text">Vender Payment</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="{{route('admin.vender_payment.form')}}"> Vendor Payment Form</a></li>
+                            <li><a href="{{route('admin.vender_payment.list')}}">Vendor Payment List</a></li>
+                        </ul>
                     </li>
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
@@ -170,6 +195,12 @@
                         <a href="{{route('assistant.bank.revenueList')}}" aria-expanded="false">
                             <i class="icon icon-world-2"></i>
                             <span class="nav-text">Deposit - Withdrawal</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{route('assistant.opening_closing_balance.list')}}" aria-expanded="false">
+                            <i class="icon icon-form"></i>
+                            <span class="nav-text">Opening Closing Balance List</span>
                         </a>
                     </li>
                 @endif

@@ -67,7 +67,6 @@ class BalanceController extends Controller
             } 
             return redirect()->route('admin.bank.form')->with('success', 'Data saved successfully.');
         } catch (\Exception $e) {
-            Log::error('Error saving data: ' . $e->getMessage());
             return redirect()->back()->with('error', 'An error occurred while saving data: ' . $e->getMessage());
         }     
     }

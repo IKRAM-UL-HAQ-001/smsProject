@@ -17,6 +17,8 @@ use App\Http\Controllers\HKController;
 use App\Http\Controllers\BalanceController;
 use App\Http\Controllers\BankBalanceController;
 use App\Http\Controllers\MasterSettlingController;
+use App\Http\Controllers\VenderPaymentController;
+use App\Http\Controllers\OpeningClosingBalanceController;
 
 // first page
     Route::get('/', [FirstPageController::class, 'index'])->name('firstpage');
@@ -71,6 +73,11 @@ Route::get('/shop/user/form', [CustomerController::class, 'index'])->name('shop.
 Route::post('/shop/user/post', [CustomerController::class, 'store'])->name('shop.user.post');
 Route::get('/shop/user/list', [CustomerController::class, 'userListDetail'])->name('shop.user.list');
 
+// Vender Payment display
+Route::get('/shop/openingClosingBalance', [OpeningClosingBalanceController::class, 'index'])->name('shop.opening_closing_balance.form');
+Route::post('/shop/openingClosingBalanceForm', [OpeningClosingBalanceController::class, 'store'])->name('shop.opening_closing_balance.post');
+Route::get('/shop/openingClosingBalanceList', [OpeningClosingBalanceController::class, 'exchangeList'])->name('shop.opening_closing_balance.list');
+
 // HK
 Route::get('/shop/hk/form', [HKController::class, 'index'])->name('shop.hk.form');
 Route::post('/shop/hk/post', [HKController::class, 'store'])->name('shop.hk.post');
@@ -107,6 +114,18 @@ Route::get('/admin/shopForm', [ShopController::class, 'form'])->name('admin.shop
 Route::post('/admin/shopForm', [ShopController::class, 'store'])->name('admin.shop.post');
 Route::get('/admin/shopDetailList', [ShopController::class, 'detailList'])->name('admin.shop.detailList');
 Route::post('/shops/delete', [ShopController::class, 'destroy'])->name('shops.destroy');
+
+// Vender Payment display
+Route::get('/admin/venderPaymentForm', [VenderPaymentController::class, 'index'])->name('admin.vender_payment.form');
+Route::post('/admin/venderPaymentForm', [VenderPaymentController::class, 'store'])->name('admin.vender_payment.post');
+Route::get('/admin/venderPaymentList', [VenderPaymentController::class, 'list'])->name('admin.vender_payment.list');
+Route::post('/venderPayment/delete', [VenderPaymentController::class, 'destroy'])->name('vender_payment.destroy');
+
+// opening Closing Balance
+Route::post('/admin/openingClosingBalanceForm', [OpeningClosingBalanceController::class, 'store'])->name('admin.opening_closing_balance.post');
+Route::get('/admin/openingClosingBalanceList', [OpeningClosingBalanceController::class, 'list'])->name('admin.opening_closing_balance.list');
+Route::post('/openingClosingBalance/delete', [OpeningClosingBalanceController::class, 'destroy'])->name('opening_closing_balance.destroy');
+
 
 // bank page display
 Route::get('/admin/revenueList', [BankController::class, 'adminRevenueList'])->name('admin.bank.revenueList');
@@ -156,4 +175,8 @@ Route::get('/assistant/settling/shopListDetail', [MasterSettlingController::clas
 //bank 
 Route::get('/assistant/bank/balanceList', [BalanceController::class, 'assistantBalanceListDetail'])->name('assistant.bank.balanceList');
 Route::get('/assistant/revenueList', [BankController::class, 'assistantRevenueList'])->name('assistant.bank.revenueList');
+
+// Vender Payment display
+Route::get('/assistant/openingClosingBalanceList', [OpeningClosingBalanceController::class, 'list'])->name('assistant.opening_closing_balance.list');
+
 });

@@ -45,7 +45,6 @@ class BankBalanceController extends Controller
             return redirect()->route('firstpage');
         }
 
-        // Validate the incoming request
         $validatedData = $request->validate([
             'account_number' => 'required|string|max:255',
             'bank_name' => 'required|string|max:255',
@@ -95,6 +94,7 @@ class BankBalanceController extends Controller
             return view('/shop/balance/list',compact('balanceRecords','userName'));
         }
     }
+    
     public function getBankBalance(Request $request){
         $request->validate(['bank_name' => 'required|string']);
         $sumBalance = BankBalance::where('bank_name', $request->bank_name)
